@@ -1,0 +1,84 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+body{
+	font-family: "Microsoft Yahei";
+}
+html{
+  	font-size: calc(100vw/3.75);
+  	}
+.main{
+	text-align:center;
+	padding-top:1.7%;
+	padding-right:3.1%;
+	padding-bottom:17.2%;
+	}
+.cart{
+	width:1.01rem;
+	height:1.13rem;
+	margin: 0 auto;
+	margin-top:8%;
+	background:url(../images/ts.png) no-repeat left top;
+	background-size:100%;
+	}
+.kong{font-size:0.21rem;text-align:center;margin-top:2.2%;}
+.find{font-size:0.12rem;color:#cfcddb;margin-top:2%;margin-bottom:17.2%;}
+.bottom{
+	max-height:4.18rem;
+	text-align:center;
+	margin-top:9%;
+	}
+.bottom .btn{
+	width:73.3%;
+	/*height:6.6%;不要固定高*/
+	margin:0 auto;
+	border:2px solid #979797;
+	border-radius:8px;
+	color:#423635;
+	font-size:0.15rem;
+	text-align:center;
+	padding:2.1% 0;
+	display:block;
+}
+.bottom .fhsy{
+	margin-top:2%;
+   }
+.foot{
+	width:100%;
+	padding-right: 3.1%;
+	position: fixed;
+	bottom:0;
+	background:#fff;
+	padding-top:1.4%;
+	padding-bottom:1%;
+	font-size:0.09rem;
+	z-index:999;
+	-webkit-box-shadow:0 -0.01rem 0.03rem #e5e3e3;
+	   -moz-box-shadow:0 -0.01rem 0.03rem #e5e3e3;
+			box-shadow:0 -0.01rem 0.03rem #e5e3e3;
+	}
+.footer{
+	width:100%;
+	text-align:center;
+	}
+.footer li{
+	width:25%;
+	text-align:center;
+	float:left;
+	}
+.footer li a {
+	width:100%;
+	display:block;
+	}
+.footer li a img{
+	width:0.22rem;
+	height:0.22rem;
+	}
+.footer .active-nav{
+	color:#e53d40;
+	}
+a:active,a:hover,a:link,a:visited{
+	text-decoration:none;
+	color: black
+}

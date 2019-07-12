@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-cn" ng-app="demoApp">
+<head>
+    <meta charset="UTF-8">
+    <title>订单详情页</title>		
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	 <link rel="stylesheet" href="css/ionic.min.css">
+    <link rel="stylesheet" type="text/css" href="css/index-xuanzhexinghao.css"/>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/css.css"/>
+    <script type="text/javascript" src="js/stopIOS.js"></script>
+    <script type="application/javascript" src="js/jquery.min.js"></script>
+    <script type="application/javascript" src="js/index-xuanzhexinghao.js"></script>
+</head>
+<style type="text/css">
+
+     .ng-cloak {
+        display: none;
+    }
+	.spinner svg{
+    stroke: #e85a5d;
+    width: 40px;
+    height: 40px;
+  }
+.loading-container{
+    background: #edecf0;
+    /*top: 0.6rem;*/
+  } 
+  .loading-container .loading{
+    background: none;
+    padding: 0;
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+</style>
+<body ng-controller="DemoCtrl">
+
+<div class="center1-wrap">
+    <!-- <nav class="navbar navbar-default navbar-fixed-top" role="navigation"  style="height:25px !important; position:fixed; z-index:999999; top:0px;">
+          <div class="container">
+               <div class="navbar-header">
+                  <span class="navbar-brand" onClick="javascript:window.history.go(-1);return false;">
+                     <img alt="Brand" src="images/y-fanhui.png" style="width:60%;">
+                </span>
+                
+                 <p class="navbar-text" style="color:#333;margin-left:13%;">审核意见</p>
+              </div>
+              <div class="navbar-header navbar-right btn-group" style="position:absolute;left:80%;top:-2%;">
+                  <a class="navbar-brand"  ng-click="off()">
+                     <img alt="Brand" src="./images/y-guanbi.png" style="width:60%;">
+                </a>
+              </div>
+              <div class="navbar-header navbar-right" id="show" style="position:absolute;left:90%;top:13%;">
+                      <a class="navbar-brand dropdown-toggle" data-toggle="dropdown" >
+                         <img alt="Brand" src="./img/dian.png" style="width:60%;">
+                    </a>
+              </div>
+            <div class="search-sort" id="header-search" style="width:200px;" >
+            <em id="search-em"></em>
+
+            
+              
+              <ul class="dropdown-menu search-sort-list" role="menu" style="position:absolute;left:65%;top:95%;width:100px;">
+                <li  ng-click="cart()"><span  style="margin-left:20px;"><img src="./img/shop.png" style="width:12%;"></span> <span style="position:relative;top:2%;">购物车</span></li>
+                <li role="presentation" class="divider"></li>
+                <li ng-click="cartme()"> <span style="margin-left:20px;"><img src="./img/user.png" style="width:12%;"></span>  <span style="position:relative;top:2%;">我的</span></li>
+                </ul>
+
+            </div>
+         </div>
+    </nav> -->
+     <div id="wuliuCon" style="margin-top:18%;"> 
+   <div id="wuliuDiv"> 
+    <div class="order_wuliu" id="wuliu"> 
+     <div class="head ng-cloak" ng-cloak> 
+    	<textarea class="form-control" rows="4" style="width:87%;margin:0 auto;"  placeholder="请填写反馈意见或建议" ></textarea>
+     </div> 
+     <br/>
+     <button type="button" class="btn btn-primary btn-lg btn-block" style="width:87%;margin:0 auto;background-color:red;border-color: red;" ng-click="text()">取消售后</button>
+    <div style="margin-bottom:10%;visibility:hidden;">121</div>
+    </div> 
+   </div>
+   <div id="jdAppID"></div>
+  </div> 
+</div>
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="js/TouchSlide.js"></script>
+<script src="angular/angular.min.js"></script>
+<script src="js/jd.js"></script>
+<script src="layer/layer_mobile/layer.js"></script>
+<script src="js/ionic.bundle.min.js"></script>
+<script type="text/javascript">
+   $('#show').click(function(){
+    $('.search-sort-list').toggle();
+  });
+    var str = location.href; //获取本页url地址
+    var arr = str.split("?");
+    var str1 = arr[1];
+    var str2 = arr[2];
+    
+     if (str1) {
+        var afid = str1.split("=")[1];
+    }
+    if (str2) {
+        var oid = str2.split("=")[1];
+    }
+   
+    
+
+    var app = angular.module('demoApp', ["ionic"]);
+    app.controller('DemoCtrl', ["$scope", "$rootScope", "$sce", "$http","$filter","$ionicLoading", function ($scope, $rootScope, $sce, $http,$filter,$ionicLoading) {
+         $ionicLoading.show({
+           template:'<ion-spinner icon="android"></ion-spinner>',
+           //content: '正在加载...',
+           animation: 'fade-in',
+           showBackdrop: false,
+           maxWidth: 200,
+           showDelay: 0
+       });
+        var token = api();
+		
+		$ionicLoading.hide();
+		sessionStorage.setItem("load",1);
+      $scope.text = function(){
+      	var texts = $('.form-control').val();
+      	if (texts=='') {
+      		layer.open({
+				content: '请填写反馈意见或建议'
+				, skin: 'msg'
+				, time: 2 //2秒后自动关闭
+				});
+      		return false;
+      	}
+      	//填写审核意见
+      	 $http({
+                async: false,
+                crossDomain: true,
+                method: 'POST',
+                url: "/jd/api/afterSale/auditCancel?serviceIdList="+afid+"&approveNotes="+texts+"&jdOrderId="+oid+"",
+                headers: {
+                   
+                   'Authorization': "Bearer" + token + "",
+                    'cache-control': "no-cache",
+                    'postman-token': "69360135-1fb8-f165-601f-09bb6accae55"
+                }  //请求头里会添加Authorization属性为'code_bunny'indesssx.html
+
+            }).success(function (datas, status, headers, config) {
+            		//console.log(datas.serviceSkuids);
+            		var over = datas.serviceSkuids;
+						if (over!=='') {
+						layer.open({
+						content: '取消成功'
+						, skin: 'msg'
+						, time: 2 //2秒后自动关闭
+						});
+						setTimeout(function(){
+						window.history.go(-1);
+						},2000);
+            			}
+            
+               if (over=='') {
+						layer.open({
+						content: '取消失败'
+						, skin: 'msg'
+						, time: 2 //2秒后自动关闭
+						});
+						setTimeout(function(){
+						window.history.go(-1);
+						},2000);
+            			}
+            }).error(function (data, status, headers, config) {
+
+            }); 
+      }
+
+      //关闭页面跳转
+      $scope.off = function () {
+
+
+          window.location.href = "./closeInAppBrowser.html";
+
+      };
+      //跳转我的购物车
+      $scope.cart = function () {
+
+
+          window.location.href = "./cart.html";
+
+      };
+       //跳转我的订单
+      $scope.cartme = function () {
+
+
+          window.location.href = "./mycart.html";
+
+      };
+      
+
+    }]);
+
+
+</script>
+</html>

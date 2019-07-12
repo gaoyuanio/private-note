@@ -1,0 +1,182 @@
+<html lang="zh-cn"  ng-app="demoApp">
+<head>
+<meta charset="UTF-8">
+<title>地址管理</title>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/jddzgl.css">
+<link rel="stylesheet" href="css/radio.css"/>
+<link rel="stylesheet" href="css/iconfont.css" />
+<link rel="stylesheet" href="css/css.css" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<style type="text/css">
+			.ng-cloak{display: none;}
+    	</style>
+      <script type="text/javascript" src="js/stopIOS.js"></script>
+</head>
+<body ng-controller="DemoCtrl">
+<!--顶部返回 地址管理开始-->
+<style>                   
+		.back_fixed{width:100%;font-size:0.15rem;padding:0 5%;height:0.44rem;line-height:0.44rem;position:fixed;z-index:99;top:0;background:#fff;text-align:center;}
+		.back_fixed .s-img{display: inline-block;position:relative;top:0.12rem;}
+		.main{margin-top:0.45rem;}
+		</style>
+<!--<nav class="navbar navbar-default navbar-fixed-top" role="navigation"  style="height:25px !important;">
+  <div class="container">
+     <div class="navbar-header"> <span class="navbar-brand" onClick="javascript:window.history.go(-1);return false;"> <img alt="Brand" src="images/y-fanhui.png" style="width:60%;"> </span>
+      <p class="navbar-text" style="color:#333;margin-left:12%;">地址管理</p>
+    </div>
+    <div class="navbar-header navbar-right btn-group" style="position:absolute;left:80%;top:-2%;"> <a class="navbar-brand"  ng-click="off()"> <img alt="Brand" src="./images/y-guanbi.png" style="width:60%;"> </a> </div>
+    <div class="navbar-header navbar-right" id="show" style="position:absolute;left:90%;top:13%;"> <a class="navbar-brand dropdown-toggle" data-toggle="dropdown" > <img alt="Brand" src="./img/dian.png" style="width:60%;"> </a> </div>
+    <div class="search-sort" id="header-search" style="width:200px;" > <em id="search-em"></em>
+     <ul class="dropdown-menu search-sort-list" role="menu" style="position:absolute;left:65%;top:95%;z-index:9999;width:100px;">
+                <li  ng-click="cart()"><span  style="margin-left:20px;"><img src="./img/shop.png" style="width:12%;"></span> <span style="position:relative;top:2%;">购物车</span></li>
+                <li role="presentation" class="divider"></li>
+                <li ng-click="cartme()"> <span style="margin-left:20px;"><img src="./img/user.png" style="width:12%;"></span>  <span style="position:relative;top:2%;">我的</span></li>
+                </ul>
+    </div> 
+  </div>
+</nav>-->
+<!--顶部返回 结束-->
+<div class="address_main mui-content ng-cloak" style="margin-top:12%;" ng-cloak>
+  <ul class="mui-table-view" id="myaddress" ng-repeat="item in listss" style="margin-top:10px;">
+    <li class="mui-table-view-cell mui-radio mui-left" >
+      <input name="radio" type="radio"   value="{{$index}}" ng-checked="$index =={{numberss}}" ng-click="text(item,$index)">
+      <a class="mui-navigate-right ng-cloak" ng-cloak> {{item.name}} <span class="tel fr ng-cloak" ng-cloak>{{item.phone}}</span> <span class="mui-ellipsis-2 ng-cloak" ng-cloak>地址：{{item.regionNames}}{{item.address}}</span> </a> <a class="mui-navigate-right ng-cloak" ng-cloak style="float:right;margin-top:2px;">
+      <button type="button" class="btn btn-default" ng-click="save(item,$index)">编辑</button>
+      </a> <a  class="mui-navigate-right ng-cloak" ng-cloak style="float:right;margin-top:2px;">
+      <button type="button" class="btn btn-default" ng-click="test(item)">删除</button>
+      </a> </li>
+  </ul>
+</div>
+<div style="margin-bottom:10%;visibility:hidden;">121</div>
+<!--foot btn start-->
+<div class="sure ng-cloak" ng-cloak> <a href="./tjdz.html">添加新地址</a> </div>
+<!--foot btn end-->
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="angular/angular.min.js"></script>
+<script src="js/jd.js"></script>
+<script src="layer/layer_mobile/layer.js"></script>
+<script type="text/javascript">
+ $('#show').click(function(){
+    $('.search-sort-list').toggle();
+  });
+ var str=location.href; //获取本页url地址
+		var arr=str.split("?");
+		var str1 = arr[1];
+		var str2 = arr[2];
+    var str3 = arr[3];
+		if(str1){var sku=str1.split("=")[1];}
+		if(str2){var nums=str2.split("=")[1];}
+    if(str3){var numbers=str3.split("=")[1];}
+		//console.log(num);
+		var token=api();
+		//var token = mc['access_token']; 
+		 var app = angular.module('demoApp', []);
+   		 app.controller('DemoCtrl', ["$scope","$rootScope","$sce","$http", function ($scope, $rootScope, $sce,$http) {
+      layer.open({
+      type: 2
+      ,content: '加载中'
+      ,time: 2 //2秒后自动关闭
+      });
+       	 $scope.text=function(item,index){
+
+			var token=api();
+		
+			var number = index;
+
+			window.location.href="./goodsub.html?sku="+sku+"?num="+nums+"?number="+number+"?inid=0"; 
+     	 };
+       //获取地址列表
+		 $http({
+		 	async: true,
+			crossDomain: true,
+            method:'GET',
+            url:"/jd/api/receiveraddresses",
+            headers: {'Authorization':"Bearer"+token+"",'cache-control': "no-cache",'postman-token': '00a70b0c-0756-adfe-3928-af0e1bbdc95f'}  //请求头里会添加Authorization属性为'code_bunny'
+        }).success(function(data,status,headers,config){
+			var arr = [];
+			var objs =data.receiverAddresses;
+			angular.forEach(objs, function(data,index,array){
+			var list= data;
+			arr.push(list) ;
+			//console.log(list);
+			});
+			$scope.listss = arr;
+			$scope.numberss = numbers;
+        	
+        }).error(function(data,status,headers,config){
+  			
+            layer.open({
+        content: '用户信息错误'
+        ,skin: 'msg'
+        ,time: 3 //2秒后自动关闭
+        });
+			 window.location.href="./closeInAppBrowser.html";
+        });
+       $scope.test = function (item) {
+       	//console.log(item.id);
+       	var id = item.id;
+       	var token=api();
+	     //删除地址
+     	 $http({
+		 	async: true,
+			crossDomain: true,
+            method:"DELETE",
+            url:"/jd/api/receiveraddresses/"+id+"",
+            headers: {'Authorization':"Bearer"+token+"",'cache-control': "no-cache",'content-type': "application/x-www-form-urlencoded",'postman-token': '00a70b0c-0756-adfe-3928-af0e1bbdc95f'}  //请求头里会添加Authorization属性为'code_bunny'
+        }).success(function(data,status,headers,config){
+        	
+            layer.open({
+        content: '删除成功'
+        ,skin: 'msg'
+        ,time: 3 //2秒后自动关闭
+        });
+			location.reload();
+        }).error(function(data,status,headers,config){
+  			
+        });
+     
+		};
+     //更改地址
+     $scope.save=function(item,index){
+        var id = item.id;
+        var numberindex = index;
+              var regionNames = item.regionNames;
+              var phone = item.phone;
+              var name = item.name;
+              var regionIds = item.regionIds;
+              var address = item.address;
+            
+            window.location.href="./jdtjdzlist.html?id="+id+"?name="+name+"?phone="+phone+"?regionIds="+regionIds+"?regionNames="+regionNames+"?address="+address+"?sku="+sku+"?num="+nums+"?number="+numberindex+"";
+    };
+    //关闭
+	 $scope.off=function(){
+
+    
+      window.location.href="./closeInAppBrowser.html";
+
+    };
+    //我的购物车
+    $scope.cart=function(){
+
+    
+      window.location.href="./cart.html";
+
+    };
+    //我的订单
+    $scope.cartme=function(){
+
+    
+      window.location.href="./mycart.html";
+
+    };
+    
+    }]);
+ 
+
+</script>
+</html>

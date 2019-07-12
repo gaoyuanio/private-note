@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-cn" ng-app="demoApp">
+<head>
+    <meta charset="UTF-8">
+    <title>商品详情</title>
+    <link rel="stylesheet" type="text/css" href="css/index-xuanzhexinghao.css"/>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/css.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <script type="text/javascript" src="js/stopIOS.js"></script>
+    <script type="application/javascript" src="js/jquery.min.js"></script>
+    <script type="application/javascript" src="js/index-xuanzhexinghao.js"></script>
+</head>
+<style type="text/css">
+    .ng-cloak {
+        display: none;
+    }
+
+    .divider {
+        height: 1px;
+        margin: 9px 0;
+        overflow: hidden;
+        background-color: #e5e5e5;
+    }
+
+    .clear {
+        zoom: 1;
+    }
+
+    .clear:after {
+        display: block;
+        content: '.';
+        clear: both;
+        overflow: hidden;
+        height: 0;
+        visibility: hidden;
+    }
+
+    .nav-but-wrap {
+        background: #fff;
+        height: 0.45rem;
+        line-height: 0.45rem;
+        border-bottom: 1px solid #E5E5E5;
+        position: fixed;
+        top: 0px;
+        z-index: 99;
+        width: 100%;
+        padding-right: 0.15rem;
+        padding-left: 0.15rem;
+        box-sizing: border-box;
+    }
+
+    .nav-but {
+        font-size: 0.16rem;
+        text-align: center;
+    }
+	td{
+	background:#FF0000;	
+	}
+</style>
+<body ng-controller="DemoCtrl">
+
+<div class="center1-wrap">
+   <!-- <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="height:25px !important;">
+        <div class="container">
+             <div class="navbar-header">
+                <span class="navbar-brand" onClick="javascript:window.history.go(-1);return false;">
+                    <img alt="Brand" src="images/y-fanhui.png" style="width:60%;">
+                </span>
+
+                <p class="navbar-text" style="color:#1c1c1c;font-size:0.17rem;line-height:0.17rem;font-family:PingFangSC-Medium;margin-left:13%;">商品详情</p>
+            </div>
+            <div class="navbar-header navbar-right btn-group" style="position:absolute;left:90%;top:-2%;">
+                <a class="navbar-brand" ng-click="off()">
+                    <img alt="Brand" src="./images/y-guanbi.png" style="width:60%;">
+                </a>
+            </div> -->
+            <!--<div class="navbar-header navbar-right" id="show" style="position:absolute;left:90%;top:13%;">
+                <a class="navbar-brand dropdown-toggle" data-toggle="dropdown">
+                    <img alt="Brand" src="./img/dian.png" style="width:60%;">
+                </a>
+            </div>
+            <div class="search-sort" id="header-search" style="width:200px;">
+                <em id="search-em"></em>
+
+
+                <ul class="dropdown-menu search-sort-list" role="menu" style="position:absolute;left:65%;top:95%;z-index:9999;width:100px;">
+                        <li ng-click="cart()"><span style="margin-left:20px;"><img src="./img/shop.png" style="width:12%;"></span>
+                        <span style="position:relative;top:2%;font-size: 0.1rem;">购物车</span></li>
+                        <li role="presentation" class="divider"></li>
+                        <li ng-click="cartme()"><span style="margin-left:20px;"><img src="./img/user.png" style="width:12%;"></span> 
+                        <span style="position:relative;top:2%;font-size: 0.1rem;">我的</span></li>
+                </ul>
+
+
+            </div>
+        </div>
+    </nav>-->
+    <div class="herder1 ng-cloak" ng-cloak>
+        <img src="http://img13.360buyimg.com/n0/{{cp_class.biz_product_detail_query_response.result.imagePath}}"/>
+    </div>
+    <div class="herder1-color"></div>
+    <div class="center1-top" id="scrollWrap">
+        <div class="center1-top-money" style="margin-top:10%;">
+            <div class="center1-top-money1"
+                 ng-bind="cp_classs.biz_price_sellPrice_get_response.result[0].price | currency:'￥'" ng-cloak></div>
+
+            <div class="center1-top-money2" ng-bind="infoname[0].stockStateDesc currency:'库存'" ng-cloak></div>
+
+            <div class="center1-top-money3" style="display: none;">请选择规格</div>
+        </div>
+        <div class="img1-box ng-cloak" ng-cloak>
+            <img src="http://img13.360buyimg.com/n0/{{cp_class.biz_product_detail_query_response.result.imagePath}}"/>
+        </div>
+        <div class="center1-left-color ng-cloak">
+            <span style="font-size:0.13rem;">产地:</span><span style="color:#666666;font-size:0.13rem;"
+                                                             ng-bind="cp_class.biz_product_detail_query_response.result.productArea"></span>
+        </div>
+        <!-- <br>
+         <div class="center1-left-color">
+         产地:<span style="color:#666666;font-size:0.1rem;">{{cp_class.biz_product_detail_query_response.result.name}}</span>
+        </div> -->
+        <div class="center1-certer-button ng-cloak">
+            <!--  <a class="center1-certer-button2 addcolor" href="#">红色</a> -->
+
+        </div>
+        <div class="center1-left-color1 ng-cloak" style="margin-top:-2%;">
+            商品规格
+        </div>
+        <div class="center1-certer-button ng-cloak" style="position:relative;top:-10px; ">
+            <span style="font-size:14px;" ng-bind="cp_class.biz_product_detail_query_response.result.name"></span>
+
+        </div>
+        <div class="shop-number-wrap ng-cloak ng-cloak" ng-cloak>
+            <span class="shop-font" style="position:relative;top:42%;">购买数量</span>
+
+            <div class="shop-add">
+           <span class="numbers" ng-cloak>
+            <img class="number-jian" src="img/number-.png"/ ng-cloak style="margin-top:20px;">
+            <input type="text" name="" class="number" value="1" / ng-cloak style="margin-top:22px;">
+            <img class="number-jia" src="img/number.png"/ ng-cloak style="margin-top:16px;">                
+          </span>
+            </div>
+        </div>
+        <a class="fooder-button ng-cloak" ng-click="test(item)">确认订单</a>
+    </div>
+</div>
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="js/TouchSlide.js"></script>
+<script src="angular/angular.min.js"></script>
+<script src="js/jd.js"></script>
+<script src="layer/layer_mobile/layer.js"></script>
+<script type="text/javascript">
+    $('#show').click(function () {
+        $('.search-sort-list').toggle();
+    });
+    //js的数量加减
+    $(function () {
+        document.documentElement.style.fontSize = window.innerWidth / 3.75 + 'px';
+        $(".number-jian").click(function () {
+            var num = $(".number").val();
+            if (num > 1) {
+                num--;
+                $(".number").val(num)
+            }
+            else{
+                $(".number").val(1);
+            }
+        });
+        $(".number-jia").click(function () {
+            var num = $(".number").val();
+            num++;
+            $(".number").val(num)
+        })
+
+
+    });
+
+    //上面代码是数量加减
+    $(function () {
+        $(".huadong-button").click(function () {
+            $(this).toggleClass("huadong-button1");
+        })
+    });
+    //上面代码按钮
+    //获取本页url地址
+    var str = location.href; 
+    var arr = str.split("?");
+    var str1 = arr[1];
+    var str2 = arr[2];
+    if (str1) {
+        //商品的skuid
+        var sku = str1.split("=")[1];
+    }
+    if (str2) {
+        //商品数量
+        var numberall = str2.split("=")[1];
+    }
+    //商品数量防止数量转为字符串
+    var nunall = numberall;
+  
+    var app = angular.module('demoApp', []);
+    app.controller('DemoCtrl', ["$scope", "$rootScope", "$sce", "$http", function ($scope, $rootScope, $sce, $http) {
+        /*layer.open({
+        type: 2
+        ,content: '加载中'
+        ,time: 2 //2秒后自动关闭
+        });*/
+        //用户的token
+        var token = api();
+       //获取接口地址
+        $http({
+            async: false,
+            crossDomain: true,
+            method: 'GET',
+            url: "/jd/api/receiveraddresses",
+            headers: {
+                'Authorization': "Bearer" + token + "",
+                'cache-control': "no-cache",
+                'postman-token': 'e0fa2222-3481-ded2-38ad-e5a34da1a05b'
+            }  //请求头里会添加Authorization属性为'code_bunny'
+        }).success(function (datas, status, headers, config) {
+            //
+   
+            var city = datas.receiverAddresses[0].regionIds;
+            var cityinfo = datas.receiverAddresses[0].regionNames;
+            var dqu = datas.receiverAddresses[0].address;
+            var name = datas.receiverAddresses[0].name;
+            var phone = datas.receiverAddresses[0].phone;
+         /*  console.log(city);
+           console.log(cityinfo);
+           console.log(dqu);
+           console.log(name);
+           console.log(phone);*/
+            // 对接接口库存
+            var arr = city.split("|");
+            strd = arr[1];
+            strc = arr[2];
+            strqu = arr[3];
+            strtown = arr[4];
+            var arr = cityinfo.split("|");
+            strdinfo = arr[1];
+            strcinfo = arr[2];
+            strquinfo = arr[3];
+
+            var json_paramsskuid = {};
+            //获取京东的库存
+            json_paramsskuid.skuNums = [{skuId: "" + sku + "", num: 1}];
+            json_paramsskuid.area = strd + "_" + strc + "_" + strqu + "_" + strtown;
+            var infoctiy = do_api("biz.stock.fororder.batget", json_paramsskuid);
+            $scope.infoctiy = JSON.parse(infoctiy);
+            var infolist = $scope.infoctiy.biz_stock_fororder_batget_response.result;
+
+            var arr = [];
+            angular.forEach(infolist, function (datas, index, array) {
+                var name = datas;
+                arr.push(name);
+            });
+            $scope.infoname = arr;
+            $scope.infoctiys = strdinfo;
+
+        }).error(function (data, status, headers, config) {
+
+            layer.open({
+                content: '用户信息错误'
+                , skin: 'msg'
+                , time: 3 //2秒后自动关闭
+            });
+            window.location.href = "./closeInAppBrowser.html";
+        });
+
+        //点击获取skuid跳转下一页面
+        $scope.skuid = function (change) {
+            //获取的upc = skuid
+            var upc = change.upc;
+            window.location.href = "./action.html?sku=" + upc + "";
+        };
+       
+        //商品详情价格
+        var json_params = {};
+        json_params.sku = sku;
+        var vvv = do_api("biz.product.detail.query", json_params);
+        var vvvs = do_api("biz.price.sellPrice.get", json_params);
+
+        $scope.cp_class = JSON.parse(vvv);
+        $scope.cp_classs = JSON.parse(vvvs);
+        $scope.item = $scope.cp_class.biz_product_detail_query_response.result.sku;
+        console.log($scope.cp_class);
+        $scope.change = $scope.cp_class.biz_product_detail_query_response.result;
+       //点击获取skuid跳转到商品详情页
+        $scope.test = function (item) {
+            console.log(item);
+            var sku = item;
+            var val = $(".number").attr("value");
+            if (val == 0) {
+                layer.open({
+                    content: '商品数量不能为零'
+                    , skin: 'msg'
+                    , time: 3 //2秒后自动关闭
+                });
+            } else {
+                window.location.href = "./goodsub.html?sku=" + sku + "?num=" + val + "?number=" + nunall + "?inid=0";
+            }
+
+        };
+        //点击关闭跳转直汇易联
+        $scope.off = function () {
+
+
+            window.location.href = "./closeInAppBrowser.html";
+
+        };
+        //点击打开购物车
+        $scope.cart = function () {
+
+
+            window.location.href = "./cart.html";
+
+        };
+        //点击打开我的订单
+        $scope.cartme = function () {
+
+
+            window.location.href = "./mycart.html";
+
+        };
+
+    }]);
+
+
+</script>
+</html>

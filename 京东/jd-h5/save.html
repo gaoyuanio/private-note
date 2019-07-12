@@ -1,0 +1,484 @@
+<html lang="zh-cn"  ng-app="demoApp">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, target-densitydpi=device-dpi,maximum-scale=1.0, user-scalable=no,initial-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<title>修改地址</title>
+<link rel="stylesheet" href="css/weui.min.css">
+<link rel="stylesheet" href="css/jdtjdzcss.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+<link rel="stylesheet" href="css/reset.css">
+<script type="text/javascript" src="js/stopIOS.js"></script>
+</head>
+<body ng-controller="DemoCtrl">
+<!--顶部返回 开始-->
+<style>	
+		.ng-cloak{display:none;}					  	 	  
+			.back_fixed{width:90%;margin:0 auto;font-size:0.15rem;padding:0 5%;height:0.44rem;line-height:0.44rem;position:fixed;z-index:99;top:0;background:#fff;text-align:center;box-shadow:0 5px 5px #ccccc;}
+			.back_fixed .s-img{display: inline-block;position:relative;top:0.12rem;}
+			.container{margin-top:0.44rem;}
+			.chose{ display:block; margin-bottom:8px;}
+			.groupaddress{ 	padding:3.7% 0% 1.5% 1.5%;border-bottom:1px solid #f3f3f3;position:relative; }
+			.weui-cell:before{ left:0px;}
+		</style>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation"  style="height:25px !important;">
+  <div class="container">
+    <!-- <div class="navbar-header"> <span class="navbar-brand" onClick="window.history.go(-1);return false;"> <img alt="Brand" src="images/y-fanhui.png" style="width:60%;"> </span>
+      <p class="navbar-text" style="color:#1c1c1c;font-family:PingFangSC-Medium; margin-left:42%;">编辑地址</p>
+    </div>
+    <div class="navbar-header navbar-right btn-group" style="position:absolute;left:90%;top:8%;"> <a class="navbar-brand"  ng-click="off()"> <img alt="Brand" src="./images/y-guanbi.png" style="width:60%;"> </a> </div> -->
+    <!--<div class="navbar-header navbar-right" id="show" style="position:absolute;left:90%;top:23%;"> <a class="navbar-brand dropdown-toggle" data-toggle="dropdown" > <img alt="Brand" src="./img/dian.png" style="width:60%;"> </a> </div>
+    <div class="search-sort" id="header-search" style="width:200px;" > <em id="search-em"></em>
+      <ul class="dropdown-menu search-sort-list" role="menu" style="position:absolute;left:65%;top:95%;z-index:9999;width:100px;">
+                <li  ng-click="cart()"><span  style="margin-left:20px;"><img src="./img/shop.png" style="width:12%;"></span> <span style="position:relative;top:2%;">购物车</span></li>
+                <li role="presentation" class="divider"></li>
+                <li ng-click="cartme()"> <span style="margin-left:20px;"><img src="./img/user.png" style="width:12%;"></span>  <span style="position:relative;top:2%;">我的</span></li>
+                </ul>
+    </div>-->
+  </div>
+</nav>
+<!--顶部返回 结束-->
+<!--content start-->
+<div class="container" style="width:100%;">
+ 
+  <div class="weui-cell">
+    <div class="weui-cell__hd">
+      <label class="weui-label" style="font-weight:normal">姓名</label>
+    </div>
+    <div class="weui-cell__bd">
+      <input class="weui-input" type="text" id="name" name="name"  ng-model="name" placeholder="收件人" >
+    </div>
+  </div>
+  <div class="weui-cell" style="border-bottom:1px solid #d9d9d9;">
+    <div class="weui-cell__hd">
+      <label class="weui-label" style="font-weight:normal">电话</label>
+    </div>
+    <div class="weui-cell__bd">
+      <input class="weui-input" type="text" id="phone" name="phone"  ng-model="phone" placeholder="联系电话" >
+    </div>
+  </div>
+  <div class="groupaddress ng-cloak" ng-cloak> <span class="chose" >选择省份</span>
+    <!--<a class="more" id="city" onClick="show_select()" ng-model="hundred">{{hundred}}</a>-->
+    <div class="weui-cell weui-cell_select" id="c1" >
+      <div class="weui-cell__bd">
+        <select class="weui-select"  id="ctyr"  onChange="get_son()">
+          <option  value=""></option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="groupaddress ng-cloak" ng-cloak> <span class="chose">选择城市</span>
+    <!--<a class="more" id="chosecity" onClick="show_city()" ng-model="city">{{city}}</a>-->
+    <div id="c2" class="weui-cell weui-cell_select" >
+      <div class="weui-cell__bd">
+        <select  class="weui-select"  value="" onChange="get_city()" id="citys">
+          <option >{{city}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="groupaddress ng-cloak" ng-cloak> <span class="chose">选择区域</span>
+    <!--<a class="more" id="chosearea" onClick="show_area()" ng-model="qu">{{qu}}</a>-->
+    <div id="c3" class="weui-cell weui-cell_select" >
+      <div class="weui-cell__bd">
+        <select  class="weui-select"  value="" onChange="get_area()" id="areas">
+          <option></option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div id="addresszhen" class="groupaddress ng-cloak" ng-cloak> <span class="chose">选择乡镇</span>
+    <!--<a class="more" id="chosehome" onClick="show_home()" ng-model="town" >{{town}}</a>-->
+    <!-- <a class="more" id="homeid" onClick="show_home()" ng-model="town" ng-if="town==!''">{{town}}</a> -->
+    <div id="c4" class="weui-cell weui-cell_select" >
+      <div class="weui-cell__bd">
+        <select   class="weui-select" value="" onChange="get_home()" id="home">
+          <option></option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div id="aaaaa"></div>
+  <div>
+    <!-- <input class="textarea"  id="texts" ng-model="texttext" placeholder="请填写详细地址（不包含省份城市区域）">
+				<textarea class="textarea" style="width:100%;border:none;"name="name" ng-model="texttext" id="name" placeholder="请填写详细地址（不包含省份城市区域）"></textarea> -->
+    <input class="group" style="width:100%;border:none;margin-bottom:10px;" name="name" id="texts" ng-model="texttext" placeholder="请填写详细地址（不包含省份城市区域）"/>
+  </div>
+</div>
+<div class="sure" onClick="sub()"> 确认 </div>
+<!--content end-->
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="angular/angular.min.js"></script>
+<script src="js/jd.js"></script>
+<script src="layer/layer_mobile/layer.js"></script>
+<script type="text/javascript">
+		 $('#show').click(function(){
+    $('.search-sort-list').toggle();
+  });
+	var json_params = {};
+    var json_params2 ={};
+ 	var json_params3={};
+ 	var json_params4={};
+	var proid;
+    var cityid;
+     var homeid;
+ 
+	var str=location.href; //获取本页url地址name
+	var arr=str.split("?");
+
+	var str1 = arr[1];
+	var str2 = arr[2];
+	var str3 = arr[3];
+	var str4 = arr[4];
+	var str5 = arr[5];
+	var str6 = arr[6];
+	var str7 = arr[7];
+	var str8 = arr[8];
+
+	if(str1){var id=str1.split("=")[1];}
+	if(str2){var name=str2.split("=")[1];}
+	if(str3){var phone=str3.split("=")[1];}
+	if(str4){var regionIds=str4.split("=")[1];}
+	if(str5){var regionNames=str5.split("=")[1];}
+	if(str6){var address=str6.split("=")[1];}
+	if(str7){var sku=str7.split("=")[1];}
+	if(str8){var number=str8.split("=")[1];}
+
+
+	var urladdress =decodeURI(address);
+	var urlname =decodeURI(name);
+	var cityinfo = decodeURI(regionNames);
+	var regionIdlists=cityinfo.split("|");
+	var strd = regionIdlists[1];
+	var strc = regionIdlists[2];
+	var strqu = regionIdlists[3];
+	var strtown = regionIdlists[4];
+	var regionIdslist = regionIds.split("|");
+ 	var strdid = regionIdslist[1];
+	var strcid = regionIdslist[2];
+	var strquid = regionIdslist[3];
+	var strtid = regionIdslist[4];
+layer.open({
+type: 2
+,content: '加载中'
+,time: 1 //2秒后自动关闭
+});
+get_son();
+
+	function show_select(){
+	    
+	    $('#city').hide();
+	    $('#c1').show();
+	}
+	function get_son(){ 
+		
+		var ds=$("#c1  option:selected").text();
+		var id = $("#ctyr").val();
+		
+		if(id==""){
+		id=strdid;
+		}
+		
+		$('#city').text(ds);
+	    $('#city').show();
+	    //$('#c1').hide();
+	    json_params2.id=id;
+		
+		
+		var vvv2 = do_api("biz.address.citysByProvinceId.query",json_params2);
+		//console.log(vvv2);
+	    var objs2=JSON.parse(vvv2).biz_address_citysByProvinceId_query_response.result;
+	    var html2='';
+		angular.forEach(objs2, function(index,data){
+           if(data==strc){
+			 html2+= '<option value="'+index+'" selected>'+data+'</option>';
+			}
+			else{
+		     html2+= '<option value="'+index+'">'+data+'</option>';
+		   }
+		   $('#citys').html(html2);
+		});
+	    get_city();
+		get_area();
+		return json_params2;
+	}
+
+	function show_city(){
+			var id = $("#c1 option:selected").val();
+		if(id==''){
+			   layer.open({
+        content: '请先选择省份'
+        ,skin: 'msg'
+        ,time: 5 //2秒后自动关闭
+        }); 
+		}else{
+			 $('#chosecity').hide();
+	    $('#c2').show();	
+		}
+		
+	   
+	}
+	function get_city(){
+		var ds2=$("#c2  option:selected").text();
+		var id = $("#citys").val();
+        if(id==""){
+		id=strcid;
+		}
+		$('#chosecity').text(ds2);
+	    $('#chosecity').show();
+	    //$('#c2').hide();
+	    cityid = json_params3.id;
+	    json_params3.id=id;
+		console.log(json_params3.id);
+		var vvv3 = do_api("biz.address.countysByCityId.query",json_params3);
+	    var objs3=JSON.parse(vvv3).biz_address_countysByCityId_query_response.result;
+	    var html3='';
+		angular.forEach(objs3, function(index,data){
+		   if(data==strqu){
+			 html3+= '<option value="'+index+'" selected>'+data+'</option>';
+			}
+			else{
+		     html3+= '<option value="'+index+'">'+data+'</option>';
+		   }
+		   $('#areas').html(html3);
+		});
+		get_area();
+		return json_params2;
+	}
+
+	function show_area(){
+		var id = $("#c3 option:selected").val();
+		if(id==''){
+			   layer.open({
+        content: '请先选择城市'
+        ,skin: 'msg'
+        ,time: 5 //2秒后自动关闭
+        }); 
+		}else{
+	    $('#chosearea').hide();
+	    $('#c3').show();
+		}
+	}
+	function get_area(){ 
+
+		var ds3=$("#c3  option:selected").text();
+		var id = $("#areas").val();
+		if(id==""){
+		id=strquid;
+		}
+		homeid =json_params4.id;
+		json_params4.id =id;
+		var vvv4 = do_api("biz.address.townsByCountyId.query",json_params4);
+		var objs4=JSON.parse(vvv4).biz_address_townsByCountyId_query_response.result;
+		if(objs4==null){
+		$("#home").empty(); 
+		$("#addresszhen").hide();
+		}
+		else{
+		$("#addresszhen").show();
+		}
+		console.log(objs4);
+		 var html4='';
+		angular.forEach(objs4, function(index,data){
+			if(data==strtown){
+			  html4+= '<option value="'+index+'" selected>'+data+'</option>';
+			}
+			else{
+		   	  html4+= '<option value="'+index+'">'+data+'</option>';
+		   }
+		   $('#home').html(html4);
+		});
+		$('#chosearea').text(ds3);
+	    $('#chosearea').show();
+	   // $('#c3').hide();
+
+	}    
+	//========
+		function show_home(){
+		
+		 $('#chosehome').hide();
+	} 
+	function get_home(){
+		var ds4=$("#c4  option:selected").text();
+		var id = $("#home").val();
+		
+		homeid =json_params4.id;
+		json_params4.id =id;
+		var vvv4 = do_api("biz.address.townsByCountyId.query",json_params4);
+		var objs4=JSON.parse(vvv4).biz_address_townsByCountyId_query_response.result;
+		
+		console.log(objs4);
+		angular.forEach(objs4, function(index,data){
+		
+		   html4+= '<option value="'+index+'">'+data+'</option>';
+		   $('#home').html(html4);
+		   console.log(html4);
+		});
+		$('#chosehome').text(ds4);
+	    $('#chosehome').show();
+	} 
+	//======
+	var app = angular.module('demoApp', []);
+    app.controller('DemoCtrl', ["$scope","$rootScope","$sce","$http", function ($scope, $rootScope, $sce,$http) {
+    	$scope.name =urlname;
+    	$scope.phone =phone;
+    	$scope.texttext =urladdress;
+		$scope.hundred = strd;
+		$scope.city = strc;
+		$scope.qu = strqu;
+		$scope.town = strtown;
+    	var vvv = do_api("biz.address.allProvinces.query",json_params);
+	    $scope.cp_class =  JSON.parse(vvv);
+	    // $scope.cp_class2 =  JSON.parse(vvv2);
+	    // $scope.cp_class3 =  JSON.parse(vvv3);
+	
+	    var objs=$scope.cp_class.biz_address_allProvinces_query_response.result;
+	    // var objs2=$scope.cp_class2.biz_address_citysByProvinceId_query_response.result;
+	    // var objs3=$scope.cp_class3.biz_address_countysByCityId_query_response.result;
+
+	    //console.log(objs2);
+	    var html='<option>请选择</option>';
+	    var html2='';
+	    var html3='';
+
+	    angular.forEach(objs, function(index,data){
+		    if(data==strd){
+			 html+= '<option value="'+index+'" selected>'+data+'</option>';
+			}
+			else{
+		     html+= '<option value="'+index+'">'+data+'</option>';
+		   }
+		   $('#ctyr').html(html);
+		});
+	 $scope.number=function(){
+
+    
+      var names =$scope.phone;
+     if(!(/^1[34578]\d{9}$/.test(names))){ 
+     
+         layer.open({
+        content: '手机号码有误，请重填'
+        ,skin: 'msg'
+        ,time: 4 //2秒后自动关闭
+        }); 
+        return false; 
+    } 
+
+    };
+	$scope.off=function(){
+
+    
+      window.location.href="./closeInAppBrowser.html";
+
+    };
+    $scope.cart=function(){
+
+    
+      window.location.href="./cart.html";
+
+    };
+    $scope.cartme=function(){
+
+    
+      window.location.href="./mycart.html";
+
+    };
+		
+    }]);
+ function sub(){
+	var str=location.href; //获取本页url地址
+	var arr=str.split("?");
+	var str1 = arr[1];
+	if(str1){var id=str1.split("=")[1];}
+	var token=api();
+	var name = $('#name').val();
+   if(name==''){
+   	  layer.open({
+        content: '请输入用户名'
+        ,skin: 'msg'
+        ,time: 4 //2秒后自动关闭
+        }); 
+   	    return false; 
+   }
+   var phone = $('#phone').val();
+    if(!(/^1[34578]\d{9}$/.test(phone))){ 
+     
+         layer.open({
+        content: '手机号码有误，请重填'
+        ,skin: 'msg'
+        ,time: 4 //2秒后自动关闭
+        }); 
+        return false; 
+    } 
+  
+   var texts = $('#texts').val();
+    if(texts==''){
+   	layer.open({
+        content: '请输入详细地址'
+        ,skin: 'msg'
+        ,time: 4 //2秒后自动关闭
+        }); 
+   	    return false; 
+   }
+	var ctyrval = $('#ctyr').find("option:selected").val();//请选择
+	if(ctyrval=='请选择'){
+		 var ctyrval = strdid;
+	}
+	var ctyrtext = $('#ctyr').find("option:selected").text();//请选择
+	if(ctyrtext=='请选择'){
+		 var ctyrtext = strd;
+	}
+   
+	var citysval = $('#citys').find("option:selected").val();
+		if(citysval==''){
+         var citysval =strcid;
+		}
+	 var citystext = $('#citys').find("option:selected").text();
+		if(citystext==''){
+         var citystext =strc;
+		}
+	 var areasval = $('#areas').find("option:selected").val();
+	 	 
+      if(areasval==''){
+         var areasval =strquid;
+	  }
+	 var areastext = $('#areas').find("option:selected").text();
+		if(areastext==''){
+         var areastext =strqu;
+		}
+	 var homeval = $('#home').find("option:selected").val();
+		 if(homeval==''){
+         var homeval =strtid;
+		 }
+	 var hometext = $('#home').find("option:selected").text();
+	 if(hometext==''){
+         var hometext =strtown;
+	 }
+	 var settings = {
+  "async": false,
+  "crossDomain": true,
+  "url": "/jd/api/receiveraddresses/"+id+"?name="+name+"&phone="+phone+"&regionIds=|"+ctyrval+"|"+citysval+"|"+areasval+"|"+homeval+"|&regionNames=|"+ctyrtext+"|"+citystext+"|"+areastext+"|"+hometext+"|&address="+texts+"",
+  "type": "PUT",
+  "headers": {
+    "authorization": "Bearer "+token+"",
+    "content-type": "application/x-www-form-urlencoded",
+    "cache-control": "no-cache",
+    "postman-token": "143d68ce-6215-ffdb-ed15-e369ae57f1f2"
+  },
+ 
+};
+
+$.ajax(settings).done(function (response) {
+ 	layer.open({
+        content: '更改成功'
+        ,skin: 'msg'
+        ,time: 4 //2秒后自动关闭http://jd.siqint.com/actions.html?sku=272830?number=1
+        }); 
+
+ 	window.history.go(-1);
+});
+    }
+</script>
+</html>

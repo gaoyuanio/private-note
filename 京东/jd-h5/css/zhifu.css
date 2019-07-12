@@ -1,0 +1,81 @@
+body{
+	background-color:#f8f8f8;
+	}
+.head{
+	background:url(../images/zhifuBeijing.png) no-repeat center top;
+	background-size:100%;
+	padding-top:4.2%;
+	padding-bottom:6.4%;
+	text-align:center;
+	} 
+.success{
+	width:0.74rem;
+	height:0.75rem;
+	margin:0 auto;
+	}
+.success img{
+	width:100%;
+	}
+h2{
+	font-size:0.17rem;
+	font-weight:400;
+	margin-top:1.6%;
+	color:#fff;
+	}
+.head .bguo{
+	font-size:0.12rem;
+	padding:1.6%;
+	color:#fabbaa;
+	}
+
+.detail{
+	margin-top:1.8%;
+	padding:5%;
+	position:relative;
+	}
+.detail .info{
+	font-size:0.16rem;
+	color:#443837;
+	}
+.detail .info span:last-child{
+	color:#150606;
+	right:5%;
+	position:absolute;
+	font-size:0.13rem;
+}
+.address{
+	font-size:0.14rem;
+	color:#736a68;
+	padding-top:1.5%;
+	padding-bottom:1.9%;
+	border-bottom:1px solid #e5e5e5;
+}
+.detail .pay{
+	font-size:0.15rem;
+	text-align:right;
+	padding:4% 0 2% 0;
+	}
+.detail .pay span{
+	color: #e53f40;
+	margin-left:3.8%;
+	}
+.bottom{
+	text-align:center;
+	margin-top:9%;
+		}
+.bottom .btn{
+	width:73.3%;
+	/*height:6.6%;不要固定高*/
+	margin:0 auto;
+	border:2px solid #979797;
+	border-radius:8px;
+	color:#423635;
+	font-size:0.15rem;
+	text-align:center;
+	padding:2.1% 0;
+	display:block;
+}
+
+.bottom .fhsy{
+	margin-top:2%;
+   }

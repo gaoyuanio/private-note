@@ -1,0 +1,1138 @@
+﻿/*全局控制*/
+body {
+	margin: 0;
+	padding: 0;
+	font-size: 16px;
+	font-family:"微软雅黑", "黑体";
+	background: #F5F5F5;
+}
+h1, h2, h3, h4, ul, li, p, dl, dt, dd, input, img {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	border: 0;
+	outline: none;
+	text-shadow: none !important
+}
+/*img{
+	width: 100%;
+	height: 100%;
+}*/
+ul { list-style:none;}
+a { text-decoration:none;}
+em { font-style: normal;}
+.clearfix:before, .clearfix:after {
+    content: "";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+.mui-content {
+	background: transparent;
+}
+input {
+	font-family: "microsoft yahei";
+}
+/*首页开始*/
+.indexCon {
+	margin-bottom: 50px;
+}
+.indexCon .mui-table-view .mui-media-object {
+	  line-height: 70px;
+    max-width: 70px;
+    height: 70px;
+}
+.colred {
+	color: #DB0B0A !important;
+}
+.colhui {
+	color: #9E9E9E !important;
+}
+.colgreen {
+	color: #34D1A7;
+}
+.indexCon .mui-media-body {
+	margin-top: 5px;
+}
+/*首页结束*/
+
+/*头部开始*/
+.myheader.mui-bar {
+	background-color:#2DD0A5;
+}
+.myheader .mui-title {
+	color:#FCFEFD;
+}
+.myheader.mui-bar .mui-icon {
+	color:#fff;
+}
+.myheader .mui-pull-right i {
+	font-size: 20px;
+	font-weight: normal;
+}
+.myMain .myheader a span,.passwordMain .myheader a span,.resetMain .myheader a span {
+	font-size: 14px;
+	font-family: "microsoft yahei";
+}
+
+/*头部结束*/
+/*底部*/
+.mui-bar-tab .mui-tab-item.mui-active {
+	color:#2DD0A5;
+}
+/*底部结束*/
+
+/*订单开始*/
+.sendPeople p span.telphone {
+	float: right;
+	margin-right: 22px;
+	font-size: 15px;
+	color: #4B4B4B;
+}
+.order .mui-bar-nav~.mui-content {
+	padding-top: 30px;
+}
+.marginT {
+	margin-top: 10px;
+}
+.order .orderCon .orderTime,.oRder {
+	height: 40px;
+	padding:11px 15px;
+}
+.order .orderCon .orderTime p {
+	color:#505050;
+}
+.order .orderCon .orderTime p span {
+	margin: 0 5px;
+}
+.order_complete {
+	float: right;
+	margin-right: 20px;
+}
+.orderCon .ordernumber {
+	color: #505050;
+}
+.orderCon .ordernumber span.order_num {
+	margin-left: 3px;
+}
+.orderCon .orderxq span {
+	float: right;
+}
+.orderCon .orderxq span.num {
+	margin-right: 12px;
+	color: #9B9B9B;
+}
+.orderCon .orderxq span.money {
+	color: #666666;
+}
+.orderCon .orderxq .mui-media-body {
+	margin-top: 10px;
+	color: #727272;
+}
+.orderCon .orderxq .yashui {
+	color: #A2A2A2;
+	font-size: 14px;
+}
+.yatongservice .yashui{color: #2DCFA5;}
+.orderCon .orderxq.mui-table-view-cell:after {
+	background: transparent;
+}
+.orderxq{padding: 11px 15px;
+		  margin-bottom: 0px;}
+.orderCon .orderpay.mui-table-view-cell:after {
+	background: #c8c7cc;
+}
+.order .orderCon .orderpay p {
+	float: right;
+}
+ .orderpay p a {
+	color: #2DD3A4;
+}
+ .orderpay{padding: 15px 15px 0 0;height: 55px;font-size: 16px;}
+.mui-btn-success {
+	border: 1px solid #2DD3A4;
+	color: #2DD3A4;
+}
+.mui-btn-success:enabled:active {
+    background-color: #2DD3A4;
+    border: 1px solid #2DD3A4;
+    color: #fff;
+}
+.orderpay.mui-table-view-cell {
+	padding: 15px 15px 0 0;
+}
+.orderpay.mui-table-view-cell p {
+	font-size: 16px;
+	color: #575757;
+}
+.orderpay span.money {
+	margin-left: 5px;
+}
+.orderpay p{font-size: 16px;}
+em.smallyuan {
+	font-size: 13px;
+}
+.useyhq .mui-media-body {
+	color: #777777;
+}
+.useyhq span {
+	float: right;
+	color: #777777;
+}
+.orderCon .weixinpay {
+	float: left !important;
+	margin-left: 17px;
+}
+.aginbuy {
+	width: 90%;
+	margin: 12px auto 4px auto;
+}
+.aginbuy .mui-btn-block {
+		padding: 8px 0;
+}
+.aginbuy .mui-btn-primary {
+		color: #fff;
+    border: 1px solid #2DD0A5;
+    background-color: #2DD0A5;
+}
+.aginbuy2 .mui-btn-primary {
+	background-color: #CEF8EC;
+	border: 1px solid #CEF8EC;
+}
+.aginbuy .mui-btn-primary:enabled:active {
+	color: #2DD0A5;
+    border: 1px solid #2DD0A5;
+    background-color: transparent;
+}
+/*订单结束*/
+/*去支付开始*/
+.pay .mui-card {
+	border: none;
+	margin: 0;
+	padding: 0;
+	margin-left:-3px;
+}
+.mui-card .mui-checkbox input[type=checkbox]:checked:before, .mui-radio input[type=radio]:checked:before {
+	color: #2DD0A5;
+	}
+.mui-card .mui-checkbox input[type=checkbox]:checked:before, .mui-radio input[type=radio]:checked:before {
+	color: #2DD0A5;
+	}
+#ticketList .mui-radio input[type=radio]:before{top:13px;}
+.mui-card .mui-checkbox input[type=checkbox]:before, .mui-radio input[type=radio]:before {
+	position: absolute;
+	left: -31px;
+	top:-8px;
+	font-size: 24px;
+	}
+.mui-cardshopping .quanxuanall .mui-checkbox input[type=checkbox]:before, .mui-radio input[type=radio]:before {
+	position: absolute;
+	left: 0px;
+	top: 4px;
+	font-size: 24px;
+	}
+
+.mui-card .zfb,.mui-card .weixin {
+	font-size: 16px;
+	color: #686868;
+	font-family: "microsoft yahei";
+}
+.mui-card .zfb i {
+	color: #FCAC01;
+}
+.mui-card .weixin i {
+	color: #4DA52B;
+}
+.mui-card .zfb i,.mui-card .weixin i {
+	margin-right: 5px;
+	font-size: 18px;
+}
+.fg.mui-table-view-cell {
+	padding: 0;
+}
+/*去支付结束*/
+/*订单状态开始*/
+.order_status .mui-content {
+	padding-top: 44px !important;
+}
+.order_status .mui-segmented-control {
+	 border: none;
+}
+.order_status .mui-segmented-control .mui-control-item.mui-active {
+	background: transparent;
+	color: #49D7B0;
+	border: none;
+	border-bottom: 2px solid #49D7B0;
+}
+.order_status .mui-segmented-control .mui-control-item {
+	border-left: none;
+	border: none;
+	color: #3B3B3B;
+}
+.order_status .orderpay p.shipay,.order_detail .orderpay p.shipay {
+	float: left;
+	margin-left: 15px;
+}
+.order_status .mui-btn, button,.order_detail .mui-btn, button {
+	padding: 4px 10px;
+}
+.order_status .mui-content {
+	padding-bottom: 60px;
+}
+.waterpic {
+	width: 60%;
+	margin: 0 auto;
+	text-align: center;
+}
+.waterpic img {
+	margin: 90px 0 10px 0;
+	width: 24%;
+}
+/*订单状态结束*/
+/*提交订单开始*/
+.submitorder li em {
+	color: #4B4B4B;
+}
+.liji {
+	margin: 6px 0;
+}
+.liji .mui-badge {
+	background-color: rgba(0,0,0,0);
+}
+.submitorder span.yuan,.goods_detail_title .yuan {
+	border: 1px solid #DCDFE3;
+	border-radius: 50%;
+	width: 25px;
+	height: 25px;
+	line-height: 18px;
+	text-align: center;
+	display: inline-block;
+}
+.goods_detail_title{position: relative}
+.submitorder span.yuan em.lvjia,.goods_detail_title em.lvjia {
+	color: #2DCFA5;
+	font-size: 27px;
+	font-weight: normal;
+}
+.submitorder .gong {
+	margin: 15px 0 0px 0;
+	background: #fff;
+	height: 50px;
+	line-height: 50px;
+}
+.submitorder .gong li {
+	padding: 0 0 0 20px;
+}
+.submitorder .gong li button {
+	float: right;
+	width: 30%;
+	height: 100%;
+	border-radius: 0;
+}
+.gong .mui-table-view-cell>.mui-btn {
+	right: 0px;
+}
+.gong .jg {
+	margin-left: 5px;
+}
+.gong  .mui-btn-primary {
+	color: #fff;
+    border: 1px solid #FF6801;
+    background-color: #FF6801;
+}
+.yst .mui-numbox {
+	background: none;
+	border-radius: 0;
+	border: none;
+	margin-right: 9px;
+	float:right;
+}
+.yst .mui-numbox [class*=numbox-btn] {
+	border-radius: 50% ;
+	background: none;
+	border: 1px solid #ccc;
+	width: 24px;
+	height: 24px;
+	line-height: 23px;
+	color: #2FD0A5;
+}
+.yst .mui-numbox .mui-numbox-input {
+	border-left: none !important;
+	border-right: none !important;
+}
+.gwc {
+	position: relative;
+}
+.gwc li {
+	margin-left: 60px;
+	color: #666666;
+}
+.gwc .shoppingcar {
+	display: inline-block;
+    border-radius: 50%;
+    position: absolute;
+    top: -30px;
+    color: #EFF0F2;
+    margin-right: 10px;
+    left: -50px;
+    border: 1px solid #D9DDE1;
+    padding: 8px 0px 0;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+}
+#shopCarList{background: #fff;}
+#shopCarList .icon{line-height: 38px;}
+.gwc .mui-badge-success {
+    position: absolute;
+    right: -2px;
+    top: -2px;
+    background: #D44444;
+}
+.gwc li .jg {
+	font-size: 18px;
+}
+.gwc .mui-table-view-cell {
+	overflow: visible;
+}
+.gwc .shoppingcar i {
+	font-size: 30px;
+	color: #A0A1A4;
+	font-weight: 100;
+}
+.yuanquan {
+	position: absolute;
+    left: -3px;
+    top: -24px;
+}
+.yuanquan .mui-badge-success {
+	background: #D44444;
+}
+
+.order nav ul.gong2 {
+	margin: 0px 0 0px 0;
+
+}
+.order nav ul li span {
+	font-size: 20px;
+}
+/*提交订单结束*/
+/*商品详情开始*/
+.goods_detail_title {
+	background: #fff;
+	padding: 5px 0;
+	border-top: 1px solid #E7E7E7;
+}
+.goods_detail_title h2 {
+	font-size: 17px;
+	font-weight: normal;
+	color: #515151;
+}
+.goods_detail_title .salesvolume {
+	color: #999999;
+	padding: 7px 0 4px;
+}
+.goods_detail_title .smallyuan {
+	color: #DE090B;
+	font-size: 18px;
+}
+.goods_detail_title .smallyuan em {
+	font-size: 13px;
+}
+.goods_detail_con h2 {
+	font-size: 16px;
+	font-weight: normal;
+	color: #A5A5A5;
+	padding: 10px;
+}
+.goods_detail_con p {
+	background: #fff;
+	padding: 10px 8px;
+	word-break: break-all;
+	word-wrap: break-word;
+	line-height: 24px;
+}
+.goods_detail_bottom {
+	margin-top: 50px;
+}
+.goods_detail_bottom .mui-bar-tab {
+	line-height: 50px;
+}
+.goods_detail_bottom_l {
+	float: left;
+	margin-left: 10px;
+	color: #A1A1A2;
+}
+.goods_detail_bottom_l i {
+	color: #A1A1A2;
+	font-size: 30px;
+	margin-top: 5px;
+	vertical-align: middle;
+}
+.goods_detail_bottom_r {
+	float: right;
+	height: 52px;
+	background: #999999;
+	width: 30%;
+	text-align: center;
+	color: #fff;
+	padding-right: 14px;
+}
+.gwc .mui-btn-primary:enabled:active {
+	color: #FF6801;
+    border: 1px solid #FF6801;
+    background-color: transparent;
+}
+/*商品详情结束*/
+/*水票开始*/
+.waterticket .mui-table-view .mui-media-object {
+	line-height: 70px;
+    max-width: 70px;
+    height: 70px;
+}
+.waterticket .discount {
+	/*margin: 8px 0;*/
+	font-size: 15px;
+}
+.waterticket .discount span {
+	color: #7B7B7B;
+	font-size: 13px;
+	margin-left: 4px;
+	text-decoration: line-through;
+}
+.waterticket .salesvolume .mui-btn-positive {
+	border: 1px solid #31CEA3;
+	border-radius: 16px;
+}
+.waterticket .salesvolume button {
+	float: right;
+	margin-top: -5px;
+	color: #31CEA3;
+}
+.waterticket .salesvolume .mui-btn-positive:enabled:active {
+	color: #fff;
+    background-color: #31CEA3;
+}
+.xuzhi2 {
+	text-align: right;
+	padding: 6px 4% 6px 0;
+}
+.waterticket .zhongwen,.buyTicket_title .jg .zhongwen,.buyTicket .jg .zhongwen {
+	font-size: 13px;
+}
+.waterticket .discount2 {
+	/*margin: 8px 0;*/
+	font-size: 15px;
+}
+.waterticket .discount2 .xiexian {
+	color: #777777;
+	font-size: 15px;
+}
+.buyTicket_title {
+
+}
+.buyTicket_title h2 {
+	font-size: 17px;
+	font-weight: normal;
+	padding: 10px 20px;
+	color: #4B4B4B;
+}
+.buyTicket_title .jg {
+	position: absolute;
+	left: 58%;
+	top: 10px;
+}
+.buyTicket_title label {
+	font-family: "microsoft yahei";
+	color: #6E6E6E;
+}
+.buyTicket_title .jg,.buyTicket .jg {
+	color: #E03030;
+	font-size: 17px;
+}
+.buyTicket_con {
+	margin: 8px 0;
+}
+.buyTicket .jg span {
+	color: #717171;
+	margin-right: 5px;
+}
+.myMain_con_tel {
+	height: 50px;
+	text-align: center;
+	line-height: 50px;
+	margin-bottom: 50px;
+}
+.myMain .mui-content {
+
+}
+.buywaterMain .mui-content {
+	margin: 0;
+	padding: 45px 0 50px 0;
+}
+.jd_category_right_con .mui-table-view:before {
+	height: 0;
+}
+.jd_category_right {
+	padding:0;
+}
+.jd_category_right_con .hengtiao {
+	font-size: 16px;
+	font-weight: normal;
+	background: #F5F5F5;
+	padding: 10px 0 10px 10px;
+	color: #686868;
+	position: relative;
+	margin-left: 15px;
+	z-index: 1000;
+}
+.jd_category_right .mui-table-view-cell>a:not(.mui-btn) {
+	/*margin: -11px -27px;*/
+}
+.jd_category_right_con .price {
+	font-size: 18px;
+}
+.jd_category_right_con span.jiuzhe {
+	font-size: 15px;
+	color: #ABABAB;
+	margin-left: 2px;
+}
+.jd_category_right_con .mui-table-view .mui-media-object {
+	line-height: 60px;
+    max-width: 60px;
+    height: 60px;
+}
+.jd_category_right_con .jiajian {
+	margin-top: 10px;
+	margin-left: 70px;
+}
+.jd_category_right_con .mui-numbox {
+	height: 30px;
+}
+.buywaterMain .gwc .shoppingcar {
+    background: #fff;
+}
+.buywaterMain .gwc .shoppingcar i {
+	line-height: 38px;
+}
+.buywaterMain .yuanquan {
+	position: absolute;
+    left: -4px;
+    top: -13px;
+}
+.buywaterMain .gong li button {
+    float: right;
+    width: 30%;
+    height: 100%;
+    border-radius: 0;
+}
+.buywaterCon {
+	margin: 0px 0  60px 0;
+	padding-top: 60px;
+}
+.jd_category_left .jd_category_left_con li a {
+	color: #A0A0A0;
+}
+
+.buywaterMain .gwc .mui-table-view-cell>a:not(.mui-btn) {
+	 position: static;
+     display: inline-block;
+     margin: 0;
+     padding: inherit;
+}
+
+.buywaterMain .mui-popover .mui-table-view,.buywaterMain .mui-popover{
+	background: #fff;
+}
+.buywaterMain  .mui-popover .money {
+}
+.buywaterMain  .mui-popover .yst .mui-numbox {
+	margin-top: -1px;
+	float: right;
+	margin-right: 0px;
+}
+.buywaterMain  .mui-popover .money {
+	color: #D44444;
+	font-size: 17px;
+}
+.mui-media-body .money{color: #D44444;font-size: 17px;}
+.qk {
+	float: right;
+}
+.buywaterMain  .mui-popover .qk {
+	color: #9F9F9F;
+	font-size: 15px;
+}
+.jd_category_left .jd_category_left_con li:last-child {
+	border-bottom: none;
+}
+/*水票结束*/
+/*我的页面开始*/
+.bgcon {
+	background: url(../images/mybg.png) no-repeat top left;
+	height: 160px;
+	width: 100%;
+	-webkit-background-size: cover;
+	background-size: cover;
+	text-align: center;
+}
+.people {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	text-align: center;
+    transform: translateY(15%);
+}
+.people img {
+	width: 100%;
+	height: 100%;
+}
+.bgcon p.tel {
+	color: #fff;
+}
+.mydetail li a {
+	color: #363636;
+}
+.mydetail li i {
+	margin-right: 3%;
+	color: #989898;
+}
+.myMain_con_tel {
+	color: #A0A0A0;
+}
+.taglines {
+	background: url(../images/sendwater.png) no-repeat center center;
+	-webkit-background-size: contain;
+	background-size: contain;
+	height: 70px;
+	margin: 25px 0px;
+}
+.aboutus_con {
+	width: 	80%;
+	margin: 0 auto;
+	border: 1px solid #EBEBEB;
+	padding: 10px 2%;
+	text-indent: 2em;
+	color: #676767;
+	line-height: 23px;
+	word-break: break-all;
+	word-wrap: break-word;
+	background: #fff;
+}
+.copyright {
+	padding-top: 50px;
+}
+.copyright p {
+	text-align: center;
+}
+.sendpass {
+	position: absolute;
+	right: 10px;
+	top:12px;
+}
+.findPassWord_main form input {
+	font-family: "microsoft yahei";
+	font-size: 16px;
+	font-weight: normal;
+}
+.sendpass .mui-btn-primary {
+	color: #fff;
+    border: 1px solid #2DD0A5;
+    background-color: #2DD0A5;
+}
+.sendpass .mui-btn-primary:enabled:active {
+	color: #E3E3E3;
+    border: 1px solid #E5E4EA;
+    background-color: transparent;
+}
+.reset_main {
+	text-align: center;
+	width: 90%;
+	margin: 40px auto;
+}
+.reset_main i {
+	font-size: 19px;
+	color: #2DD0A5;
+}
+.reset_main .pwds {
+	color: #5B5B5B;
+}
+.reset_main .contactMt {
+	margin: 10px 0 7px 0;
+}
+.reset_main .kftel {
+	color: #2DD0A5;
+}
+.shuitong_main ul li span {
+	color: #6B6B6B;
+	font-size: 15px;
+}
+.shuitong_main ul li span:first-child {
+	margin-left: 3%;
+}
+/*.address_main,*/.myxiaoxi_main {
+	margin-top: -14px;
+}
+.addressMain .mui-bar .mui-btn-link,.editshrMain .mui-bar .mui-btn-link {
+	color: #fff;
+}
+.address_main .mui-table-view-cell>a:not(.mui-btn) {
+	margin: -11px -11px -11px -63px;
+}
+.address_main ul li a {
+	color: #434343;
+}
+.address_main ul li .tel {
+	margin-right: 5%;
+}
+.address_main ul li .mui-ellipsis-2 {
+	-webkit-line-clamp:100;
+	color: #AEAEAE;
+	font-size: 15px;
+}
+.address_main ul li .mui-navigate-right:after, .mui-push-right:after {
+	right: 5px;
+}
+.editshr_main .mui-input-group .mui-input-row {
+	height: auto;
+}
+.editshr_main .mui-input-row a,.editshr_main .mui-input-row label {
+	color: #5D5D5D;
+	font-family: "microsoft yahei";
+}
+.mywaterticket_main .mui-table-view .mui-media-object {
+	line-height: 70px;
+    max-width: 70px;
+    height: 70px;
+    margin-top: 5px;
+}
+.mywaterticket_main .smallyuan {
+	font-size: 14px;
+	color: #DB0B0B;
+}
+.mywaterticket_main .numprice {
+	font-size: 18px;
+	color: #DB0B0B;
+}
+.mywaterticket_main ul .mui-table-view-cell p.price {
+	margin: 10px 0 5px;
+}
+.mywaterticket_main ul .mui-table-view-cell p.shengyu .mui-btn {
+	padding: 3px 9px;
+	margin: 0 5px;
+	margin-top: -6px;
+}
+.mywaterticket_main ul li .mui-btn-positive {
+	border: 1px solid #2DD0A5;
+}
+.mywaterticket_main ul li .mui-btn-positive:enabled:active {
+	border: 1px solid #2DD0A5;
+	background-color:#2DD0A5;
+}
+.myyaoqing_main .title {
+	padding: 15px 0;
+}
+.myyaoqing_main h2 {
+	font-size: 17px;
+	font-weight: normal;
+}
+.myyaoqing_main h2 span {
+	display: inline-block;
+	width: 4px;
+	height: 15px;
+	background: #FF6801;
+	margin-right: 5px;
+}
+.yaoqing_con {
+	background: #fff;
+	padding: 10px 15px;
+}
+.yaoqing_con p {
+	line-height: 27px;
+}
+.marginT30 {
+	margin-top: 30px;
+}
+.myxiaoxi_main .orderTime.mui-table-view-cell:after {
+	height: 0;
+}
+.myxiaoxi_main .xiaoxiconlist {
+	margin-top: -11px;
+}
+.yhq_main .xz {
+	float: right;
+	padding: 5px 0px;
+}
+.yhq_main {
+	padding: 10px 3%;
+}
+.yhq_main .yhq_con {
+	margin-top: 28px;
+	position: relative;
+}
+.yhq_main .yhq_con_t {
+	background: url(../images/yhq.png) repeat-x;
+	-webkit-background-size: cover;
+	background-size: cover;
+	width: 100%;
+	height: 9px;
+}
+.yhq_main .yhq_con_c {
+	height: 140px;
+	background: #fff;
+	padding: 8px 3%;
+}
+.yhq_main .yhq_con_b {
+	background: #E1E1E1;
+	height: 10px;
+	border-radius: 0px 0 5px 5px;
+}
+.yhq_main .yhq_con_c  i {
+	position: absolute;
+    right: 2%;
+    font-size: 9rem;
+    top: 37%;
+    /*color: #81E5C9;*/
+    opacity: 0.2;
+}
+.yatong_a b {
+	color: #A2A2A3;
+	font-weight: normal;
+}
+
+.yhq_main .yhq_con_c h2 {
+	padding: 5px 0;
+	margin-top: 10px;
+	font-size: 20px;
+}
+.yhq_main .yhq_con_c .jieshi {
+	position: absolute;
+	bottom: 20px;
+	left: 3%;
+}
+.yhq_main .yhq_con_c .price {
+	position: absolute;
+    top: 42%;
+    right: 13%;
+    font-size: 2.6rem;
+}
+.yhq_main .yhq_con_c .price span {
+	margin-right: 1%;
+}
+.col5 {
+	color: #F2CA93;
+}
+.col3 {
+	color: #82DBE4;
+}
+.col2 {
+	color: #FFCDEE;
+}
+.col1 {
+	color: #BFC0F5;
+}
+.col20 {
+	color: #F9CECD;
+}
+.login_main label {
+	color: #B5B5B5;
+}
+.login_main label,.login_main input {
+	font-family: "microsoft yahei";
+}
+/*我的页面结束*/
+
+/*xin.gao*/
+.good_detail a {
+	color: #B5B5B5;
+}
+
+/*服务条款页面*/
+.serviceItem {
+	margin: 0 5%;
+	padding: 0px 0 15px;
+}
+.service_title {
+	padding: 10px 0;
+	text-align: center;
+	border-bottom: 2px solid #B1B1B1;
+}
+.service_title h2 {
+	font-size: 24px;
+	padding: 20px 0;
+	font-weight: normal;
+	color:#393A3A;
+}
+.service_con p{
+	font-size: 16px;
+	padding: 10px 0;
+	text-indent: 2em;
+	color: #4F4F4F;
+}
+.service_con h3 {
+	font-weight: normal;
+	font-size: 19px;
+	color:#FF7934;
+}
+.service_con_item {
+	margin: 10px 0;
+}
+
+.serviceItem .yatong p {
+	line-height: 25px;
+}
+
+#toastBtn{
+	color: #fff;
+}
+#phone_txt,#yzcode,#pwd,.yaoqing{position: relative;top: 10px;}
+
+.details .mui-media-body div{
+	text-align: right;
+}
+.details .mui-media-body div span:nth-child(1){
+	display:inline-block; 
+	margin-right:20px;
+}
+.details .mui-media-body div span:nth-child(2){
+	color:red;
+}
+#footerBar{
+	line-height: 50px;
+	height: 50px;
+	padding:0  5px 0 5px;
+}
+#footerBar input{
+	width: 45%;
+	height: 40px;
+	color: #fff;
+}
+#footerBar #Defeated{
+	margin:5px 3% 5px 2%;
+	background: #ff5f5f;
+}
+#footerBar #Success{
+	margin:5px 2% 5px 3%;
+	background: #17e4ab;
+}
+.inform{
+	display: inline-block;
+    width: 90px;
+    height: 40px;
+   /* border-radius: 50%;*/
+    line-height: 40px;
+    text-align: center;
+    /*background: #f20168;*/
+    color: #333;
+    /*border:1px solid #f20168;*/
+
+}
+.mui-table-view-cell p{
+        height: 25px;
+        line-height: 25px;
+        color:#4B4B4B;
+        font-size: 16px;
+}
+.mui-table-view-cell #tel{
+    padding-top:5px;
+    padding-bottom: 20px;
+}
+.mui-table-view .mui-media-object {
+    line-height: 42px;
+    max-width: 42px;
+    height: 42px;
+}
+.peisongz{
+	height:100%;
+	padding:0 10px 0 10px; 
+	background:#f5cb34; 
+	display:inline-block;
+	text-align:center;
+	float:right; 
+	color:#fff;
+}
+.peisongwan{
+	height:100%;
+	padding:0 10px 0 10px; 
+	background:#17e4ab; 
+	display:inline-block;
+	text-align:center;
+	float:right; 
+	color:#fff
+}
+#Tel{
+	display: inline-block;
+    vertical-align: bottom;
+    color: #15b78c;
+}
+/*tongji.html统计页*/
+.mui-content .zongxiao{
+	height:150px;
+}
+.mui-content .zongxiao p{
+	line-height: 150px;
+    padding-left: 30px;
+    font-size: 22px;
+    border-bottom: 1px solid #333;
+    background: rgba(3,169,244,0.5);
+    color: #fff;
+}
+.mui-content .fendian{
+	height:40px;
+}
+.mui-content .fendian p{
+	line-height: 40px;
+    padding-left: 30px;
+    font-size: 16px;
+    font-weight: bold;
+}
+.fendianName1,.fendianName2,.fendianName3,.fendianName4{
+	width:120px; 
+	height:120px; 
+	display:inline-block; 
+	float:left;
+	border: 1px solid #fff;
+	border-radius: 50%;
+	text-align: center;
+	line-height: 120px;
+	font-weight: bold;
+	color: #fff;
+}
+.fendianName1{
+	background: #f7d011;
+}
+.fendianName2{
+	background: #ad12ca;
+}
+.fendianName3{
+	background: #f14950;
+}
+.fendianName4{
+	background: #44ea58;
+}
+.agoods{
+	margin-top: 10px;
+}
+.agoods div{
+	float: right;
+}
+/*配送员界面配送件数dilivery_number.html*/
+.jinri,.benyue,.shangyue{
+	height:33%;
+}
+.jinri p,.benyue p,.shangyue p{
+	line-height: 150px;
+    padding-left: 30px;
+    font-size: 22px;
+    border-bottom: 1px solid #999;
+    background: #c8e1e2;
+    color: #333;
+}
+.delivery{
+    background-image: url(../images/delivery.png);
+    background-repeat:no-repeat;
+    background-size:auto 64px; 
+    background-position:top right;
+}

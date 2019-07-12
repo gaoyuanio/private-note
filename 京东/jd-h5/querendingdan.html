@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="zh-cn" ng-app="demoApp">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="content-type" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>提交订单</title>
+    <!-- <link rel="stylesheet" type="text/css" href="css/index-querendingdan.css"/> -->
+    <link rel="stylesheet" type="text/css" href="css/indexac.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/css.css" />
+    <link rel="stylesheet" href="css/ionic.min.css">
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .red {
+            border: 1px solid #666666;
+            background-image: url(./images/yuan.png);
+            background-position: right top;
+            background-repeat: no-repeat;
+        }
+
+        .green {
+            border: 1px solid #E53F40;
+            background-image: url(./images/yuan2.png);
+            background-position: right top;
+            background-repeat: no-repeat;
+        }
+
+        .ng-cloak {
+            display: none;
+        }
+
+        .spinner svg {
+            stroke: #e85a5d;
+            width: 40px;
+            height: 40px;
+        }
+
+        .loading-container {
+            background: #edecf0;
+            top: 52px;
+        }
+
+        .loading-container .loading {
+            background: #fff;
+            padding: 0;
+            width: 0.5rem;
+            height: 0.5rem;
+        }
+
+        @media (max-width: 340px) {
+            .guige_con {
+                position: absolute;
+                left: 1.4rem;
+                top: 0;
+                width: 1rem;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+            }
+        }
+
+        @-webkit-keyframes rotation {
+            from {
+                -webkit-transform: rotate(0deg);
+            }
+            to {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        .Rotation {
+            -webkit-transform: rotate(360deg);
+            animation: rotation 1s linear infinite;
+            -moz-animation: rotation 1s linear infinite;
+            -webkit-animation: rotation 1s linear infinite;
+            -o-animation: rotation 1s linear infinite;
+        }
+
+        .show0 {
+            display: none;
+        }
+
+        .show1 {
+            display: black;
+        }
+
+        .img {
+            border-radius: 250px;
+        }
+    </style>
+
+
+</head>
+
+<body ng-controller="DemoCtrl">
+    <div class="show{{show}}" style=" position:fixed; z-index:9999; width:100%; height:2000px; background:#ffffff">
+        <div style="margin:0 auto;position:fixed;top:42%;left:46%;z-index:99999;float:left;">
+            <img class="Rotation img" src="./images/loading3.png" style="width:35px;">
+        </div>
+    </div>
+
+    <div class="containe" style=" width:100%; height:100%;overflow-x: hidden;overflow-y: scroll;-webkit-overflow-scrolling:touch;">
+        <!-- <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="height:25px !important;">
+        <div class="container">
+             <div class="navbar-header"><span class="navbar-brand" onClick="javascript:window.history.go(-1);return false;"> <img alt="Brand" src="images/y-fanhui.png" style="width:60%;"></span>
+
+                <p class="navbar-text" style="color:#1c1c1c;font-family:PingFangSC-Medium;margin-left:13%;font-size: 0.17rem;line-height: 0.17rem;">提交订单</p>
+            </div>
+            <div class="navbar-header navbar-right btn-group" style="position:absolute;left:90%;top:-2%;"><a
+                    class="navbar-brand" ng-click="off()"> <img alt="Brand" src="./images/y-guanbi.png"
+                                                                style="width:60%;"> </a></div> -->
+        <!-- <div class="navbar-header navbar-right" id="show" style="position:absolute;left:90%;top:13%;"><a
+                    class="navbar-brand dropdown-toggle" data-toggle="dropdown"> <img alt="Brand" src="./img/dian.png"
+                                                                                      style="width:60%;"> </a></div> -->
+        <!-- <div class="search-sort" id="header-search" style="width:200px;"><em id="search-em"></em>
+                <ul class="dropdown-menu search-sort-list" role="menu"
+                    style="position:absolute;left:65%;top:95%;z-index:9999;width:100px;">
+                    <li ng-click="cart()"><span style="margin-left:20px;"><img src="./img/shop.png" style="width:12%;"></span>
+                        <span style="position:relative;top:2%;">购物车</span></li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>-->
+        <div class="top-center-warp ng-cloak" id="scrollWrap">
+            <!-- <div style="margin-bottom:2%;visibility:hidden;">121</div> -->
+            <div class="header ng-cloak">
+                <div class="header-add" style="padding-top: 0.05rem;" ng-click="zd()">
+                    <div class="header-name-wrap" ng-cloak>
+                        <!--<img class="header-ico" src="img/dizhi.png" / ng-cloak>-->收件人:
+                        <span class="header-add-name" ng-cloak ng-bind="listadd.name"></span>
+                        <br/> 电话:
+                        <span style="margin-left: 0.05rem;" class="photo-number" ng-cloak ng-bind="listadd.phone"></span>
+                    </div>
+                    <div class="add-box">
+                        <p class="header-address" ng-cloak> 地址：
+                            <span ng-bind="listadd.regionNames | line"></span>
+                            <span ng-bind="listadd.address"></span>
+                        </p>
+
+                        <div class="right-ico" ng-click="zd()" ng-cloak>
+                            <a style="position: absolute;width: 1.2rem;height: 1.15rem;top: -0.19rem;">
+                                <img src="img/right-ico.png" /> </a>
+                        </div>
+                    </div>
+                    <img style="margin-left: 0;" class="header-caidai" src="img/caidai.png" / ng-cloak>
+                </div>
+                <div style="height: 10px;width: 100%;background: #c9c9c9;" ng-cloak></div>
+                <div class="center-title" ng-cloak>
+                    <img src="img/icon.png" />
+                    <span>商品信息</span>
+                    <div style="display: block;width: 90%;height: 1px;background: #797979;position: relative;bottom: 0;margin: 0 auto;"></div>
+                </div>
+                <div class="center-wrapper" style="overflow: hidden;">
+                    <div class="col-xs-12" style="float:left; height:100px;" ng-repeat="item in listss">
+                        <a href="actions.html?sku={{sku}}?number={{number}}">
+                            <div class="order1">
+                                <div class="order1-photo-wrap">
+                                    <img src="http://img13.360buyimg.com/n0/{{item.imagePath}}" />
+                                </div>
+                                <div class="order-font">
+                                    <p class="order1-info" ng-bind="item.name"></p>
+                                    <p class="guige_info" style="top:0.33rem;">
+                                        重量:
+                                        <span>{{cp_class.biz_product_detail_query_response.result.weight}}kg</span> 规格:
+                                        <span class="guige_con">{{cp_class.biz_product_detail_query_response.result.brandName}}</span>
+                                    </p>
+                                    <span class="order1-money" ng-bind="item.price | currency:'￥'"></span>
+                                </div>
+                                <div class="order1-spec-wrap" id="empty">
+                                    <span class="order1-spec">
+                                        <input type="hidden" id="skuid" value="{{item.skuId}}">
+                                    </span>
+                                    <span class="order1-spec-number dw" ng-model="items" id="num">
+                                        <input type="hidden" id="numss" value="{{nuslist[0][$index]}}"> ×{{nuslist[0][$index]}} </span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="center1-wrap ng-cloak" ng-cloak>
+            <div style="height: 10px;width: 100%;background: #c9c9c9; " ng-cloak></div>
+           <div ng-if="len==100 " class="shop-number-wrap ng-cloak " ng-cloak>
+                <span class="shop-font ">购买数量</span>
+                <div class="numbers " ng-cloak style="top: 0.11rem; ">
+                    <span ng-click="reduce() " ng-class="{ 'number-jian':items <=1 , 'number-jian2':items> 1}"></span>
+                <input style="padding-top: 0;height: 0.25rem;border-left: 1px solid #c5c5c5;border-right: 1px solid #c5c5c5;" type="tel"
+                    value="{{items}}" class="number" id="number{{$index}}" ng-model="items" readonly="readonly" />
+                <span ng-click="add()" class="number-jia"></span>
+            </div>
+        </div>
+        <!-- <div style="display: block;width: 90%;height: 1px;background: #797979;position: relative;bottom: 0;margin: 0 auto;"></div> -->
+        <div class="shop-give ng-cloak" ng-cloak>
+            <span class="shop-font">配送方式</span>
+            <a class="shop-give-button1">京东配送</a>
+        </div>
+        <div style="height: 10px;width: 100%;background: #c9c9c9; display:none" ng-cloak></div>
+        <div class="shop-moey-list-left ng-cloak" ng-cloak style="width:100%;height:40px;line-height: 30px;padding-left: 0.18rem;">
+            <!-- <a href="./invoicest.html?sku={{sku}}?num={{num}}?price={{pricess}}?number={{number}}?inid=0">-->
+            <span style="width:80%;float:left;">发票：{{configlist.invoiceTitle}}</span>
+            <!-- <span style="width:10%;float:right;"><img src="img/right-ico.png" / style="width:30%;"></span></a>-->
+        </div>
+        <div style="height: 10px;width: 100%;background: #c9c9c9;" ng-cloak></div>
+        <div class="input-wrap ng-cloak" ng-cloak>
+            <h4>给卖家留言</h4>
+            <textarea class="center-input" type="textarea" name="" id="" placeholder="请输入留言内容" /></textarea>
+        </div>
+        <div style="height: 10px;width: 100%;background: #c9c9c9;" ng-cloak></div>
+        <div class="shop-moey-list ng-cloak" ng-cloak style="padding-top: 0.05rem;">
+            <ul class="shop-moey-list-box" ng-cloak>
+                <li class="shop-moey-list1" style="overflow: hidden;">
+                    <span class="shop-moey-list-left"> 库存： </span>
+                    <span class="shop-moey-list-right" ng-repeat="item in listss">
+                        <span style="color:red;" ng-cloak ng-if="itemadd[$index][0].stockStateDesc=='有货'">{{item.brandName}}{{itemadd[$index][0].stockStateDesc}}</span>
+                    </span>
+                </li>
+                <br/>
+                <li class="shop-moey-list1" ng-cloak>
+                    <span class="shop-moey-list-left" ng-cloak> 商品金额： </span>
+                    <span class="shop-moey-list-right" ng-cloak style="color:red;"> ￥{{pricess | number:2}} </span>
+                </li>
+                <br/>
+                <li class="shop-moey-list2">
+                    <span class="shop-moey-list-left"> 运费： </span>
+                    <span class="shop-moey-list-right" ng-cloak>
+                        <span style="color:red;" ng-bind="yunpic | currency:'￥'"></span>
+                    </span>
+                </li>
+                <li style="border:0px solid #666666;">
+                    <span></span>
+                </li>
+            </ul>
+        </div>
+        <div style="height: 10px;width: 100%;background: #c9c9c9;" ng-cloak></div>
+    </div>
+    </div>
+
+    </div>
+
+ <div class="footer1 ng-cloak"  style="position:absolute; bottom:0px; left:0px; right:0px; z-index:1" ng-cloak>
+        <div class="footer1-left" id="numberlist" ng-cloak><span class="footer1-left-top" ng-cloak>合计：<span
+                style="color: #E63E41;">{{pricess + yunpic|currency:'￥'}}</span></span> <br/>
+           
+        </div>
+
+        <a class="ok-button" ng-click="test()">提交订单</a>
+    </div>
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="angular/angular.min.js"></script>
+<script src="modules/api-service.module.js"></script>
+<script src="js/ionic.bundle.min.js"></script>
+<script src="js/jd.js"></script>
+<script src="layer/layer_mobile/layer.js"></script>
+<script type="text/javascript">
+    $('#show').click(function () {
+        $('.search-sort-list').toggle();
+    });
+    var str = location.href; //获取本页url地址
+    var arr = str.split("?");
+    var str1 = arr[1];
+    var str2 = arr[2];
+    var str3 = arr[3];
+    var str4 = arr[4];
+    var str5 = arr[5];
+    if (str1) {
+        var sku = str1.split("=")[1];
+    }
+    if (str2) {
+        var num = str2.split("=")[1];
+    }
+    if (str3) {
+        var price = str3.split("=")[1];
+    }
+    if (str4) {
+        var number = str4.split("=")[1];
+    }
+    if (str5) {
+        var inid = str5.split("=")[1];
+    }
+    var nums = num.split(",");
+    var skus = sku.split(",");
+
+
+    var app = angular.module('demoApp', ["ionic", 'JDApiService']);
+    app.filter('line', function () { //可以注入依赖
+        return function (text) {
+
+            if (text) {
+                return text.replace(/\|/g, "");
+            }
+        }
+    });
+    app.controller('DemoCtrl', ["$scope", "$rootScope", "$sce", "$http", "$ionicLoading", "$q",
+    'skuDetail', 'orderFreight', 'batget',
+    function ($scope, $rootScope, $sce, $http, $ionicLoading, $q, skuDetailService, freightService, batgetService) {
+        $scope.show = 1;
+        $scope.sku = sku;
+        $scope.number = number;
+        $scope.num = num;
+
+        $scope.reduce = function () {
+            if ($scope.items > 1) {
+                $scope.items--;
+                $(".shop-number").val(items);
+            }
+        };
+
+        //添加数量函数
+        $scope.add = function () {
+            $scope.items++;
+            $scope.nuslist[0][$index]++;
+            $(".shop-number").val(items);
+        };
+        var arr = [];
+        var list = [];
+        list.push(nums);
+        $scope.items = 1;
+        var listsku = [];
+        listsku.push(skus);
+        $scope.itemsku = listsku;
+        var json_para = {};
+        json_para.skus = $scope.itemsku[0];
+
+        /***************/
+        function wrapPromise (skus) {
+            return skus.map(function (sku) {
+                return skuDetailService.get(sku);
+            });
+        }
+        // 遍历skudi，获取商品详情
+        $q.all(wrapPromise(skus)).then(function (results) {
+
+            return results.map(function (res, index) {
+
+                $('.dw').eq(index).text(nums[index]);
+                $scope.singPric = res.price.price;
+                
+                return {
+                    brandName: res.skuDetailItem.brandName,
+                    name: res.skuDetailItem.name,
+                    imagePath: res.skuDetailItem.imagePath,
+                    price: res.price.price,
+                    skuId: res.price.skuId 
+                };
+            });
+        }).then(function (result) {
+            $scope.listss = result;
+            $scope.len = $scope.listss.length;
+        });
+        /***************/
+
+        // angular.forEach(skus, function (datalist, index, array) {
+
+        //     var skus = datalist;
+        //     var numss = nums[index];
+
+        //     $('.dw').eq(index).text(nums[index]);
+
+        //     var json_params = {};
+        //     json_params.sku = skus;
+
+        //     var vvv = do_api("biz.product.detail.query", json_params);
+        //     var vvvs = do_api("biz.price.sellPrice.get", json_params);
+
+        //     $scope.cp_class = JSON.parse(vvv);
+        //     $scope.cp_classs = JSON.parse(vvvs);
+        //     var list = $scope.cp_class.biz_product_detail_query_response.result;
+        //     var lists = $scope.cp_classs.biz_price_sellPrice_get_response.result[0];
+
+        //     $scope.singPric = lists.price;
+        //     arr.push(angular.extend(lists, list));
+        // });
+
+        // $scope.listss = arr;
+        // $scope.len = $scope.listss.length;//订单中商品的个数
+        var arrs = [];
+        arrs.push(nums);
+        $scope.nuslist = arrs;
+        var token = api();
+        $http({
+            async: true,
+            crossDomain: true,
+            method: 'GET',
+            url: "/jd/api/receiveraddresses",
+            headers: {
+                'Authorization': "Bearer" + token + "",
+                'cache-control': "no-cache",
+                'postman-token': 'e0fa2222-3481-ded2-38ad-e5a34da1a05b'
+            }  //请求头里会添加Authorization属性为'code_bunny'
+        }).success(function (datas, status, headers, config) {
+            var objs = datas.receiverAddresses;
+            var arrlist = [];
+            angular.forEach(objs, function (datalist, index, array) {
+
+                var list = datalist;
+                arrlist.push(list);
+            });
+
+            $scope.listadd = arrlist[0];
+
+            if ($scope.listadd == null) {
+                layer.open({
+                    content: '您还没有收货地址，请先新建一个!'
+                    , skin: 'msg'
+                    , time: 2 //2秒后自动关闭
+                    , end: function () {
+                        window.location.href = "./zd.html?sku=" + sku + "?num=" + num + "?price=" + price + "?numbers=0";
+                    }
+                });
+            } else {
+                var regionIdlist = $scope.listadd.regionIds;
+                var regionIdlists = regionIdlist.split("|");
+                strd = regionIdlists[1];
+                strc = regionIdlists[2];
+                strqu = regionIdlists[3];
+                strtown = regionIdlists[4];
+
+                var regionIdphone = $scope.listadd.phone;
+                var regionIdname = $scope.listadd.name;
+                var regionIdaddress = $scope.listadd.address;
+            }
+
+        }).error(function (data, status, headers, config) {
+            layer.open({
+                content: '用户信息错误'
+                , skin: 'msg'
+                , time: 2//2秒后自动关闭tests
+            });
+        });
+        var token = api();
+        $http({
+            async: false,
+            crossDomain: true,
+            method: 'GET',
+            url: "/jd/api/config/invoices",
+            headers: {
+                'Authorization': "Bearer" + token + "",
+                'cache-control': "no-cache",
+                'postman-token': 'e0fa2222-3481-ded2-38ad-e5a34da1a05b'
+            }  //请求头里会添加Authorization属性为'code_bunny'configInvoices
+        }).success(function (datasconfig, status, headers, config) {
+            var arrconfig = [];
+            var configs = datasconfig.configInvoices;
+            angular.forEach(configs, function (dataconfigs, index, array) {
+                var listconfigs = dataconfigs;
+                arrconfig.push(listconfigs);
+            });
+            $scope.configlist = arrconfig[inid];
+        }).error(function (data, status, headers, config) {
+
+        });
+
+        $scope.conf = function (index) {
+            var innum = index;
+            var token = api();
+
+            $http({
+                async: true,
+                crossDomain: true,
+                method: 'GET',
+                url: "/jd/api/config/invoices",
+                headers: {
+                    'Authorization': "Bearer" + token + "",
+                    'cache-control': "no-cache",
+                    'postman-token': 'e0fa2222-3481-ded2-38ad-e5a34da1a05b'
+                }  //请求头里会添加Authorization属性为'code_bunny'configInvoices
+            }).success(function (datasone, status, headers, config) {
+                var addnames = [];
+                var name = datasone.configInvoices[innum];
+                $scope.addnames = name;
+                $scope.infonums = innum;
+                $scope.inum = datasone.configInvoices[innum].id;
+            }).error(function (datasone, status, headers, config) {
+                layer.open({
+                    content: '用户信息错误'
+                    , skin: 'msg'
+                    , time: 2//2秒后自动关闭tests
+                });
+            });
+        };
+        $scope.test = function () {
+            var dataconfigs = [];
+            for (var i = 1; i <= skus.length; i++) {
+                var datasss = " {\n      \"id\": \"" + skus[i - 1] + "\",\n      \"num\": " + nums[i - 1] + "\n    }";
+                dataconfigs.push(datasss);
+            }
+            var regionIdlist = $scope.listadd.regionIds;
+            var regionIdlists = regionIdlist.split("|");
+            strd = regionIdlists[1];
+            strc = regionIdlists[2];
+            strqu = regionIdlists[3];
+            strtown = regionIdlists[4];
+            if (strtown == 'undefined') {
+                strtown = 0;
+            }
+            var regionIdphone = $scope.listadd.phone;
+            var regionIdname = $scope.listadd.name;
+            var regionIdaddress = $scope.listadd.address;
+            $http({
+                async: true,
+                crossDomain: true,
+                method: "POST",
+                url: "/jd/api/orders",
+                headers: {
+                    'Authorization': "Bearer" + token + "",
+                    "content-type": "application/x-www-form-urlencoded",
+                    "content-type": "application/json",
+                    "cache-control": "no-cache",
+                },  //请求头里会添加Authorization属性为'code_bunny'
+                processData: false,
+                "data": "{\n  \"skus\": [\n  " + dataconfigs + "\n  ],\n   \"name\": \"" + regionIdname + "\",\n  \"mobile\": \"" + regionIdphone + "\",\n  \"province\": " + strd + ",\n  \"city\": " + strc + ",\n  \"county\": " + strqu + ",\n  \"town\": " + strtown + ",\n  \"address\": \"" + regionIdaddress + "\",\n  \"remark\": \"测试订单\",\n  \"jdAccountId\": 1\n}"
+
+            }).success(function (data, status, headers, config) {
+                var ctiy = $("#numid").attr("value");
+                if (ctiy == '') {
+                    var ctiy = 1;
+                }
+                if (data.code == "0000") {
+                    layer.open({
+                        content: '下单成功'
+                        , skin: 'msg'
+                        , time: 2//2秒后自动关闭tests
+                    });
+                    var jdOrderId = data.order.jdOrderId;
+                    var orderId = data.order.orderId;
+                    var applicationOid = data.order.applicationOid;
+                    //window.location.href = "./connum.html?sku=" + sku + "?num=" + num + "?numid=" + ctiy + "?jdOrderId=" + jdOrderId + "?orderId=" + orderId + "?apporder=" + applicationOid + "?price=" + price + "?number=" + number + "";
+                    window.location.href = "./confirm.html?sku=" + sku + "?num=" + num + "?number=" + number + "?jdOrderId=" + jdOrderId + "?orderId=" + orderId + "?apporder=" + applicationOid + "";
+                } else {
+                    layer.open({
+                        content: data.msg
+                        , skin: 'msg'
+                        , time: 2//2秒后自动关闭tests
+                    });
+                }
+            }).error(function (data, status, headers, config) {
+                layer.open({
+                    content: data.msg
+                    , skin: 'msg'
+                    , time: 2//2秒后自动关闭tests
+                });
+            });
+        };
+
+        $scope.zd = function () {
+            window.location.href = "./zd.html?sku=" + sku + "?num=" + num + "?price=" + price + "?numbers=0";
+        };
+        $scope.off = function () {
+            window.location.href = "./closeInAppBrowser.html";
+        };
+        $scope.cart = function () {
+            window.location.href = "./cart.html";
+        };
+        $scope.cartme = function () {
+            window.location.href = "./mycart.html";
+        };
+        var token = api();
+        $http({
+            async: false,
+            crossDomain: true,
+            method: 'GET',
+            url: "/jd/api/receiveraddresses",
+            headers: {
+                'Authorization': "Bearer" + token + "",
+                'cache-control': "no-cache",
+                'postman-token': 'e0fa2222-3481-ded2-38ad-e5a34da1a05b'
+            }  //请求头里会添加Authorization属性为'code_bunny'
+        }).success(function (datas, status, headers, config) {
+            //对接用户的公司账单发票信息
+            var objs = datas.receiverAddresses;
+
+            var arrlist = [];
+            angular.forEach(objs, function (datalist, index, array) {
+                var list = datalist;
+                arrlist.push(list);
+            });
+
+            $scope.itemlist = arrlist[number];
+            var regionIdlist = $scope.itemlist.regionIds;
+            var regionIdlists = regionIdlist.split("|");
+            strd = regionIdlists[1];
+            strc = regionIdlists[2];
+            strqu = regionIdlists[3];
+            strtown = regionIdlists[4];
+            if (strtown == 'undefined') {
+                strtown = 0;
+            }
+            var regionIdphone = $scope.itemlist.phone;
+            var regionIdname = $scope.itemlist.name;
+            var regionIdaddress = $scope.itemlist.address;
+            var addinfos = [];
+            var pic = [];
+            var piclist = [];
+            var yunfs = [];
+            for (var i = 1; i <= skus.length; i++) {
+
+                var yunf = { "skuId": "" + skus[i - 1] + "", "num": "" + nums[i - 1] + "" };
+                yunfs.push(yunf);
+            }
+            var json_param = {};
+            json_param.token = token;
+            json_param.sku = yunfs;
+            json_param.province = strd;
+            json_param.city = strc;
+            json_param.county = strqu;
+            json_param.town = strtown;
+            json_param.paymentType = 1;
+            /*******************before*********/
+            // var infoctiy = do_api("biz.order.freight.get", json_param);
+            // $scope.infoctiy = JSON.parse(infoctiy);
+
+            // var infolist = $scope.infoctiy;
+            // var piscr = [];
+            // angular.forEach(infolist, function (datapic, index, array) {
+            //     piscr.push(datapic);
+            // });
+
+            // $scope.yunpic = piscr[0].result.freight;
+            /********************after*********/
+            freightService.get(yunfs, strd, strc, strqu, strtown).then(function (freight) {
+                $scope.yunpic = freight.freight;
+            });
+
+            /********************end*********/
+
+            /*******************before*********/
+            // angular.forEach(skus, function (datapic, index, array) {
+            //     var json_paramsskuid = {};
+            //     json_paramsskuid.skuNums = [{ skuId: "" + datapic + "", num: 1 }];
+            //     json_paramsskuid.area = strd + "_" + strc + "_" + strqu + "_" + strtown;
+            //     var infoctiy = do_api("biz.stock.fororder.batget", json_paramsskuid);
+            //     $scope.infoctiy = JSON.parse(infoctiy);
+            //     var infolist = $scope.infoctiy.biz_stock_fororder_batget_response.result;
+            //     addinfos.push(infolist);
+            // });
+
+            // $scope.itemadd = addinfos;
+            /********************after*********/
+            $scope.itemadd = [];
+            angular.forEach(skus, function (sku) {
+                batgetService.get(sku, [strd, strc, strqu, strtown].join('_'), 1)
+                .then(function (data) {
+                    $scope.itemadd.push(data);
+                });
+            });
+            /********************end*********/
+
+            prices = parseFloat(price);
+            $scope.pricess = prices;
+            $scope.show = 0;
+
+        }).error(function (data, status, headers, config) {
+            layer.open({
+                content: '用户信息错误'
+                , skin: 'msg'
+                , time: 2//2秒后自动关闭tests
+            });
+
+
+
+            // window.location.href = "./closeInAppBrowser.html";
+        });
+
+
+    }]);
+</script>
+
+</html>

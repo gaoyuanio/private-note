@@ -1,0 +1,218 @@
+<html lang="zh-cn" ng-app="demoApp">
+<head>
+<meta charset="utf-8">
+<title>
+发票信息
+</title>
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/reset.css" rel="stylesheet">
+<link href="css/jddzgl.css" rel="stylesheet">
+<link href="css/radio.css" rel="stylesheet"/>
+<link href="css/ionic.css" rel="stylesheet"/>
+<link href="css/iconfont.css" rel="stylesheet"/>
+<link href="css/css.css" rel="stylesheet"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <style type="text/css">
+        .ng-cloak {
+            display: none;
+        }
+    </style>
+    <script src="js/stopIOS.js" type="text/javascript">
+    </script>
+</head>
+    <body ng-controller="DemoCtrl">
+        <!--顶部返回 地址管理开始-->
+        <style>
+            .back_fixed {
+        width: 100%;
+        font-size: 0.15rem;
+        padding: 0 5%;
+        height: 0.44rem;
+        line-height: 0.44rem;
+        position: fixed;
+        z-index: 99;
+        top: 0;
+        background: #fff;
+        text-align: center;
+    }
+
+    .back_fixed .s-img {
+        display: inline-block;
+        position: relative;
+        top: 0.12rem;
+    }
+
+    .main {
+        margin-top: 0.45rem;
+    }
+    .item-radio .radio-icon1{
+        position: absolute;
+        top: 15px;
+        left: 0;
+        width: 24px;
+        height: 24px;
+        padding: 0;
+        background: url(images/invoice_icon.png) no-repeat center center;
+        background-size: 24px 24px;
+        z-index: 3;
+    }
+    .item-radio input:checked + .radio-content .radio-icon1{
+        background: url(images/invoice_checked.png) no-repeat center center;
+        background-size: 24px 24px;
+    }
+    .sure a{
+        display: block;
+        height: 100%;
+        padding: 0;
+        background: none;
+    }
+        </style>
+        <nav class="" role="navigation" style="height:100% !important;">
+            <div class="">
+                <!-- <div class="navbar-header"><span class="navbar-brand" onClick="javascript:window.history.go(-1);return false;"> <img alt="Brand" src="images/y-fanhui.png" style="width:60%;"> </span>
+
+            <p class="navbar-text" style="color:#1c1c1c;font-size: 0.17rem;line-height: 0.17rem;font-family:PingFangSC-Medium; margin-left:15%;">发票</p>
+        </div>
+        <div class="navbar-header navbar-right btn-group" style="position:absolute;left:90%;top:-2%;"><a
+                class="navbar-brand" ng-click="off()"> <img alt="Brand" src="./images/y-guanbi.png" style="width:60%;">
+        </a></div> -->
+                <div class="content has-header" style="top: 0;">
+                    <div class="list" style="padding: 0 0.1rem;background: #fff;">
+                        <label class="item item-radio" ng-repeat="item in configlist" style="border:0;border-bottom:1px solid #ddd;margin: 0;">
+                            <input name="group" type="radio" value="go">
+                                <div class="radio-content" style="position: relative;">
+                                    <div class="item-content" ng-bind="item.invoiceTitle" style="background: #fff;padding: 16px 16px 16px 49px;">
+                                        <!-- 上海甄汇信息科技有限公司1 -->
+                                    </div>
+                                    <i class="radio-icon1"></i>
+                                </div>
+                            </input>
+                        </label>
+                        <!-- <label class="item item-radio" style="border:0;border-bottom:1px solid #ddd;margin: 0;background: #fff;">
+                            <input name="group" type="radio" value="python">
+                                <div class="radio-content" style="position: relative;">
+                                    <div class="item-content" style="background: #fff;padding: 16px 16px 16px 49px;">
+                                        上海甄汇信息科技有限公司2
+                                    </div>
+                                    <i class="radio-icon1">
+                                    </i>
+                                </div>
+                            </input>
+                        </label> -->
+                    </div>
+                </div>
+                <!--foot btn start-->
+                <div class="sure ng-cloak" ng-cloak="">
+                    <a ng-click="confirmbtn(item,$index)" style="color: #fff;">
+                        确定
+                    </a>
+                </div>
+                <!--foot btn end-->
+            </div>
+        </nav>
+    </body>
+    <script src="js/jquery.min.js">
+    </script>
+    <script src="angular/angular.min.js">
+    </script>
+    <!-- <script src="layer/layer_mobile/layer.js"></script> -->
+    <script src="js/jd.js">
+    </script>
+    <script type="text/javascript">
+        $('#show').click(function () {
+        $('.search-sort-list').toggle();
+    });
+    var str = location.href; //获取本页url地址
+    var arr = str.split("?");
+    var str1 = arr[1];
+    var str2 = arr[2];
+    var str3 = arr[3];
+
+    if (str1) {
+        var sku = str1.split("=")[1];
+    }
+    if (str2) {
+        var num = str2.split("=")[1];
+    }
+    if (str3) {
+        var number = str3.split("=")[1];
+    }
+    //console.log(num);
+    var token = api();
+    //var token = mc['access_token']; sku=1057737?num=5?number=4
+    var app = angular.module('demoApp', []);
+    app.controller('DemoCtrl', ["$scope", "$rootScope", "$sce", "$http", function ($scope, $rootScope, $sce, $http) {
+         /*layer.open({
+            type: 2
+            ,content: '加载中'
+            ,time: 2 //2秒后自动关闭
+            });*/
+        //对接地址管理接口
+        var token = api();
+        $http({
+            async: false,
+            crossDomain: true,
+            method: 'GET',
+            url: "/jd/api/config/invoices",
+            headers: {
+                'Authorization': "Bearer" + token + "",
+                'cache-control': "no-cache",
+                'postman-token': 'e0fa2222-3481-ded2-38ad-e5a34da1a05b'
+            }  //请求头里会添加Authorization属性为'code_bunny'configInvoices
+        }).success(function (datasconfig, status, headers, config) {
+           // console.log(datasconfig);
+            //
+            var arrconfig = [];
+            var configs = datasconfig.configInvoices;
+           //console.log(configs);
+            angular.forEach(configs, function (dataconfigs, index, array) {
+                //console.log(dataconfigs);
+                var listconfigs = dataconfigs;
+                arrconfig.push(listconfigs);
+            });
+            $scope.configlist = arrconfig;
+           //console.log($scope.configlist);
+        }).error(function (data, status, headers, config) {
+
+        });
+        //console.log($(".item-content"))
+        $scope.confirmbtn = function (item, index) {
+            //console.log(item,index);
+            var goods_id = [];
+            var goods_num = [];
+            var goods_pice = [];
+            //console.log($("input[name='radio']:checked"));
+            /*$.each($("input[name='radio']:checked"), function (i, item) {
+                console(111);
+                goods_id.push(i);
+
+            });*/
+            $("input[type='radio']").each(function(index, el) {
+                if($(this).attr('checked')=='checked'){
+                    goods_id.push(index);
+                }
+            });
+            //console.log(goods_id);
+            window.location.href = "./goodsub.html?sku=" + sku + "?num=" + num + "?number=" + number + "?inid=" + goods_id + "";
+        };
+        //关闭
+
+        $scope.off = function () {
+            window.location.href = "./closeInAppBrowser.html";
+        };
+        //我的购物车
+        $scope.cart = function () {
+            window.location.href = "./cart.html";
+
+        };
+        //我的订单
+        $scope.cartme = function () {
+            window.location.href = "./mycart.html";
+
+        };
+
+    }]);
+    </script>
+</html>

@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html ng-app="demoApp">
+<head>
+<meta charset="utf-8"/>
+<title>我的订单</title>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+<meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<link rel="stylesheet" type="text/css" href="css/index-wodedingdan.css"/>
+<link rel="stylesheet" href="css/ionic.min.css">
+<link rel="stylesheet" href="css/fenleis.css">
+<script type="text/javascript" src="js/stopIOS.js"></script>
+</head>
+<script src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/index-wodedingdan.js"></script>
+<style>
+    .header_wrapper{
+      background:#ffffff;
+      box-shadow:0 1px 0 0 rgba(215,215,215,0.50);
+    }
+    .ng-cloak {
+        display: none;
+    }
+    .block0{
+      display: none;
+    }
+    .block1{
+      display: black;
+    }
+        .write0{display:black;}
+        .write1{display:none;}
+        .l1{display:black;}
+        .l0{display:none;}
+        .k0{display:black;}
+        .k1{display:none;}
+         .m0{display:black;}
+        .m1{display:none;}
+        .q0{display:black;}
+        .q1{display:none;}
+        .q{display:none;}
+.spinner svg{
+    stroke: #e85a5d;
+    width: 40px;
+    height: 40px;
+  }
+.loading-container{
+    background: #edecf0;
+    top: 0.6rem;
+  } 
+  .loading-container .loading{
+    background: none;
+    padding: 0;
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+  .order-money span {
+        display: inline-block;
+        width: 25%;
+        text-align: left;
+        color: #E64243;
+    }
+  @media screen and (max-width: 360px){
+    .order-money span {
+        display: inline-block;
+        width: 50px;
+        text-align: center;
+        color: #E64243;
+    }    
+  }
+  
+   .foot{ 
+        /*margin-left: -2.2%; */
+        -webkit-transform:translate3d(0,0,0);
+        transform:translate3d(0,0,0);
+		-webkit-transform: translateZ(0);
+        } 
+        .foot ul{ 
+        margin:0; 
+        padding:0; 
+        width:100%; 
+        line-height: 100%; 
+        } 
+        .foot ul li span{ 
+        display: inline-block; 
+        width: 100%; 
+        text-align: center; 
+        margin-top:4px;
+		font-size:0.11rem!important;
+		
+        } 
+</style>
+<body ng-controller="DemoCtrl">
+<div class="containe" style="height: 100%;padding-bottom: 0.49rem;">
+<div class="header-nav" style="z-index:999;-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0);-webkit-transform: translateZ(0);">
+  <div style="background: #fff;">
+    <!-- <div class="header_wrapper" style="text-align: center;font-weight:600;overflow: hidden;zoom:1;height: 0.4rem;line-height: 0.4rem;font-size: 0.17rem;color: #1c1c1c;letter-spacing: 
+    0;" class="clear f18"> <span onClick="javascript:window.history.go(-1);return false;" style="display: block;float:left;padding: 0 0.16rem;height: 100%;"> <img src="images/fanhui.png" alt="" style="height: 0.18rem;width: 0.13rem;display: block;margin-top: 0.12rem;"> </span>我的订单<a href="closeInAppBrowser.html" style="display: block;float:right;height: 100%;padding: 0 0.15rem;"> <img src="images/y-guanbi.png" alt="" style="height: 0.16rem;width: 0.16rem;display: block;margin-top: 0.12rem;"> </a> </div> -->
+    <div style="background:#f8f8f8;height: 1px;"></div>
+    <ul class="nav-wrap clear">
+      <li class="nav-1" ng-click="orderstatus(0)">全部</li>
+      <li ng-click="orderstatus(1)">待付款</li>
+      <li ng-click="orderstatus(2)">配送中</li>
+      <li ng-click="orderstatus(3)">已完成</li>
+     <!-- <a href="./stater.html">-->
+      <li  ng-click="gostater()" style="font-size:0.16rem;font-family: "微软雅黑";">售后</li>
+     
+    </ul>
+  </div>
+</div>
+<!-- 全部 -->
+	<div ng-cloak>
+	  <div id="contenttop"  ng-cloak style="height: 5.9rem;overflow-y: auto; display:block; overflow-x:hidden; padding-top: 16px;-webkit-overflow-scrolling: touch;">
+		
+		<ion-content style="top: 25px;" >
+		<div ng-if="listss.length==0" style="margin:0 auto;position:absolute; margin-top:50%;left:40%;z-index:999;"><img src="./images/mycart.png" style="width:0.8rem;height:0.8rem;">
+		  <div style="margin-left:-17%;margin-top:11%;">
+			<h4 style="font-family:STHeitiSC-Medium;font-size:0.14rem;color:#959595;">你还没有相关订单</h4>
+		  </div>
+		</div>
+		<div class="center12 ng-cloak" ng-cloak>
+		  <div class="order top1"  ng-repeat="item in listss"  ng-cloak > <a href="./confirm.html?sku=?num=?number={{number}}?jdOrderId={{item.jdOrderId}}?orderId={{item.orderId}}?apporder={{item.applicationOid}}" >
+			<div class="order-header" ng-cloak>
+			  <div class="order-tit" ng-cloak><img src="img/order.png"/>订单编号:</div>
+			  <div class="order-id" ng-cloak >{{item.orderId}}</div>
+			  <div class="order-info" ng-cloak ng-if="item.approvalStatus=='0' && item.orderState=='1'">等待审核 </div>
+			  <div class="order-info" ng-cloak ng-if="item.approvalStatus=='1' && item.payStatus=='0' && item.orderState=='1'"> 等待买家付款 </div>
+			  <div class="order-info" ng-cloak ng-if="item.payStatus=='0'&& item.orderState=='0'">订单已取消</div>
+			  <div class="order-info" ng-cloak ng-if="item.approvalTime + 7 * 24 * 60 * 60 * 1000  - startDate <0 && item.orderState=='0'">订单超时已取消</div>
+			  <div class="order-info" ng-cloak ng-if="item.approvalStatus=='1' && item.payStatus=='1' && item.orderState=='1' && item.submitState=='1'">付款成功</div>
+			</div>
+			<div class="order-detail" ng-cloak ng-repeat="value in item.skus">
+			  <div class="order-img" ng-cloak><img
+									src="{{value.jdSkuDetailsView.imgPath}}"/></div>
+			  <div class="order-title" ng-cloak>{{value.name}}</div>
+			  <div class="order-number" ng-cloak>
+				<div style='font-size: 0.14rem;'>￥{{value.price|number:2}}</div>
+				<p>{{value.num}}</p>
+			  </div>
+			</div>
+			<div class="order-money" ng-cloak><nobr>共{{item.skus[0].num}}件商品&nbsp;合计:<span>￥{{item.price + item.freight|number:2}}</span>(含运费:{{item.freight|number:2}}) </nobr></div>
+			</a>
+			<div class="order-btn" ng-cloak> <a ng-cloak ng-click="testinfo(item)" class="orderBtn orderBtn-1">查看申请单</a> <a href="javascript:" ng-cloak class="orderBtn orderBtn-{{item.orderState}}"
+							   ng-if="item.orderState=='0'">已取消订单</a>
+			  <!--   <a href="javascript:" ng-cloak class="orderBtn orderBtn-{{item.orderState}}"
+							   ng-if="item.approvalTime + 7 * 24 * 60 * 60 * 1000 =={{startDate}} && item.orderState=='0'">超时取消订单</a> -->
+			  <a href="javascript:" ng-cloak ng-click="test(item)" class="orderBtn orderBtn-{{item.orderState}}" ng-if="item.orderState=='1' && item.payStatus=='0' && item.submitState=='0'">取消订单</a> <a href="javascript:" ng-cloak  class="orderBtn orderBtn-0" ng-if="item.orderState=='1' && item.payStatus=='1' && item.submitState=='1'">取消订单</a>
+			  <!-- <a href="javascript:" ng-cloak class="orderBtn orderBtn-2" ng-click="pays(item)" ng-if="item.approvalStatus=='1' && item.payStatus=='0'&&  item.orderState=='1'">去付款</a> -->
+			  <a href="javascript:" ng-cloak class="orderBtn orderBtn-2" ng-click="pay(item)" ng-if="item.approvalStatus=='1' && item.orderState=='1'&& item.payStatus=='0'" >去付款</a> <a href="javascript:" ng-cloak class="orderBtn orderBtn-0" ng-click="payok(item)" ng-if="item.payStatus=='1'&& item.submitState=='1'" >付款成功</a>
+			  <!-- <a href="javascript:" ng-cloak class="orderBtn orderBtn-1" ng-click="payok(item)" ng-if="item.payStatus=='1'&& item.submitState=='1'" style="background:#ccc;">已付款</a> -->
+			  <!-- <a href="javascript:;"ng-cloak  class="orderBtn orderBtn-2"  ng-if="item.approvalStatus=='0'" payStatus style="border:none !important;background:#fff;color:#333;">待审核</a>
+										  <a href="javascript:;"ng-cloak  class="orderBtn orderBtn-2"  ng-if="item.approvalStatus=='2'" style="border:none !important;background:#fff;color:#333;">审批驳回</a> -->
+			</div>
+		  </div>
+		</div>
+		<!-- 待付款 -->
+		<div class="center12 ng-cloak" style="display:none;" ng-cloak>
+		  <div class="l{{l}}" style="margin:0 auto;position:absolute;top:30%;left:40%;z-index:999;"><img src="./images/mycart.png" style="width:0.8rem;height:0.8rem;">
+			<div style="margin-left:-17%;margin-top:11%;">
+			  <h4 style="font-family:STHeitiSC-Medium;font-size:0.14rem;color:#959595;">你还没有相关订单</h4>
+			</div>
+		  </div>
+		  <div class="order top1" ng-repeat="item in listss"
+						 ng-if="item.approvalStatus=='1' && item.orderState=='1' &&  item.payStatus=='0'" ng-cloak > <a href="./confirm.html?sku=?num=?number={{number}}?jdOrderId={{item.jdOrderId}}?orderId={{item.orderId}}?apporder={{item.applicationOid}}" >
+			<div class="order-header" ng-cloak>
+			  <div class="order-tit" ng-cloak><img src="img/order.png"/>订单编号:</div>
+			  <div class="order-id" ng-cloak>{{item.jdOrderId}}</div>
+			  <div class="order-info" ng-cloak ng-if="item.approvalStatus=='1' && item.payStatus=='0'">等待买家付款</div>
+			  <div class="order-info" ng-cloak ng-if="item.approvalStatus=='1' && item.payStatus=='1'">买家已付款</div>
+			</div>
+			<div class="order-detail" ng-cloak ng-repeat="value in item.skus">
+			  <div class="order-img" ng-cloak><img
+									src="{{value.jdSkuDetailsView.imgPath}}"/></div>
+			  <div class="order-title" ng-cloak>{{value.name}}</div>
+			  <div class="order-number" ng-cloak>
+				<div style='font-size: 0.14rem;'>{{value.price|currency:'￥'}}</div>
+				<p>{{value.num}}</p>
+			  </div>
+			</div>
+			<div class="order-money" ng-cloak> 共{{item.skus[0].num}}件商品&nbsp;合计:<span>{{item.price + item.freight|currency:'￥'}}</span>(含运费:{{item.freight|number:2}}) </div>
+			</a>
+			<div class="order-btn" ng-cloak><a ng-cloak ng-click="testinfo(item)"  class="orderBtn orderBtn-1">查看申请单</a>
+			  <!-- <a href="javascript:;" ng-cloak  class="orderBtn orderBtn-{{item.orderState}}" ng-if="item.orderState=='0'">已取消订单</a> -->
+			  <a href="javascript:" ng-cloak ng-click="test(item)"
+							   class="orderBtn orderBtn-{{item.orderState}}" ng-if="item.orderState=='1'">取消订单</a> <a href="javascript:" ng-cloak class="orderBtn orderBtn-2" ng-click="pay(item)"  ng-if="item.approvalStatus=='1' && item.payStatus=='0'">去付款</a> <a href="javascript:" ng-cloak class="orderBtn orderBtn-0" ng-click="pay(item)"  ng-if="item.payStatus=='1'">付款成功</a> </div>
+		  </div>
+		</div>
+		<!-- 待配送 -->
+		<div class="center12 ng-cloak" style="display:none;" ng-cloak>
+		  <div class="k{{k}}" style="margin:0 auto;position:absolute;top:40%;left:39%;z-index:999;"><img src="./images/mycart.png" style="width:60%;height:60%;">
+			<div style="margin-left:-17%;margin-top:11%;">
+			  <h4>你还没有相关订单</h4>
+			</div>
+		  </div>
+		  <div class="order top1" ng-repeat="item in listss"
+						 ng-if="item.approvalStatus=='1' && item.orderState=='1' &&  item.payStatus=='1' && item.state=='0'" ng-cloak> <a href="./confirm.html?sku=?num=?number={{number}}?jdOrderId={{item.jdOrderId}}?orderId={{item.orderId}}?apporder={{item.applicationOid}}" >
+			<div class="order-header" ng-cloak>
+			  <div class="order-tit" ng-cloak><img src="img/order.png"/>订单编号:</div>
+			  <div class="order-id" ng-cloak>{{item.jdOrderId}}</div>
+			  <div class="order-info" ng-cloak ng-if="item.approvalStatus=='1' && item.payStatus=='0'">等待买家付款</div>
+			  <div class="order-info" ng-cloak ng-if="item.approvalStatus=='1' && item.payStatus=='1'">买家已付款</div>
+			</div>
+			<div class="order-detail" ng-cloak ng-repeat="value in item.skus">
+			  <div class="order-img" ng-cloak><img
+									src="{{value.jdSkuDetailsView.imgPath}}"/></div>
+			  <div class="order-title" ng-cloak>{{value.name}}</div>
+			  <div class="order-number" ng-cloak>
+				<div style='font-size: 0.14rem;'>{{value.price|currency:'￥'}}</div>
+				<p>{{value.num}}</p>
+			  </div>
+			</div>
+			<div class="order-money" ng-cloak> 共{{item.skus[0].num}}件商品&nbsp;合计:<span>{{item.price + item.freight|currency:'￥'}}</span>(含运费:{{item.freight|number:2}}) </div>
+			</a>
+      <div class="order-btn" ng-cloak><a ng-cloak ng-click="testinfo(item)"
+														   class="orderBtn orderBtn-1">查看申请单</a>
+			  <!-- <a href="javascript:;" ng-cloak  class="orderBtn orderBtn-{{item.orderState}}" ng-if="item.orderState=='0'">已取消订单</a> -->
+			  <a href="javascript:" ng-cloak class="orderBtn orderBtn-0" ng-click="payok(item)"  ng-if="item.Status=='1'" style="background:#ccc;">付款成功</a> <a href="javascript:" ng-cloak class="orderBtn orderBtn-1" ng-click="paynew(item)"  >查看物流</a> </div>
+		  </div>
+		</div>
+		<div class="center12 ng-cloak" style="display:none;" ng-cloak>
+		  <div class="m{{py}}" style="margin:0 auto;position:absolute;top:40%;left:39%;z-index:999;"><img src="./images/mycart.png" style="width:60%;height:60%;">
+			<div style="margin-left:-17%;margin-top:11%;">
+			  <h4>你还没有相关订单</h4>
+			</div>
+		  </div>
+		  <div class="order top1" ng-cloak ng-repeat="item in listss" ng-if="item.approvalStatus=='1' && item.orderState=='1' &&  item.payStatus=='1' && item.state=='1'" > <a href="./confirm.html?sku=?num=?number={{number}}?jdOrderId={{item.jdOrderId}}?orderId={{item.orderId}}?apporder={{item.applicationOid}}" >
+			<div class="order-header" ng-cloak>
+			  <div class="order-tit" ng-cloak><img src="img/order.png"/>订单编号:</div>
+			  <div class="order-id" ng-cloak>{{item.jdOrderId}}</div>
+			  <div class="order-info" ng-cloak>交易成功</div>
+			</div>
+			<div class="order-detail" ng-cloak ng-repeat="value in item.skus">
+			  <div class="order-img" ng-cloak><img
+									src="{{value.jdSkuDetailsView.imgPath}}"/></div>
+			  <div class="order-title" ng-cloak>{{value.name}}</div>
+			  <div class="order-number" ng-cloak>
+				<div style='font-size: 0.14rem;'>{{value.price|currency:'￥'}}</div>
+				<p>{{value.num}}</p>
+			  </div>
+			</div>
+			<div class="order-money ng-binding"> 共{{item.skuNum}}件商品&nbsp;合计:<span class="ng-binding">{{item.price + item.freight|currency:'￥'}}</span>(含运费:{{item.freight|number:2}}) </div>
+			</a>
+			<div class="order-btn"><a  ng-click="testinfo(item)" class="orderBtn orderBtn-1">查看申请单</a> <a href="javascript:" class="orderBtn orderBtn-1" ng-click="paynew(item)">查看物流</a> <a href="javascript:" class="orderBtn orderBtn-2 ng-scope" ng-click="pstate(item)">申请售后</a> </div>
+		  </div>
+		</div>
+		<div>
+		  <!-- 待配送 -->
+		  <ul style="float:left;" ng-repeat="ilist in parrlist">
+			<input type="text" value="{{ilist.code}}" id="tu{{$index}}">
+		  </ul>
+		  
+		</div>
+		 <div id="footer" ng-if="actiontxt==false" style=" width:100%;height:150px; text-align:center;">
+                   <a  class="y-gengduo ng-cloak" style="color:#000;" ng-cloak  >已经到底啦～</a>
+         </div>
+		 <ion-infinite-scroll ng-if="hasMore" on-infinite="do_infinite()" immediate-check="false" style=" text-align:center;"></ion-infinite-scroll>
+		  </ion-content>
+	  </div>
+	 
+	</div>
+</div>
+<div class="foot" style="position:fixed; bottom:0; width:100%;">
+  <ul class="footer">
+    <li style="padding-top: 0.07rem;"> <a  href="./index.html"> <img alt="首页" src="images/shouye2.png"/> <span> 首页 </span> </a> </li>
+    <li style="padding-top: 0.07rem;"> <a href="./cart.html"> <img alt="购物车" src="images/gouwuche1.png"/> <span> 购物车 </span> </a> </li>
+    <li class="active-nav" style="padding-top: 0.07rem;"> <a href="./mycart.html"  class="active-nav" style="height: 39px;"> <img alt="我的" src="images/wode2.png"/> <span> 我的 </span> </a> </li>
+  </ul>
+</div>
+</body>
+<script src="scripts/bridge.js"></script>
+<script src="js/TouchSlide.js"></script>
+<script src="angular/angular.min.js"></script>
+<script src="js/ionic.bundle.min.js"></script>
+<script src="layer/layer_mobile/layer.js"></script>
+<script src="js/jd.js"></script>
+<script type="text/javascript"></script>
+<script>
+    /*$(".nav-wrap  li").click(function () {
+        $(".center12").hide().eq($(this).index()).show();
+    });*/
+
+	var token =GetQueryString("token");
+	console.log(token);
+	if(!token){
+     var token = api();
+	}
+	
+	sessionStorage.setItem("jingdu",'0');
+	
+    
+    var app = angular.module('demoApp', ["ionic"]);
+    app.controller('DemoCtrl', ["$scope", "$rootScope", "$sce","$http","$ionicLoading",function ($scope, $rootScope, $sce, $http,$ionicLoading) {
+       $ionicLoading.show({
+           template:'<ion-spinner icon="android"></ion-spinner>',
+           //content: '正在加载...',
+           animation: 'fade-in',
+           showBackdrop: false,
+           maxWidth: 200,
+           showDelay: 0
+       });
+        $scope.write =0;
+        $scope.py=0;
+        $scope.k=0;
+        $scope.l=0;
+        $scope.q=1;
+        $scope.number=0;
+       // $scope.test = $(".order-info").html();
+        console.log(111);
+		getdata(0);
+        /*$scope.test1 = item.payStatus;
+        $scope.test2 = item.orderState;*/
+        /*if(test1=="0" && test2=="0"){
+            consoe.log($scope.test);
+        }*/
+		$scope.status=0;
+		$scope.hasMore = false;
+		$scope.actiontxt=true;
+		$scope.quantity=100;
+		$scope.pageNum=1;
+		$scope.pageSize=8;
+		$scope.do_infinite = function() {
+		//console.log($scope.quantity);		
+			if($scope.quantity<8){
+			
+			   $scope.$broadcast("scroll.infiniteScrollComplete");
+			   $scope.actiontxt=false;
+                return;
+			}		
+            if (!$scope.hasMore) {
+                $scope.$broadcast("scroll.infiniteScrollComplete");
+                return;
+            }
+            //  如果当前页数大于等于总页数，说明已经没数据可再加载了。
+			console.log($scope.pageNum);
+            $scope.pageNum += 1;			
+
+           $http({
+            async: true,
+            crossDomain: true,
+            method:'GET',
+            // url:"/api/skus?q="+names+"&pageNum=1&pageSize="+newnum+"",
+            url:"/jd/api/orders?pageNum="+ $scope.pageNum+"&pageSize="+$scope.pageSize+"&status="+$scope.status,
+            headers: { 'Authorization': "Bearer" + token + "",
+                'cache-control': "no-cache",
+                'postman-token': '31b1fd14-4443-ec6a-a453-8eb4b68d25d8'}  //请求头里会添加Authorization属性为'code_bunny'
+        }).success(function(listdata,status,headers,config){
+		
+                if (listdata) {
+                     var arrlist = [];
+					   var objs = listdata.jdOrders;
+					   angular.forEach(objs, function (datalist, index, array) {
+						var state = datalist.orderState;
+						var stateall = datalist;
+						var stateallsku = datalist.skus;
+						var statess = datalist.payStatus;
+						var stateap = datalist.approvalStatus;
+						var stateod = datalist.orderState;
+						var statem = datalist.state;
+						if(statess==1 && stateap==1 && stateod==1){
+							$scope.k =1;
+						}
+						 if(statem ==1){
+							$scope.py=1;
+						}
+						if(datalist== ''){
+							$scope.q =0;
+						}
+						 arrlist.push(datalist);
+						var len = objs.length;
+						var nums = index+1;
+						if(len==nums){
+							$scope.write=1;
+						}
+					   
+					});
+					    var startDate = Date.parse(new Date());
+						var timestamp = startDate + 7 * 24 * 60 * 60 * 1000;
+						$scope.timeend = timestamp;
+                   // $scope.listss = arrlist || [];
+				   console.log(arrlist.length);
+                    for (var i = 0; i < arrlist.length; i++) {
+                        $scope.listss.push(arrlist[i]);
+                    }
+                    $scope.hasMore = ($scope.listss.length < listdata.total);
+					 $scope.actiontxt=$scope.hasMore;
+					 console.log($scope.listss.length);
+					console.log($scope.hasMore );
+                } else {
+                    $scope.hasMore = false;
+					 $scope.actiontxt=false;
+                }
+                $scope.$broadcast("scroll.infiniteScrollComplete");
+            });
+		}
+		
+		 function getdata(status) {
+		 //var div = document.getElementById('content');
+		 //div.scrollTop = 100;
+		
+		// console.log(div.scrollTop);
+		 $scope.actiontxt=true;
+		 $scope.status=status;
+		 $scope.listss=null;
+        $http({
+            async: true,
+            crossDomain: true,
+            method: 'GET',
+            url: "/jd/api/orders?pageNum=1&pageSize=8&status="+status,
+            headers: {
+                'Authorization': "Bearer" + token + "",
+                'cache-control': "no-cache",
+                'postman-token': '31b1fd14-4443-ec6a-a453-8eb4b68d25d8'
+            }  //请求头里会添加Authorization属性为'code_bunny'indesssx.html
+
+        }).success(function (datas, status, headers, config) {
+
+          
+            var arrlist = [];
+            var objs = datas.jdOrders;
+            console.log(objs);
+            angular.forEach(objs, function (datalist, index, array) {
+                //var len =datalist.length;
+                var state = datalist.orderState;
+               // console.log(datslist);
+                //全部所有ng-if="item.state==1"
+                var stateall = datalist;
+                var stateallsku = datalist.skus;
+                var statess = datalist.payStatus;
+                var stateap = datalist.approvalStatus;
+                var stateod = datalist.orderState;
+                var statem = datalist.state;
+                if(statess==0 && stateap==1 && stateod==1){
+                   $scope.l =0;
+                    
+                }
+				
+                if(statess==1 && stateap==1 && stateod==1){
+                    $scope.k =1;
+                  //  console.log(k);
+                }
+                 if(statem ==1){
+                    $scope.py=1;
+                  //  console.log(k);
+                }
+                if(datalist== ''){
+                    $scope.q =0;
+                  //  console.log(k);
+                }
+
+               
+                // $scope.k=k;
+                // $scope.l=i;
+                // $scope.q=q;
+                 arrlist.push(datalist);
+                //console.log(stateallsku);
+                /*angular.forEach(stateallsku, function (datalistall, index, array) {
+                    var infosall = datalistall.jdSkuId;
+                    var json_params = {};
+                    json_params.sku = infosall;
+                    $scope.cp_class = JSON.parse(vvv);
+                    var listall = $scope.cp_class.biz_product_detail_query_response.result;
+                    console.log(listall);
+                    arrlist.push(angular.extend(listall, stateall));
+                });*/
+                var len = objs.length;
+                var nums = index+1;
+                if(len==nums){
+                    $scope.write=1;
+                }
+               
+            });
+            $scope.listss = arrlist;
+			if ($scope.listss.length == 0) {
+					    $scope.l =1;
+             }
+			 if( $scope.listss.total < 8 ){
+			  $scope.quantity = $scope.listss.total;
+              $scope.hasMore = true;
+            }else {
+              $scope.hasMore = true;
+            }
+            console.log($scope.listss);
+            $ionicLoading.hide();
+
+            var startDate = Date.parse(new Date());
+            var timestamp = startDate + 7 * 24 * 60 * 60 * 1000;
+            $scope.timeend = timestamp;
+          //  document.getElementById('content').scrollTop=100;
+		// document.body.scrollTop = 120;
+		 $('#contenttop').height(1000);
+		 $("#contenttop").animate({"scrollTop":600});
+		 $('#contenttop').scrollTop('520px');
+		// $('body').scrollTop(500);
+		 $("#contenttop").animate({"scrollTop":'400px'});
+		 
+		 console.log($('#contenttop').height());
+		 scrollTo(400,0);
+		 window.scrollTo(420,50); 
+		 scrollBy(0,-400);
+		 target.scrollIntoView();
+        }).error(function (data, status, headers, config) {
+            layer.open({
+                content: '用户信息错误'
+                , skin: 'msg'
+                , time: 1 //2秒后自动关闭
+            });
+            //window.location.href = "./closeInAppBrowser.html";
+         });
+		}
+        //取消订单
+        $scope.test = function (item) {
+
+            var skusq = item.jdOrderId;
+            if (skusq !== '') {
+                layer.open({
+                    content: '确认取消订单'
+                    , btn: ['确定', '取消']
+                    , yes: function (index) {
+
+                        $http({
+                            async: true,
+                            crossDomain: true,
+                            method: 'POST',
+                            url: "/jd/api/orders/cancel/" + skusq + "",
+                            params: {
+                                deleteApplication: true
+                            },
+                            headers: {
+                                'Authorization': "Bearer" + token + "",
+                                "content-type": "application/x-www-form-urlencoded"
+                            }  //请求头里会添加Authorization属性为'code_bunny'
+                        }).success(function (data, status, headers, config) {
+                            layer.open({
+                                content: '取消订单成功'
+                                , skin: 'msg'
+                                , time: 1 //2秒后自动关闭
+							,end: function () {
+								  layer.close(index);
+								 location.reload();
+								 }
+                            });
+
+                        }).error(function (data, status, headers, config) {
+							 layer.open({
+                                content: data.msg
+                                , skin: 'msg'
+                                , time: 1 //2秒后自动关闭
+							,end: function () {
+								  layer.close(index);
+								 location.reload();
+								 }
+                            });
+                        });
+                        layer.close(index);
+                    }
+                });
+            }
+        };
+         //支付订单
+        $scope.pay = function (item) {
+              layer.open({
+   			 content: '确认付款？'
+   			 ,btn: ['确认', '取消']
+  		  ,yes: function(index){
+          var token = api();
+            var skusq = item.jdOrderId;
+            $http({
+                async: true,
+                crossDomain: true,
+                method: 'POST',
+                url: "/jd/api/pay/" + skusq + "",
+                headers: {
+                    'Authorization': "Bearer" + token + "",
+                    'content-type': "application/x-www-form-urlencoded",
+                    'cache-control': "no-cache",
+                    'postman-token': '31b1fd14-4443-ec6a-a453-8eb4b68d25d8'
+                }  //请求头里会添加Authorization属性为'code_bunny'indesssx.html
+
+            }).success(function (datas, status, headers, config) {
+                    layer.open({
+                    content:  datas.msg
+                    ,skin: 'msg'
+                    ,time: 2 //2秒后自动关闭
+					,end: function () {
+					  layer.close(index);
+               		 location.reload();
+           			 }
+                    });
+             
+             
+            }).error(function (data, status, headers, config) {
+			   layer.open({
+                    content:  datas.msg
+                    ,skin: 'msg'
+                    ,time: 3 //2秒后自动关闭
+					,end: function () {
+					  layer.close(index);
+               		 location.reload();
+           			 }
+                    });
+
+            });
+     // location.reload();
+      layer.close(index);
+    }
+  });
+          
+
+        };
+		 $scope.gostater = function (status) {
+           sessionStorage.setItem("jingdu",'0');
+		   window.location.href="./stater.html";
+        };
+		 $scope.orderstatus = function (status) {
+           
+           getdata(status);
+        };
+         $scope.payok = function (item) {
+           
+              layer.open({
+                content: '订单已支付'
+                , skin: 'msg'
+                , time: 2//2秒后自动关闭tests
+            });
+        };
+        $scope.tests = function (item) {
+           
+              layer.open({
+                content: '订单已支付不能取消'
+                , skin: 'msg'
+                , time: 2//2秒后自动关闭
+            });
+        };
+          $scope.pays = function (item) {
+            var token = api();
+            var skusq = item.jdOrderId;
+			console.log(skusq);
+            $http({
+                async: true,
+                crossDomain: true,
+                method: 'POST',
+                url: "/jd/api/pay/" + skusq + "",
+                headers: {
+                    'Authorization': "Bearer" + token + "",
+                    'content-type': "application/x-www-form-urlencoded",
+                    'cache-control': "no-cache",
+                    'postman-token': '31b1fd14-4443-ec6a-a453-8eb4b68d25d8'
+                }  //请求头里会添加Authorization属性为'code_bunny'indesssx.html
+
+            }).success(function (datas, status, headers, config) {
+                layer.open({
+                content: datas.msg
+                ,btn: ['取消', '确认']
+                ,yes: function(index){
+           
+                layer.close(index);
+                }
+                });
+             
+            }).error(function (data, status, headers, config) {
+
+            });
+
+        };
+        $scope.paynew = function (item) {
+            var token = api();
+            var skusq = item.jdOrderId;
+         window.location.href="./fenlei.html?orderid="+skusq+"";
+
+        };  
+         //是否可以提交售后
+        $scope.pstate = function (item) {
+          var jdid = item.jdOrderId;
+         // console.log(item);
+       var sku = item.sku;
+        var num = item.skus[0].num;
+            $http({
+          async: false,
+          crossDomain: true,
+          url: "/jd/api/afterSale/availableNumberQuery?jdOrderId="+jdid+"&skuId="+sku+"",//有数据换成sku
+          method: "POST",
+          headers: {
+         "authorization": "Bearer "+token+"",
+          "cache-control": "no-cache",
+          "postman-token": "dfb7b052-6d81-2042-5adc-f626a5c718cb"
+          } //请求头里会添加Authorization属性为'code_bunny'indesssx.html
+
+        }).success(function (data, status, headers, config) {  
+          console.log(data);
+         if (data==1) {
+          $http({
+          async: false,
+          crossDomain: true,
+          url: "/apijd/jd/afterSale/customerExpectQuery?jdOrderId="+jdid+"&skuId="+sku+"",//有数据换成sku
+          method: "POST",
+          headers: {
+         "authorization": "Bearer "+token+"",
+          "cache-control": "no-cache",
+          "postman-token": "dfb7b052-6d81-2042-5adc-f626a5c718cb"
+          } //请求头里会添加Authorization属性为'code_bunny'indesssx.html
+
+        }).success(function (datass, status, headers, config) {  
+            //$scope.data = datass;
+           //console.log(datass);
+          var arrs = [];
+             angular.forEach(datass, function (datasslist, index, array) {
+                   //console.log(datasslist);
+                    arrs.push(datasslist.code);
+                    //arrlist.push(angular.extend(listall, stateall));
+                });
+             $scope.parrlist = arrs;
+            // console.log(arrs);
+         // console.log($scope.parrlist);
+
+          var codeone = arrs[0];
+          var codetwo = arrs[1];
+          var codetherr = arrs[2];
+          
+           
+          if (codetwo ==undefined) {
+          var codetwo =1;
+          }
+          if (codetherr ==undefined ) {
+          var codetherr =1;
+          }
+          window.location.href="./cback.html?jdOrders="+jdid+"?num="+num+"?codeone="+codeone+"?codetwo="+codetwo+"?codetherr="+codetherr+"?skuid="+sku+"";
+
+         }).error(function (data, status, headers, config) { 
+
+        });
+         }else{
+             layer.open({
+                content: '该商品不能提交售后'
+                , skin: 'msg'
+                , time: 1 //2秒后自动关闭
+            });
+             return false;
+         }
+         }).error(function (data, status, headers, config) { 
+
+        });
+        }
+
+        $scope.hasReferer = function () {
+          return localStorage.getItem('referer');
+        };
+        //根据状态去查看申请单
+        $scope.testinfo = function (item) {
+          var appid = item.applicationOid;
+          var tryBridge = bridgeHelper.openContact(appid);
+          if (tryBridge) return;
+
+          var referer = window.localStorage.getItem('referer');
+
+          if (referer) {
+            referer = referer + '/?targetState=jd&applicationOID=' +  appid + '&loginType=fosun&state=state';
+            window.location.href = referer;
+            return;
+          }
+
+            console.log(item);
+            var statusinfo = item.approvalStatus;
+            if (statusinfo == 0) {
+                var appid = item.applicationOid;
+                window.location.href = "./jingdong/application?applicationOID=" + appid + "";
+            }
+            if (statusinfo == 2) {
+                var appid = item.applicationOid;
+                window.location.href = "./jingdong/application?applicationOID=" + appid + "";
+            }
+            if (statusinfo == 1) {
+                var appid = item.applicationOid;
+                window.location.href = "./jingdong/application/has/pass?applicationOID=" + appid + "";
+            }
+        }
+    $scope.block=0;
+      $(function () {
+    var u = navigator.userAgent, app = navigator.appVersion;
+    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
+    var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+    if (isAndroid) {
+      //alert("安卓果机！")
+        $scope.block=1;
+    }
+    if (isIOS) {
+        //alert("苹果果机！")
+        $scope.block=0;
+    }
+});
+
+    }]);
+
+    window.alert = function (name) {
+        var iframe = document.createElement("IFRAME");
+        iframe.style.display = "none";
+        iframe.setAttribute("src", 'data:text/plain,');
+        document.documentElement.appendChild(iframe);
+        window.frames[0].window.alert(name);
+        iframe.parentNode.removeChild(iframe);
+    }
+ $(window).load(function() {
+                $(".strip").fadeOut("slow");
+ })
+ 
+   function GetQueryString(name)
+		{
+			 var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+			 var r = window.location.search.substr(1).match(reg);
+			 if(r!=null)return  unescape(r[2]); return null;
+		}
+// window.onload = function(){
+//setTimeout(function(){
+//  
+//  $("#contenttop").animate({"scrollTop":600});
+//		 $('#contenttop').scrollTop('520px');
+//		// $('body').scrollTop(500);
+//		 $("#contenttop").animate({"scrollTop":'400px'});
+//  $("#contenttop").animate({"scrollTop":600});
+//	console.log(66);
+//	 scrollTo(400,0);
+//		 window.scrollTo(420,50); 
+//		 scrollBy(0,-400);
+//		 target.scrollIntoView();
+//},2000)}
+</script>
+</html>

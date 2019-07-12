@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-cn" ng-app="demoApp">
+<head>
+    <meta charset="UTF-8">
+    <title>订单详情页</title>
+	
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+	<link rel="stylesheet" href="css/ionic.min.css">
+    <link rel="stylesheet" type="text/css" href="css/index-xuanzhexinghao.css"/>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/css.css"/>
+    <script type="application/javascript" src="js/jquery.min.js"></script>
+    <script type="application/javascript" src="js/index-xuanzhexinghao.js"></script>
+</head>
+<style type="text/css">
+.stars1{background:url(./img/dian.png ) no-repeat left 4px;top:20px;width:12px;height:18px;background-size:60px 11px; position:relative;top:20px;left:-5%;}
+    .ng-cloak {
+        display: none;
+    }
+
+    .divider {
+        height: 1px;
+        margin: 9px 0;
+        overflow: hidden;
+        background-color: #e5e5e5;
+    }
+
+    .clear {
+        zoom: 1;
+    }
+
+    .clear:after {
+        display: block;
+        content: '.';
+        clear: both;
+        overflow: hidden;
+        height: 0;
+        visibility: hidden;
+    }
+
+    .nav-but-wrap {
+        background: #fff;
+        height: 0.45rem;
+        line-height: 0.45rem;
+        border-bottom: 1px solid #E5E5E5;
+        position: fixed;
+        top: 0px;
+        z-index: 99;
+        width: 100%;
+        padding-right: 0.15rem;
+        padding-left: 0.15rem;
+        box-sizing: border-box;
+    }
+
+    .nav-but {
+        font-size: 0.16rem;
+        text-align: center;
+    }
+     .ng-cloak {
+        display: none;
+    }
+	.spinner svg{
+    stroke: #e85a5d;
+    width: 40px;
+    height: 40px;
+  }
+.loading-container{
+    background: #edecf0;
+    /*top: 0.6rem;*/
+  } 
+  .loading-container .loading{
+    background: none;
+    padding: 0;
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+</style>
+<body ng-controller="DemoCtrl">
+
+<div class="center1-wrap">
+    <!-- <nav class="navbar navbar-default navbar-fixed-top" role="navigation"  style="height:25px !important; position:fixed; z-index:999999; top:0px;">
+          <div class="container">
+               <div class="navbar-header">
+                  <span class="navbar-brand" onClick="javascript:window.history.go(-1);return false;">
+                     <img alt="Brand" src="images/y-fanhui.png" style="width:60%;">
+                </span>
+                
+                 <p class="navbar-text" style="color:#333;margin-left:13%;">审核进度</p>
+              </div>
+              <div class="navbar-header navbar-right btn-group" style="position:absolute;left:80%;top:-2%;">
+                  <a class="navbar-brand"  ng-click="off()">
+                     <img alt="Brand" src="./images/y-guanbi.png" style="width:60%;">
+                </a>
+              </div>
+              <div class="navbar-header navbar-right" id="show" style="position:absolute;left:90%;top:13%;">
+                      <a class="navbar-brand dropdown-toggle" data-toggle="dropdown" >
+                         <img alt="Brand" src="./img/dian.png" style="width:60%;">
+                    </a>
+              </div>
+            <div class="search-sort" id="header-search" style="width:200px;" >
+            <em id="search-em"></em>
+
+            
+              
+              <ul class="dropdown-menu search-sort-list" role="menu" style="position:absolute;left:65%;top:95%;width:100px;">
+                <li  ng-click="cart()"><span  style="margin-left:20px;"><img src="./img/shop.png" style="width:12%;"></span> <span style="position:relative;top:2%;">购物车</span></li>
+                <li role="presentation" class="divider"></li>
+                <li ng-click="cartme()"> <span style="margin-left:20px;"><img src="./img/user.png" style="width:12%;"></span>  <span style="position:relative;top:2%;">我的</span></li>
+                </ul>
+
+            </div> 
+         </div>
+    </nav>-->
+     <div id="wuliuCon"> 
+   <div id="wuliuDiv"> 
+    <div class="order_wuliu" id="wuliu" style="margin-top:15px;"> 
+     <div class="head ng-cloak" ng-cloak> 
+      <p><span style="font-size:14px;margin-left:5%;">服务单号：</span>{{afi}}</p>
+      <p><span style="font-size:14px;margin-left:5%;">申请时间：</span> {{atime}}</p> 
+      <br>
+      <div class="d1" style="border-bottom:1px solid #CCCCCC;width:100%;margin:0 auto;"></div>
+     </div> 
+
+     <ul class="list" style="margin-left:8%;" > 
+      <li class="cur " style="font-size:14px; line-height:25px;" ng-repeat="item in infos |orderBy:'-createDate'" > <p class="stars1"></p><p  class="ng-cloak" ng-cloak> {{item.context}} </p> <p><small  class="ng-cloak" ng-cloak>{{item.createDate}} </small></p> <p><small class="ng-cloak" ng-cloak>经办人：{{item.createName}} </small></p><hr/></li> 
+      
+     </ul> 
+    <div style="margin-bottom:10%;visibility:hidden;">121</div>
+    </div> 
+   </div>
+   <div id="jdAppID"></div>
+  </div> 
+</div>
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="js/TouchSlide.js"></script>
+<script src="angular/angular.min.js"></script>
+<script src="js/jd.js"></script>
+<script src="layer/layer_mobile/layer.js"></script>
+<script src="js/ionic.bundle.min.js"></script>
+<script type="text/javascript">
+   $('#show').click(function(){
+    $('.search-sort-list').toggle();
+  });
+    var str = location.href; //获取本页url地址
+    var arr = str.split("?");
+    var str1 = arr[1];
+    var str2 = arr[2];
+    var str3 = arr[3];
+     if (str1) {
+        var afid = str1.split("=")[1];
+    }
+    if (str2) {
+        var oid = str2.split("=")[1];
+    }
+     if (str3) {
+        var atime = str3.split("=")[1];
+    }
+    var times =decodeURI(atime);
+
+    var app = angular.module('demoApp', ["ionic"]);
+    app.controller('DemoCtrl', ["$scope", "$rootScope", "$sce", "$http","$filter","$ionicLoading", function ($scope, $rootScope, $sce, $http,$filter,$ionicLoading) {
+       $ionicLoading.show({
+           template:'<ion-spinner icon="android"></ion-spinner>',
+           //content: '正在加载...',
+           animation: 'fade-in',
+           showBackdrop: false,
+           maxWidth: 200,
+           showDelay: 0
+       });
+        var token = api();
+        $scope.afi = afid;
+         $scope.atime = times;
+         //查看商品的物流
+           $http({
+                async: false,
+                crossDomain: true,
+                method: 'POST',
+               
+                url:"jd/api/afterSale/serviceDetailInfoQuery?jdOrderId="+oid+"&afsServiceId="+afid+"&appendInfoSteps=1%2C2%2C3%2C4%2C5",
+                headers: {
+                   
+                   'Authorization': "Bearer" + token + "",
+                    'cache-control': "no-cache",
+                    'postman-token': "69360135-1fb8-f165-601f-09bb6accae55"
+                }  //请求头里会添加Authorization属性为'code_bunny'indesssx.html
+
+            }).success(function (datas, status, headers, config) {
+            	var arr = [];
+            	var dataslist = datas.jdServiceTrackList;
+                // console.log(datas.orderTrackItemList);
+                // var datainfo = datas.orderTrackItemList;
+                // var info =[];
+                angular.forEach(dataslist, function(dataslists,index,array){
+                 var list = dataslists;
+                 arr.push(list);
+                  //console.log(dataslists);
+                });
+               $scope.infos=arr;
+			   $ionicLoading.hide();
+			   sessionStorage.setItem("load",1);
+                // console.log($scope.infos);
+            }).error(function (data, status, headers, config) {
+
+            }); 
+
+         $scope.off=function(){
+
+        
+            window.location.href="./closeInAppBrowser.html";
+
+        };
+        $scope.cart=function(){
+
+        
+            window.location.href="./cart.html";
+
+        };
+        $scope.cartme=function(){
+
+        
+            window.location.href="./mycart.html";
+
+        };
+      
+    }]);
+
+</script>
+</html>

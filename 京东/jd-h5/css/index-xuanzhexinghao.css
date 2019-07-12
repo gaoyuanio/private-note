@@ -1,0 +1,230 @@
+*{
+	margin: 0.0rem;
+	padding: 0.0rem;
+	border: 0.0rem;
+	font-family: "微软雅黑";
+	font-size: 0.16rem;
+}
+html{
+	font-size: calc(100vw/3.75);
+}
+.center1-wrap{
+	
+}
+.herder1{
+	width: 100%;
+	height: 2.00rem;
+	/*padding-top: 0.70rem;*/
+	text-align: center;	
+}
+.herder1-color{
+	width: 100%;
+	height: 2.40rem;
+	background-color: rgba(22,5,6,.40); 
+	position: absolute;
+	top:0rem;
+  
+}
+.herder1 img{
+	height: 1.96rem;
+	margin-left: -0.2rem;
+	border: none;
+	z-index: -1;
+}
+.center1-top{
+	height: 4.00rem;
+}
+.center1-top-money{
+	margin-top: 0.2rem;
+	text-align: left;
+	height: 1.0rem;
+	width:0.85rem;
+	font-size: 0.15rem;
+	color: #000000;
+	padding-top: 0.20rem;
+	background: #FFFFFF;
+	margin-left: 1.50rem;
+}
+.center1-top-money1{
+	position: relative;
+	top: -0.08rem;
+	left: -0.10rem;
+	color: #e53d40;
+	font-size: 0.17rem;
+}
+.center1-top-money2{
+	margin-top: -0.07rem;
+	margin-bottom: 0.12rem;
+	position: relative;
+	left: -0.02rem;
+	font-size: 0.15rem;
+}
+.center1-top-money3{
+	position: relative;
+	left: -0.02rem;
+	top: -0.03rem;
+}
+.img1-box{
+	background: #FFFFFF;
+	position: absolute;
+	top: 1.6rem;
+	left: 0.18rem;
+	height: 1.10rem;
+	width: 1.10rem;
+	text-align: center;
+	/*border:0.015rem solid #E53D40;*/
+	border-radius: 0.04rem;
+}
+.img1-box img{
+	height: 98%;
+	width: 98%;
+}
+
+.center1-left-color{
+	width:90%;
+	font-size: 0.15rem;
+	height: 0.60rem;
+	margin: 0 auto;
+	color:  #989191;
+	line-height: 0.40rem;
+	/*border-bottom: 0.01rem solid #E5E5E5;*/
+	margin-top: -0.20rem;
+}
+.center1-certer-button{
+	height: 0.40rem;
+	width: 90%;
+	margin: 0.12rem auto;
+	margin-bottom: 0.05rem;
+}
+
+.addcolor{
+	color: #E53D40;
+	border: 0.01rem solid #E53D40;
+}
+.center1-certer-button1:hover{
+	text-decoration: none;
+}
+.center1-certer-button2{
+	display: block;
+	height: 0.30rem;
+	width: 0.68rem;
+	color: #000000;
+	border: 0.01rem solid #979797;
+	text-align: center;
+	line-height:0.30rem;
+	float: left;
+	border-radius: 0.04rem;
+	margin-right: 0.10rem;
+	text-decoration: none;
+}
+.addcolor{
+	color: #E53D40;
+	border: 0.01rem solid #E53D40;
+}
+.center1-certer-button2:hover{
+	text-decoration: none;
+}
+.center1-certer-button3{
+	display: block;
+	height: 0.30rem;
+	width: 0.70rem;
+	color: #000000;
+	border: 0.01rem solid #979797;
+	text-align: center;
+	line-height:0.30rem;
+	float: left;
+	border-radius: 0.04rem;
+	margin-right: 0.10rem;
+	text-decoration: none;
+}
+.center1-left-color1{
+	width:90%;
+	font-size: 0.15rem;
+	height: 0.40rem;
+	margin: 0 auto;
+	color:  #989191;
+	line-height: 0.40rem;
+	border-bottom: 0.01rem solid #E5E5E5;
+	
+}
+.shop-number-wrap{
+	height: 0.85rem;
+    width: 90%;
+    margin: 0 auto;
+    background: #FFFFFF;
+   
+    border-top: 0.01rem solid #E5E5E5;
+    padding-bottom: 0.5rem;
+    margin-top:-150px;
+}
+.shop-font{
+	color: #766d6d;
+	font-size: 0.15rem;
+}
+.shop-number{
+	color: #150606;
+	position: relative;
+	top: -0.04rem;
+}
+.number-{
+	height: 0.20rem;
+	width: 0.20rem;
+}
+.number1{
+	height: 0.20rem;
+	width: 0.20rem;
+}
+.shop-add{
+	display: inline-block;
+	position: absolute;
+	right: 4%;
+}
+.numbers{
+			display: block;
+			float: right;
+			position: relative;
+		}
+		.number-jia{
+			height: 0.18rem;
+			position: relative;
+            right: 0.0rem;
+            top: 0.03rem;
+		}
+		.number{
+			font-size: 0.14rem;
+			width: 0.2rem;
+			height: 0.18rem;
+			position: absolute;
+			right: 0.26rem;
+			top: -0.02rem;
+			bottom: 0;
+			margin: auto;			
+		}
+        .number-jian{
+			height: 0.18rem;
+			position: absolute;
+			right: 0.66rem;
+			top: 0;
+			bottom: 0;
+			margin: auto;
+		}
+
+.fooder-button{
+	display: block;
+	position: fixed;
+	bottom: 0.0px;
+	height: 50px;
+	width: 100%;
+	color: #FFFFFF;
+	background: #E53D40;
+	text-align: center;
+	line-height:50px;
+	text-decoration: none;
+}
+.fooder-button:hover{
+	text-decoration: none;
+}
+.addcolor{
+	color: #E53D40;
+	border: 0.01rem solid #E53D40;
+}

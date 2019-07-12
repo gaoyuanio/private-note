@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-cn" ng-app="demoApp">
+<head>
+    <meta charset="UTF-8">
+    <title>订单详情页</title>
+    <link rel="stylesheet" type="text/css" href="css/index-xuanzhexinghao.css"/>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/css.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+    <script type="text/javascript" src="js/stopIOS.js"></script>
+    <script type="application/javascript" src="js/jquery.min.js"></script>
+    <script type="application/javascript" src="js/index-xuanzhexinghao.js"></script>
+</head>
+<style type="text/css">
+.stars1{background:url(./img/dian.png ) no-repeat left 4px;top:20px;width:12px;height:18px;background-size:60px 11px; position:relative;top:20px;left:-5%;}
+    .ng-cloak {
+        display: none;
+    }
+
+    .divider {
+        height: 1px;
+        margin: 9px 0;
+        overflow: hidden;
+        background-color: #e5e5e5;
+    }
+
+    .clear {
+        zoom: 1;
+    }
+
+    .clear:after {
+        display: block;
+        content: '.';
+        clear: both;
+        overflow: hidden;
+        height: 0;
+        visibility: hidden;
+    }
+
+    .nav-but-wrap {
+        background: #fff;
+        height: 0.45rem;
+        line-height: 0.45rem;
+        border-bottom: 1px solid #E5E5E5;
+        position: fixed;
+        top: 0px;
+        z-index: 99;
+        width: 100%;
+        padding-right: 0.15rem;
+        padding-left: 0.15rem;
+        box-sizing: border-box;
+    }
+
+    .nav-but {
+        font-size: 0.16rem;
+        text-align: center;
+    }
+</style>
+<body ng-controller="DemoCtrl">
+
+<div class="center1-wrap">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="height:25px !important;">
+        <div class="container">
+           <!--  <div class="navbar-header">
+                <span class="navbar-brand" onClick="javascript:window.history.go(-1);return false;">
+                    <img alt="Brand" src="images/y-fanhui.png" style="width:60%;">
+                </span>
+
+                <p class="navbar-text" style="color:#333;margin-left:14%;">订单详情页</p>
+            </div>
+            <div class="navbar-header navbar-right btn-group" style="position:absolute;left:80%;top:-2%;">
+                <a class="navbar-brand" ng-click="off()">
+                    <img alt="Brand" src="./images/y-guanbi.png" style="width:60%;">
+                </a>
+            </div> 
+            <div class="navbar-header navbar-right" id="show" style="position:absolute;left:90%;top:13%;">
+                <a class="navbar-brand dropdown-toggle" data-toggle="dropdown">
+                    <img alt="Brand" src="./img/dian.png" style="width:60%;">
+                </a>
+            </div>
+            <div class="search-sort" id="header-search" style="width:200px;">
+                <em id="search-em"></em>
+
+
+                <ul class="dropdown-menu search-sort-list" role="menu"
+                    style="position:absolute;left:65%;top:95%;z-index:9999;width:100px;">
+                    <li ng-click="cart()"><span style="margin-left:20px;"><img src="./img/shop.png" style="width:12%;"></span>
+                        <span style="position:relative;top:2%;font-size: 0.1rem;">购物车</span></li>
+                    <li role="presentation" class="divider"></li>
+                    <li ng-click="cartme()"><span style="margin-left:20px;"><img src="./img/user.png"
+                                                                                 style="width:12%;"></span> <span
+                            style="position:relative;top:2%;font-size: 0.1rem;">我的</span></li>
+                </ul>
+
+
+            </div>-->
+        </div>
+    </nav>
+     <div id="wuliuCon" style="margin-top:15%;"> 
+   <div id="wuliuDiv"> 
+    <div class="order_wuliu" id="wuliu"> 
+     <div class="head"> 
+      <p><span style="font-size:14px;margin-left:5%;">订单编号：</span>{{skus}}</p>
+      <p><span style="font-size:14px;margin-left:5%;">配送方式：</span>京东快递 {{skus}}</p> 
+      <br>
+      <div class="d1" style="border-bottom:1px solid #CCCCCC;width:100%;margin:0 auto;"></div>
+     </div> 
+
+     <ul class="list" style="margin-left:8%;" > 
+      <li class="cur " style="font-size:14px;" ng-repeat="item in infos" > <p class="stars1"></p><p> {{item.content}} </p> <small>{{item.msgTime}} </small> <hr/></li> 
+      
+     </ul> 
+    <div style="margin-bottom:10%;visibility:hidden;">121</div>
+    </div> 
+   </div>
+   <div id="jdAppID"></div>
+  </div> 
+</div>
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="js/TouchSlide.js"></script>
+<script src="angular/angular.min.js"></script>
+<script src="js/jd.js"></script>
+<script src="layer/layer_mobile/layer.js"></script>
+<script type="text/javascript">
+   $('#show').click(function(){
+    $('.search-sort-list').toggle();
+  });
+    var str = location.href; //获取本页url地址
+    var arr = str.split("?");
+    var str1 = arr[1];
+     if (str1) {
+        var sku = str1.split("=")[1];
+    }
+
+
+    var app = angular.module('demoApp', []);
+    app.controller('DemoCtrl', ["$scope", "$rootScope", "$sce", "$http", function ($scope, $rootScope, $sce, $http) {
+            layer.open({
+            type: 2
+            ,content: '加载中'
+            ,time: 2 //2秒后自动关闭
+            });
+        var token = api();
+        $scope.skus=sku;
+           $http({
+                async: false,
+                crossDomain: true,
+                method: 'GET',
+                url: "jd/api/orders/track/" + sku + "",
+                headers: {
+                    'Authorization': "Bearer" + token + "",
+                    'content-type': "application/x-www-form-urlencoded",
+                    'cache-control': "no-cache",
+                    'postman-token': "69360135-1fb8-f165-601f-09bb6accae55"
+                }  //请求头里会添加Authorization属性为'code_bunny'indesssx.html
+
+            }).success(function (datas, status, headers, config) {
+                console.log(datas.orderTrackItemList);
+                var datainfo = datas.orderTrackItemList;
+                var info =[];
+                angular.forEach(datainfo, function(datass,index,array){
+                 
+                  info.push(datass);
+                });
+                $scope.infos=info;
+                console.log($scope.infos);
+            }).error(function (data, status, headers, config) {
+
+            }); 
+
+         $scope.off=function(){
+
+        
+            window.location.href="./closeInAppBrowser.html";
+
+        };
+        $scope.cart=function(){
+
+        
+            window.location.href="./cart.html";
+
+        };
+        $scope.cartme=function(){
+
+        
+            window.location.href="./mycart.html";
+
+        };
+      
+
+    }]);
+
+
+</script>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+  <meta content="yes" name="apple-mobile-web-app-capable" />
+  <title> 商品分类 </title>
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/resets.css" rel="stylesheet">
+  <link href="css/fenleis.css" rel="stylesheet">
+
+  <!-- 重构后的文件 -->
+  <link rel="stylesheet" href="styles/index.css">
+
+</head>
+
+<body ng-app="demoApp" ng-controller="DemoCtrl" style="line-height: 2.428571;overflow:hidden;">
+
+  <!-- loading component -->
+  <div ng-show="loading" style=" position:fixed; z-index:9999; width:100%; height:2000px; background:#ffffff">
+    <div style="margin:0 auto;position:fixed;top:42%;left:46%;z-index:99999;float:left;">
+      <img class="Rotation img" src="./images/loading3.png" style="width:35px;">
+    </div>
+  </div>
+
+  <div class="container">
+
+    <div class="header">
+
+      <!-- search-box component -->
+      <div class="search_box">
+        <input class="head-input" onClick="window.location.href='search.html'" placeholder="搜索产品/关键字" style="width:100%;height:36px;font-size: 0.12rem;color:#6d7a80;font-family:PingFangSC-Regular;border:1px solid #eeeeee!important;"
+          type="search">
+        </input>
+      </div>
+
+      <!--middle start-->
+      <div class="container-fluid main">
+        <div class="row" style="height: 100%;">
+          <!-- left start-->
+          <div class="col-xs-4 y-nav1" id="scrollWrap2" ng-cloak="" style="height:100%;overflow-y:auto;overflow-x:hidden;width: 30%;padding-right: 0px !important; -webkit-overflow-scrolling: touch">
+            <ul class="nav nav-pills ceibianlan clear" id="empty" ng-cloak="" style="overflow-x:hidden;background-color:#fafafa">
+              <li ng-repeat="topCategory in topCategories" 
+                ng-click="switchCategory(topCategory.id, $index);"
+                style="color:#0099cc;">
+                <a ng-bind="topCategory.name" 
+                  ng-class="{true: 'tab-active'}[$index === $parent.activeTab]"
+                  class="text-ellipsis" style="border-radius: 0;">
+                  <i>
+                  </i>
+                </a>
+              </li>
+            </ul>
+            <div style=" clear: both;">
+            </div>
+          </div>
+          <!-- left end -->
+          <!-- right start -->
+          <div class="col-xs-9" id="contentright" style="overflow-y: auto;overflow-x:hidden;height:100%; width:70%;background:#fff;padding-left: 7px !important; -webkit-overflow-scrolling: touch">
+            <!-- banner -->
+            <div style="background:#fff;padding-left:0px !important;">
+              <ul>
+                <div class="col-xs-8 y-nav2 ng-cloak" 
+                  ng-repeat="category in subCategories" style="width:111%;background:#fff;margin-bottom: 0.05rem;">
+                  <li style="width: 100%;background: #fff; margin-bottom: 10px;">
+                    <b style="font-size: 0.14rem;color:#4a4a4a;">
+                      {{::category.name}}
+                    </b>
+                  </li>
+                  <ul class="sj " id="list" ng-cloak="" style="overflow: hidden;">
+                    <li ng-cloak="" ng-repeat="item in category.children">
+                      <a href="./goodslist.html?q={{item.name}}?sku={{item.id}}">
+                        <img src-err src="./img/pic/{{item.id}}.jpg" style="width: 90%;height: 59%;">
+                        <span ng-bind="::item.name" ng-cloak="" class="text-ellipsis text-block">
+                        </span>
+                        </img>
+                      </a>
+                    </li>
+                  </ul>
+                  <div style="width: 90%;height:0;border-bottom:1px solid #eee;">
+                  </div>
+                </div>
+              </ul>
+              <div style="visibility:hidden;margin-bottom:2%;">
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- right end -->
+      </div>
+    </div>
+    <!--middle end-->
+
+    <!-- footer component -->
+    <div class="foot" style="position:absolute; z-index:999; bottom:0; width:100%;">
+
+      <ul class="footer">
+        <li class="active-nav" style="padding-top: 0.07rem;">
+          <a class="active-nav">
+            <img alt="首页" src="images/shouyered1.png" />
+            <span> 首页 </span>
+          </a>
+        </li>
+        <li style="padding-top: 0.07rem;">
+          <a href="./cart.html">
+            <img alt="购物车" src="images/gouwuche1.png" />
+            <span> 购物车 </span>
+          </a>
+        </li>
+        <li style="padding-top: 0.07rem;">
+          <a href="./mycart.html">
+            <img alt="我的" src="images/wode1.png" />
+            <span> 我的 </span>
+          </a>
+        </li>
+      </ul>
+
+    </div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="angular/angular.min.js"></script>
+    <script src="modules/api-service.module.js"></script>
+    <script src="js/jd.js"></script>
+    <script src="layer/layer_mobile/layer.js"></script>
+    <script src="scripts/index.controller.js"></script>
+  </div>
+</body>
+
+</html>

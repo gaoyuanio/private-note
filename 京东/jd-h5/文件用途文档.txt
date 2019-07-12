@@ -1,0 +1,24 @@
+index.html  /首页
+
+goodslist.html /商品列表页
+actions.html/商品详情页
+goodslists.html /商品搜索页
+action.html /商品数量改变页
+goodsub.html/下订单页
+jddzgl.html /地址管理页
+jdtjdzlist.html /地址编辑页
+tjdz。html/地址添加页
+confirm。html/订单详情页
+jddtwo.html/ 商品详情actions.html的地址切换页面
+save.html /商品详情actions.html的地址编辑页面
+cart.html /购物车页面
+querendingdan.html /提交订单页面
+invoicest.html /发票页面
+connum..html /订单详情查看申请单页面
+mycart.html /我的订单页
+zd.html /购物车地址管理页
+savetwo.html /地址编辑页
+cback.html /申请售后页面
+dzone.html /商品退回方式  及确认页
+wlxx.html /商品详情
+

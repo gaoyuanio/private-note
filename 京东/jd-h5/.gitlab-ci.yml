@@ -1,0 +1,34 @@
+image: registry.huilianyi.com/devops/gitlab-runner-docker:node-runner
+
+variables:
+    IMAGE: registry.huilianyi.com/vendor/jd-h5
+    DEV_VERSION: dev-1.0.$CI_PIPELINE_ID
+    FOSUN_VERSION: fosun-1.0.$CI_PIPELINE_ID
+    STAGE_VERSION: stage-1.0.$CI_PIPELINE_ID
+    RELEASE_VERSION: prod-1.0.$CI_PIPELINE_ID
+
+stages:
+- build
+- dev-release
+- fosun-release
+- master
+
+master:
+    stage: build
+    only:
+    - "master"
+    when: always
+    script:
+    - "docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.huilianyi.com"
+    - "docker build -t $IMAGE:$DEV_VERSION ."
+    - "docker push $IMAGE:$DEV_VERSION"
+
+build:
+    stage: fosun-release
+    only:
+    - "fosun/dev"
+    when: always
+    script:
+    - "docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.huilianyi.com"
+    - "docker build -t $IMAGE:$FOSUN_VERSION ."
+    - "docker push $IMAGE:$FOSUN_VERSION"

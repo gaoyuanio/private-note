@@ -1,0 +1,226 @@
+<html lang="zh-cn" ng-app="demoApp">
+<head>
+    <meta charset="UTF-8">
+    <title>地址管理</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/jddzgl.css">
+    <link rel="stylesheet" href="css/radio.css"/>
+    <link href="css/ionic.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/iconfont.css"/>
+    <link rel="stylesheet" href="css/css.css"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <style type="text/css">
+        .ng-cloak {
+            display: none;
+        }
+    </style>
+    <script type="text/javascript" src="js/stopIOS.js"></script>
+</head>
+<body ng-controller="DemoCtrl">
+<!--顶部返回 地址管理开始-->
+<style>
+    .ng-cloak {
+        display: none;
+    }
+
+    .back_fixed {
+        width: 100%;
+        font-size: 0.15rem;
+        padding: 0 5%;
+        height: 0.44rem;
+        line-height: 0.44rem;
+        position: fixed;
+        z-index: 99;
+        top: 0;
+        background: #fff;
+        text-align: center;
+    }
+
+    .back_fixed .s-img {
+        display: inline-block;
+        position: relative;
+        top: 0.12rem;
+    }
+
+    .main {
+        margin-top: 0.45rem;
+    }
+    .item-radio .radio-icon1{
+        position: absolute;
+        top: 15px;
+        left: 0;
+        width: 24px;
+        height: 24px;
+        padding: 0;
+        background: url(images/invoice_icon.png) no-repeat center center;
+        background-size: 24px 24px;
+        z-index: 3;
+    }
+    .item-radio input:checked + .radio-content .radio-icon1{
+        background: url(images/invoice_checked.png) no-repeat center center;
+        background-size: 24px 24px;
+    }
+    .sure a{
+        display: block;
+        height: 100%;
+        padding: 0;
+        background: none;
+    }
+</style>
+<!--<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="height:25px !important;">
+    <div class="container">
+         <div class="navbar-header"><span class="navbar-brand" onClick="javascript:window.history.go(-1);return false;"> <img alt="Brand" src="images/y-fanhui.png" style="width:60%;"> </span>
+
+            <p class="navbar-text" style="color:#333;margin-left:12%;">发票</p>
+        </div>
+        <div class="navbar-header navbar-right btn-group" style="position:absolute;left:80%;top:-2%;"><a
+                class="navbar-brand" ng-click="off()"> <img alt="Brand" src="./images/y-guanbi.png" style="width:60%;">
+        </a></div>
+        <div class="navbar-header navbar-right" id="show" style="position:absolute;left:90%;top:13%;"><a
+                class="navbar-brand dropdown-toggle" data-toggle="dropdown"> <img alt="Brand" src="./img/dian.png"
+                                                                                  style="width:60%;"> </a></div>
+        <div class="search-sort" id="header-search" style="width:200px;"><em id="search-em"></em>
+            <ul class="dropdown-menu search-sort-list" role="menu"
+                style="position:absolute;left:65%;top:95%;z-index:9999;width:100px;">
+                <li ng-click="cart()"><span style="margin-left:20px;"><img src="./img/shop.png"
+                                                                           style="width:12%;"></span> <span
+                        style="position:relative;top:2%;">购物车</span></li>
+                <li role="presentation" class="divider"></li>
+                <li ng-click="cartme()"><span style="margin-left:20px;"><img src="./img/user.png"
+                                                                             style="width:12%;"></span> <span
+                        style="position:relative;top:2%;">我的</span></li>
+            </ul>
+        </div> 
+    </div>
+</nav>-->
+<!--顶部返回 结束-->
+<div class="content has-header" style="top: 0;">
+    <div class="list" style="padding: 0 0.1rem;background: #fff;">
+        <label class="item item-radio" ng-repeat="item in configlist" style="border:0;border-bottom:1px solid #ddd;margin: 0;">
+            <input name="group" type="radio" value="go">
+                <div class="radio-content" style="position: relative;">
+                    <div class="item-content" ng-bind="item.invoiceTitle" style="background: #fff;padding: 16px 16px 16px 49px;">
+                        <!-- 上海甄汇信息科技有限公司1 -->
+                    </div>
+                    <i class="radio-icon1"></i>
+                </div>
+            </input>
+        </label>
+        <!-- <label class="item item-radio" style="border:0;border-bottom:1px solid #ddd;margin: 0;background: #fff;">
+            <input name="group" type="radio" value="python">
+                <div class="radio-content" style="position: relative;">
+                    <div class="item-content" style="background: #fff;padding: 16px 16px 16px 49px;">
+                        上海甄汇信息科技有限公司2
+                    </div>
+                    <i class="radio-icon1">
+                    </i>
+                </div>
+            </input>
+        </label> -->
+    </div>
+</div>
+<!--foot btn start-->
+<div class="sure ng-cloak" ng-cloak><a ng-click="confirmbtn(item,$index)">确定</a></div>
+<!--foot btn end-->
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="angular/angular.min.js"></script>
+<script src="js/jd.js"></script>
+<script type="text/javascript">
+    $('#show').click(function () {
+        $('.search-sort-list').toggle();
+    });
+    var str = location.href; //获取本页url地址
+    var arr = str.split("?");
+    var str1 = arr[1];
+    var str2 = arr[2];
+    var str3 = arr[3];
+    var str4 = arr[4];
+    var str5 = arr[5];
+    if (str1) {
+        var sku = str1.split("=")[1];
+    }
+    if (str2) {
+        var num = str2.split("=")[1];
+    }
+    if (str3) {
+        var price = str3.split("=")[1];
+    }
+    if (str4) {
+        var number = str4.split("=")[1];
+    }
+    if (str5) {
+        var inid = str5.split("=")[1];
+    }
+    //console.log(num);
+    var token = api();
+    //var token = mc['access_token']; sku=1057737?num=5?number=4
+    var app = angular.module('demoApp', []);
+    app.controller('DemoCtrl', ["$scope", "$rootScope", "$sce", "$http", function ($scope, $rootScope, $sce, $http) {
+        /*layer.open({
+            type: 2
+            ,content: '加载中'
+            ,time: 2 //2秒后自动关闭
+            });*/
+        var token = api();
+        $http({
+            async: false,
+            crossDomain: true,
+            method: 'GET',
+            url: "/jd/api/config/invoices",
+            headers: {
+                'Authorization': "Bearer" + token + "",
+                'cache-control': "no-cache",
+                'postman-token': 'e0fa2222-3481-ded2-38ad-e5a34da1a05b'
+            }  //请求头里会添加Authorization属性为'code_bunny'configInvoices
+        }).success(function (datasconfig, status, headers, config) {
+            //console.log(datasconfig);
+            //
+            var arrconfig = [];
+            var configs = datasconfig.configInvoices;
+            angular.forEach(configs, function (dataconfigs, index, array) {
+                //console.log(dataconfigs);
+                var listconfigs = dataconfigs;
+                arrconfig.push(listconfigs);
+            });
+            $scope.configlist = arrconfig;
+            console.log($scope.configlist);
+        }).error(function (data, status, headers, config) {
+
+        });
+        $scope.confirmbtn = function (item, index) {
+            var goods_id = [];
+            var goods_num = [];
+            var goods_pice = [];
+            /*$.each($("input[name='radio']:checked"), function (i, item) {
+
+                goods_id.push(i);
+
+            });*/
+            $("input[type='radio']").each(function(index, el) {
+                if($(this).attr('checked')=='checked'){
+                    goods_id.push(index);
+                }
+            });
+            window.location.href = "./querendingdan.html?sku=" + sku + "?num=" + num + "?price=" + price + "?number=" + number + "?inid=" + goods_id + "";
+        };
+        $scope.off = function () {
+            window.location.href = "./closeInAppBrowser.html";
+        };
+        $scope.cart = function () {
+            window.location.href = "./cart.html";
+
+        };
+        $scope.cartme = function () {
+            window.location.href = "./mycart.html";
+
+        };
+
+    }]);
+
+
+</script>
+</html>

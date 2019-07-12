@@ -1,0 +1,714 @@
+<html lang="zh-cn" ng-app="demoApp">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, target-densitydpi=device-dpi,maximum-scale=1.0, user-scalable=no,initial-scale=1" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <title>修改地址</title>
+    <link href="css/weui.min.css" rel="stylesheet">
+    <link href="css/jdtjdzcss.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="css/reset.css" rel="stylesheet">
+    <link href="css/ui-choose.css" rel="stylesheet">
+    <script src="js/stopIOS.js" type="text/javascript">
+    </script>
+    </link>
+    </link>
+    </link>
+    </link>
+    </meta>
+    </meta>
+    </meta>
+</head>
+
+<body ng-controller="DemoCtrl">
+    <!--顶部返回 开始-->
+    <script type="text/javascript">
+        function stops() {
+            return false;
+        }
+        document.oncontextmenu = stops;
+    </script>
+    <style>
+        .demo-box {
+            margin: 10px auto;
+            height: 88px;
+            width: 100%;
+            padding: 10px;
+            border: 0px solid #ccc;
+        }
+
+        .demo-table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .demo-table caption {
+            border-bottom: 1px dashed #ccc;
+            height: 40px;
+            margin-bottom: 20px;
+            font: 18px/1.2 normal 'microsoft yahei';
+        }
+
+        .demo-table tr td {
+            padding: 8px 10px;
+            font: 16px/1.8 normal 'microsoft yahei';
+            vertical-align: top;
+        }
+
+        .ui-input {
+            vertical-align: top;
+            height: 18px;
+            font-size: 16px;
+            line-height: 20px;
+            border: 1px solid #aaa;
+            padding: 6px 8px;
+            border-radius: 3px;
+        }
+
+        .jq22-header h1 {
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .ng-cloak {
+            display: none;
+        }
+    </style>
+    <style>
+        .ng-cloak {
+            display: none;
+        }
+
+        .back_fixed {
+            width: 90%;
+            margin: 0 auto;
+            font-size: 0.15rem;
+            padding: 0 5%;
+            height: 0.44rem;
+            line-height: 0.44rem;
+            position: fixed;
+            z-index: 99;
+            top: 0;
+            background: #fff;
+            text-align: center;
+            box-shadow: 0 5px 5px #cccccc;
+        }
+
+        .back_fixed .s-img {
+            display: inline-block;
+            position: relative;
+            top: 0.12rem;
+        }
+
+        .container {
+            margin-top: 0.44rem;
+        }
+
+        .chose {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .groupaddress {
+            padding: 3.7% 0% 1.5% 1.5%;
+            border-bottom: 1px solid #f3f3f3;
+            position: relative;
+        }
+
+        .weui-cell:before {
+            left: 0px;
+        }
+
+        .backcss {
+            margin-top: 15px;
+            width: 100%;
+            text-align: left;
+            height: 60px;
+        }
+
+        .backli {
+            margin-right: 10px;
+            padding: 8px 15px;
+            text-align: center;
+            float: left;
+            background: #FFFFFF;
+            border: 1px solid #999999;
+            border-radius: 3px;
+            font-size: 1.6rem;
+        }
+
+        .libtn
+        /*,.backcss >ul :first-child*/
+
+            {
+            z-index: 3;
+            border-color: #0080ff;
+            background-color: #0080ff;
+            color: #fff;
+        }
+    </style>
+    <div class="container" style="width:100%;">
+        <div style="margin-top:10px;background:#fff;width:100%;">
+            <span style="font-size:1.6rem;"> 商品退回方式 </span>
+            <div class="backcss" ng-cloak>
+                <ul class="backul" ng-cloak>
+                    <li name="radiogroup1" 
+                    ng-class="{'libtn': value.code === code}"
+                    ng-repeat="value in result35" 
+                    class="backli" 
+                    ng-click="selected(value.code)" 
+                    value="{{value.code}}"
+                    ng-cloak>{{value.name}}</li>
+                </ul>
+            </div>
+        </div>
+        <div style="background:#EEF2F3;width:98%;height:7rem; padding:2px 8px;margin:0 auto;">
+            <div style="margin-top:3%;font-size:14px;"> 商品返回地址将在服务单审核通过后以短信形式告知，或在查看返修/退换货记录中查询，京东不收取快递附加费用 </div>
+        </div>
+        <div style="margin-top:3%;background:#fff;width:100%;">
+            <div style="margin-top:3%;">
+                <br/> 确认收货信息
+                <span style="font-size:13px;color:#ccc;"> (该地址是京东回寄给您的地址) </span>
+            </div>
+            <hr/>
+        </div>
+        <div class="container" ng-repeat="item in listss" ng-show="$index === 0" style="margin-top:-4%;width:100%;">
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label" style="font-weight:normal"> 姓名 </label>
+                </div>
+                <div class="weui-cell__bd ng-cloak" ng-cloak="">
+                    <input class="weui-input" id="name" name="name" ng-model="name" value="{{item.order.jdOrderAddress.name}}" type="text">
+                    </input>
+                </div>
+            </div>
+            <div class="weui-cell" style="border-bottom:1px solid #d9d9d9;">
+                <div class="weui-cell__hd ng-cloak" ng-cloak="">
+                    <label class="weui-label" style="font-weight:normal"> 电话 </label>
+                </div>
+                <div class="weui-cell__bd ng-cloak" ng-cloak="">
+                    <input class="weui-input" id="phone" name="phone" ng-model="phone" value="{{item.order.jdOrderAddress.mobile}}" type="tel">
+                    </input>
+                </div>
+            </div>
+        </div>
+        <div class="groupaddress ng-cloak" ng-cloak="">
+            <span class="chose"> 选择省份 </span>
+            <!--<a class="more" id="city" onClick="show_select()" ng-model="hundred">{{hundred}}</a>-->
+            <div class="weui-cell weui-cell_select" id="c1">
+                <div class="weui-cell__bd">
+                    <select class="weui-select" id="ctyr" onChange="get_son()">
+                        <option value=""> </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="groupaddress ng-cloak" ng-cloak="">
+            <span class="chose"> 选择城市 </span>
+            <!--<a class="more" id="chosecity" onClick="show_city()" ng-model="city">{{city}}</a>-->
+            <div class="weui-cell weui-cell_select" id="c2">
+                <div class="weui-cell__bd">
+                    <select class="weui-select" id="citys" onChange="get_city()" value="">
+                        <option> {{city}} </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="groupaddress ng-cloak" ng-cloak="">
+            <span class="chose"> 选择区域 </span>
+            <!--<a class="more" id="chosearea" onClick="show_area()" ng-model="qu">{{qu}}</a>-->
+            <div class="weui-cell weui-cell_select" id="c3">
+                <div class="weui-cell__bd">
+                    <select class="weui-select" id="areas" onChange="get_area()" value="">
+                        <option> </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="groupaddress ng-cloak" id="addresszhen" ng-cloak="">
+            <span class="chose"> 选择乡镇 </span>
+            <!--<a class="more" id="chosehome" onClick="show_home()" ng-model="town" >{{town}}</a>-->
+            <!-- <a class="more" id="homeid" onClick="show_home()" ng-model="town" ng-if="town==!''">{{town}}</a> -->
+            <div class="weui-cell weui-cell_select" id="c4">
+                <div class="weui-cell__bd">
+                    <select class="weui-select" id="home" onChange="get_home()" value="">
+                        <option> </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div id="aaaaa"> </div>
+        <div ng-repeat="item in listss" ng-if="$index === 0">
+            <!-- <input class="textarea"  id="texts" ng-model="texttext" placeholder="请填写详细地址（不包含省份城市区域）">
+                    <textarea class="textarea" style="width:100%;border:none;"name="name" ng-model="texttext" id="name" placeholder="请填写详细地址（不包含省份城市区域）"></textarea> -->
+            <input class="group ng-cloak" id="texts" name="name" ng-cloak="" ng-model="texttext" value="{{item.order.jdOrderAddress.address}}"
+                style="width:100%;border:none;margin-bottom:10px; height:55px;" />
+        </div>
+    </div>
+    <div style="margin-bottom:10%;visibility:hidden;"> 121 </div>
+    <div class="sure" ng-repeat="item in listss" ng-if="item.sku == productId">
+        <a href="" ng-click="test(item)"> 确认 </a>
+    </div>
+    <!--content end-->
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="angular/angular.min.js"></script>
+<script src="modules/api-service.module.js"></script>
+<script src="modules/address.js"></script>
+<script src="js/jd.js"></script>
+<script src="layer/layer_mobile/layer.js"></script>
+<script src="js/ui-choose.js"></script>
+<script type="text/javascript">
+    //document.documentElement.style.fontSize = window.innerWidth / 3.75 + 'px';
+    $(function () {
+        $(".backul>li").click(function () {
+            $(this).siblings().removeClass("libtn");
+            //$(".backcss >ul :first-child").css({"background-color":"ffffff","border-color":"#999999","color":"#333"});
+            $(this).addClass("libtn");
+        })
+    });
+    $('#show').click(function () {
+        $('.search-sort-list').toggle();
+    });
+    // 将所有.ui-choose实例化
+    $('.ui-choose').ui_choose();
+    var json_params = {};
+    var json_params2 = {};
+    var json_params3 = {};
+    var json_params4 = {};
+
+    var proid;
+    var cityid;
+    var homeid;
+
+    var str = location.href; //获取本页url地址name
+    var arr = str.split("?");
+
+    var str1 = arr[1];
+    var str2 = arr[2];
+    var str3 = arr[3];
+    var str4 = arr[4];
+    var str5 = arr[5];
+    var str6 = arr[6];
+    var str7 = arr[7];
+    var str8 = arr[8];
+    var str9 = arr[9];
+    var str10 = arr[10];
+    var str11 = arr[11];
+    var str12 = arr[12];
+    var str13 = arr[13];
+    var str14 = arr[14];
+    if (str1) { var sku = str1.split("=")[1]; }
+    if (str2) { var skuids = str2.split("=")[1]; }
+    if (str3) { var info = str3.split("=")[1]; }
+    if (str4) { var text = str4.split("=")[1]; }
+    if (str5) { var value = str5.split("=")[1]; }
+    if (str6) { var nums = str6.split("=")[1]; }
+    if (str7) { var strdid = str7.split("=")[1]; }
+    if (str8) { var strcid = str8.split("=")[1]; }
+    if (str9) { var strquid = str9.split("=")[1]; }
+    if (str10) { var strtid = str10.split("=")[1]; }
+    if (str11) { var backone = str11.split("=")[1]; }
+    if (str12) { var backtwo = str12.split("=")[1]; }
+    if (str13) { var backthr = str13.split("=")[1]; }
+    if (str14) { var imgs = str14.split("=")[1]; }
+
+    var globalProductId = location.href.replace(/^.+\?skuid=(\d+)$/g, '$1');
+    var texts = decodeURI(text);
+    var values = parseInt(value);
+
+    var imgurl = sessionStorage.getItem("imgurl");
+    var json_params5 = {
+        "param": {
+            "jdOrderId": sku,
+            "skuId": skuids
+        }
+    };
+
+    get_son();
+
+    function show_select() {
+
+        $('#city').hide();
+        $('#c1').show();
+    }
+    //获取省份
+    function get_son() {
+
+        var ds = $("#c1  option:selected").text();
+        var id = $("#ctyr").val();
+
+        if (id == "") {
+            id = strdid;
+        }
+
+        $('#city').text(ds);
+        $('#city').show();
+
+        json_params2.id = id;
+
+        // var vvv2 = do_api("biz.address.citysByProvinceId.query", json_params2);
+        // var objs2 = JSON.parse(vvv2).biz_address_citysByProvinceId_query_response.result;
+        var vvv2 = globalAddressFn.getCities(json_params2.id);
+        var objs2 = vvv2.result;
+
+        var html2 = '';
+        angular.forEach(objs2, function (index, data) {
+            if (index == strcid) {
+                html2 += '<option value="' + index + '" selected>' + data + '</option>';
+            }
+            else {
+                html2 += '<option value="' + index + '">' + data + '</option>';
+            }
+            $('#citys').html(html2);
+        });
+        get_city();
+        get_area();
+        return json_params2;
+    }
+    //获取城市
+    function show_city() {
+        var id = $("#c1 option:selected").val();
+        if (id == '') {
+            layer.open({
+                content: '请先选择省份'
+                , skin: 'msg'
+                , time: 5 //2秒后自动关闭
+            });
+        } else {
+            $('#chosecity').hide();
+            $('#c2').show();
+        }
+    }
+
+    function get_city() {
+        var ds2 = $("#c2  option:selected").text();
+        var id = $("#citys").val();
+        if (id == "") {
+            id = strcid;
+        }
+        $('#chosecity').text(ds2);
+        $('#chosecity').show();
+        cityid = json_params3.id;
+            json_params3.id = id;
+            // var vvv3 = do_api("biz.address.countysByCityId.query", json_params3);
+            // var objs3 = JSON.parse(vvv3).biz_address_countysByCityId_query_response.result;
+            var vvv3 = globalAddressFn.getCounties(json_params3.id);
+            var objs3 = vvv3.result;
+
+        var html3 = '';
+        angular.forEach(objs3, function (index, data) {
+            if (index == strquid) {
+                html3 += '<option value="' + index + '" selected>' + data + '</option>';
+            }
+            else {
+                html3 += '<option value="' + index + '">' + data + '</option>';
+            }
+            $('#areas').html(html3);
+        });
+        get_area();
+        return json_params2;
+    }
+    //获取区
+    function show_area() {
+        var id = $("#c3 option:selected").val();
+        if (id == '') {
+            layer.open({
+                content: '请先选择城市'
+                , skin: 'msg'
+                , time: 5 //2秒后自动关闭
+            });
+        } else {
+            $('#chosearea').hide();
+            $('#c3').show();
+        }
+    }
+    function get_area() {
+
+        var ds3 = $("#c3  option:selected").text();
+        var id = $("#areas").val();
+        if (id == "") {
+            id = strquid;
+        }
+        homeid = json_params4.id;
+        json_params4.id = id;
+        // var vvv4 = do_api("biz.address.townsByCountyId.query", json_params4);
+        // var objs4 = JSON.parse(vvv4).biz_address_townsByCountyId_query_response.result;
+                var vvv4 = globalAddressFn.getTowns(json_params4.id);
+                var objs4 = vvv4.result;
+        if (objs4 == null) {
+            $("#home").empty();
+            $("#addresszhen").hide();
+        } else {
+            $("#addresszhen").show();
+        }
+        var html4 = '';
+        angular.forEach(objs4, function (index, data) {
+            if (index == strtid) {
+                html4 += '<option value="' + index + '" selected>' + data + '</option>';
+            }
+            else {
+                html4 += '<option value="' + index + '">' + data + '</option>';
+            }
+            $('#home').html(html4);
+        });
+        $('#chosearea').text(ds3);
+        $('#chosearea').show();
+    }
+    //========
+    function show_home() {
+        $('#chosehome').hide();
+    }
+    function get_home() {
+        var ds4 = $("#c4  option:selected").text();
+        var id = $("#home").val();
+
+        homeid = json_params4.id;
+        json_params4.id = id;
+        // var vvv4 = do_api("biz.address.townsByCountyId.query", json_params4);
+        // var objs4 = JSON.parse(vvv4).biz_address_townsByCountyId_query_response.result;
+                var vvv4 = globalAddressFn.getTowns(json_params4.id);
+                var objs4 = vvv4.result;
+
+        angular.forEach(objs4, function (index, data) {
+
+            html4 += '<option value="' + index + '">' + data + '</option>';
+            $('#home').html(html4);
+        });
+        $('#chosehome').text(ds4);
+        $('#chosehome').show();
+    }
+    //======
+    var app = angular.module('demoApp', ['JDApiService']);
+    app.controller('DemoCtrl', ["$scope", "$rootScope", "$sce", "$http", 'wareReturn', 'skuDetail', 
+    function ($scope, $rootScope, $sce, $http, wareReturnService, skuDetailService) {
+        $scope.productId = globalProductId;
+        $scope.ordersku = sku;
+        $scope.backone = backone;
+        $scope.backtwo = backtwo;
+        $scope.backthr = backthr;
+        //调用3.5接口查询支持的商品返回京东方式：送货至自提点，快递至京东，上门取件
+        /*************before****************/
+        // var wareReturnJdComp = do_api("biz.afterSale.wareReturnJdComp.query", json_params5);
+        // $scope.query = JSON.parse(wareReturnJdComp);
+        // var result = $scope.query.biz_afterSale_wareReturnJdComp_query_response.result;
+        // $scope.result35 = result;
+        // console.log($scope.result35);
+        /*************after****************/
+        wareReturnService.get(sku, skuids).then(function (res) {
+            $scope.result35 = res;
+        });
+        /*************end****************/
+        $scope.code = 0;//$scope.result35[0].code;
+
+        // var vvv = do_api("biz.address.allProvinces.query", json_params);
+        var vvv = globalAddressFn.getProvinces(json_params.id);
+        // $scope.cp_class = JSON.parse(vvv);
+        // var objs = $scope.cp_class.biz_address_allProvinces_query_response.result;
+        var objs = vvv.result;
+        var html = '<option>请选择</option>';
+        var html2 = '';
+        var html3 = '';
+        //根据循环的值渲染省份下拉列表页面
+        angular.forEach(objs, function (index, data) {
+
+            if (index == strdid) {
+                html += '<option value="' + index + '" selected>' + data + '</option>';
+            }
+            else {
+                html += '<option value="' + index + '">' + data + '</option>';
+            }
+            $('#ctyr').html(html);
+        });
+        var token = api();
+        $http({
+            async: false,
+            crossDomain: true,
+            url: "/jd/api/orders/" + sku + "",//有数据换成sku
+            method: "GET",
+            headers: {
+                'Authorization': "Bearer" + token + "",
+                "cache-control": "no-cache",
+                "postman-token": "663a2d75-c319-c2cd-3870-1e748b12dce5"
+            } //请求头里会添加Authorization属性为'code_bunny'indesssx.html
+
+        }).success(function (data, status, headers, config) {
+            var arrlist = [];
+            var stateall = data;
+            var stateallsku = data.order.skus;
+            $scope.listss = [];
+            angular.forEach(stateallsku, function (datalistall, index, array) {
+                // var infosall = datalistall.jdSkuId;
+                // var json_params = {};
+                // json_params.sku = infosall;
+                // var vvv = do_api("biz.product.detail.query", json_params);
+                // $scope.cp_class = JSON.parse(vvv);
+                // var listall = $scope.cp_class.biz_product_detail_query_response.result;
+                // arrlist.push(angular.extend(listall, stateall));
+                skuDetailService.get(datalistall.jdSkuId).then(function (res) {
+                    $scope.listss.push(angular.extend(res.skuDetailItem, stateall));
+                });
+            });
+            // $scope.listss = arrlist;
+        }).error(function (data, status, headers, config) {
+
+        });
+        // $scope.listss = arrlist;
+        var startDate = Date.parse(new Date());
+        var timestamp = startDate + 7 * 24 * 60 * 60 * 1000;
+        $scope.timeend = timestamp;
+        //点击的时候对接接口申请售后
+        $scope.test = function (item) {
+            var jdOrderId = parseInt(item.order.jdOrderId);
+            var email = item.order.jdOrderAddress.email;
+            var mobile = $('#phone').val();
+            var name = $('#name').val();
+            var address = item.order.jdOrderAddress.address;
+            var province = item.order.jdOrderAddress.province;
+            var city = item.order.jdOrderAddress.city;
+            var county = item.order.jdOrderAddress.county;
+            var town = item.order.jdOrderAddress.town;
+            var ctyrval = parseInt($('#ctyr').find("option:selected").val());//请选择
+            var citysval = parseInt($('#citys').find("option:selected").val());
+            var areasval = parseInt($('#areas').find("option:selected").val());
+            var homeval = $('#home').find("option:selected").val();
+            if (homeval == undefined) {
+                var homeval = 0;
+            }
+            var textsx = $('#texts').val();
+
+            if (name == '') {
+                layer.open({
+                    content: '请输入姓名!'
+                    , skin: 'msg'
+                    , time: 4 //2秒后自动关闭
+                });
+                return false;
+            }
+            var phone = $('#phone').val();
+            // if (!(/^1[34578]\d{9}$/.test(phone))) {
+            if (isNaN(phone) || phone.length != 11) {
+                layer.open({
+                    content: '请输入正确的电话!'
+                    , skin: 'msg'
+                    , time: 4 //2秒后自动关闭
+                });
+                return false;
+            }
+            if (textsx == '') {
+                layer.open({
+                    content: '请输入退回地址!'
+                    , skin: 'msg'
+                    , time: 4 //2秒后自动关闭
+                });
+                return false;
+                var textsx = address;
+            }
+            if ($scope.code == 0) {
+                layer.open({
+                    content: '请选择商品退回方式!'
+                    , skin: 'msg'
+                    , time: 4 //2秒后自动关闭
+                });
+                return false;
+            }
+
+            if (ctyrval == '') {
+                layer.open({
+                    content: '请选择省!'
+                    , skin: 'msg'
+                    , time: 4 //2秒后自动关闭
+                });
+                return false;
+            }
+
+            if (citysval == '') {
+                layer.open({
+                    content: '请选择城市!'
+                    , skin: 'msg'
+                    , time: 4 //2秒后自动关闭
+                });
+                return false;
+            }
+
+            if (areasval == '') {
+                layer.open({
+                    content: '请选择区域!'
+                    , skin: 'msg'
+                    , time: 4 //2秒后自动关闭
+                });
+                return false;
+            }
+            var questionDesc = sessionStorage.getItem("questionDesc");
+
+            var skus = item.sku;
+            var setback = $('.selected').val();//退回方式
+            var settings = {
+                async: false,
+                crossDomain: true,
+                url: "/jd/api/afterSale/afsApplyCreate",
+                type: "POST",
+                headers: {
+                    "authorization": "Bearer " + token + "",
+                    "content-type": "application/json",
+                    "cache-control": "no-cache",
+                    "postman-token": "dd1ae8c9-6a74-6fea-de15-2b301c4fe4a5"
+                },
+                processData: false,
+                data: "{\"jdOrderId\":" + jdOrderId + ",\"customerExpect\":" + info + ",\"questionDesc\":\"" + questionDesc + "\",\"isNeedDetectionReport\":true,\"questionPic\":\"" + imgurl + "\",\"isHasPackage\":true,\"packageDesc\":0,\"asCustomerDto\":{\"customerContactName\":\"" + name + "\",\"customerTel\":\"" + mobile + "\",\"customerMobilePhone\":\"" + mobile + "\",\"customerEmail\":\"" + email + "\",\"customerPostcode\":\"065201\"},\"asPickwareDto\":{\"pickwareType\":" + $scope.code + ",\"pickwareProvince\":" + province + ",\"pickwareCity\":" + city + ",\"pickwareCounty\":" + county + ",\"pickwareVillage\":" + town + ",\"pickwareAddress\":\"" + address + "\"},\"asReturnwareDto\":{\"returnwareType\":10,\"returnwareProvince\":" + ctyrval + ",\"returnwareCity\":" + citysval + ",\"returnwareCounty\":" + areasval + ",\"returnwareVillage\":" + homeval + ",\"returnwareAddress\":\"" + textsx + "\"},\"asDetailDto\":{\"skuId\":" + skus + ",\"skuNum\":" + nums + "}}"
+            }
+
+            $.ajax(settings).done(function (response) {
+                var res = response.resultCode;
+                if (res == 0) {
+                    layer.open({
+                        content: '申请成功'
+                        , skin: 'msg'
+                        , time: 3 //2秒后自动关闭
+                    });
+                    setTimeout(function () {
+                        window.location.href = "./stater.html";
+                    }, 2000);
+
+                }
+                if (res !== 0) {
+                    layer.open({
+                        content: '申请失败'
+                        , skin: 'msg'
+                        , time: 3 //2秒后自动关闭
+                    });
+                }
+            });
+        };
+
+        $scope.number = function () {
+            var names = $scope.phone;
+            if (!(/^1[34578]\d{9}$/.test(names))) {
+
+                layer.open({
+                    content: '手机号码有误，请重填'
+                    , skin: 'msg'
+                    , time: 4 //2秒后自动关闭
+                });
+                return false;
+            }
+
+        };
+        $scope.off = function () {
+            window.location.href = "./closeInAppBrowser.html";
+        };
+        $scope.cart = function () {
+            window.location.href = "./cart.html";
+        };
+        $scope.cartme = function () {
+            window.location.href = "./mycart.html";
+        };
+
+        $scope.selected = function (index) {
+            $scope.code = index;
+        };
+    }]);
+</script>
+</html>

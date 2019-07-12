@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <title>搜索</title>
+    <style>
+    * {
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
+    }
+    body{
+      margin: 0;
+      padding: 0;
+      background-color: #fff;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+    }
+    div {
+      box-sizing: border-box;
+    }
+    .container {
+      width: 100%;
+      height: 100vh;
+      position: relative;
+    }
+    .top-bar {
+      width: 100%;
+      height: 45px;
+      background-color: #fff;
+      box-shadow: 0 1px 0 rgba(215,215,215,0.5);
+      text-align: center;
+      font-size: 16px;
+      font-weight: bold;
+      line-height: 45px;
+      position: relative;
+    }
+    .img-wrapper-1 {
+      width: 10px;
+      height: 18px;
+      line-height: 18px;
+      position: absolute;
+      left: 16px;
+      top: 13px;
+    }
+    .img-wrapper-2 {
+      width: 18px;
+      height: 18px;
+      line-height: 18px;
+      position: absolute;
+      right: 16px;
+      top: 13px;
+    }
+    .img-wrapper-1 img, .img-wrapper-2 img {
+      width: 100%;
+      height: 100%;
+    }
+    .search-bar {
+      padding: 10px 15px;
+      height: 54px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      background-color: #f6f6f6;
+      border-bottom: 1px solid #eee;
+    }
+    .search-input {
+      border: 1px solid #eee;
+      height: 100%;
+      background-color: #fff;
+      flex-grow: 1;
+      position: relative;
+      padding-left: 33px;
+    }
+    .search-input img {
+      width: 14px;
+      height: 14px;
+      position: absolute;
+      left: 10px;
+      top: 8px;
+    }
+    .search-cancel {
+      min-width: 50px;
+      max-width: 50px;
+      height: 30px;
+      line-height: 30px;
+      background-color: #fafafa;
+      border: 1px solid #dadada;
+      border-radius: 2px;
+      margin-left: 10px;
+      font-size: 14px;
+      text-align: center; 
+    }
+    .search-go {
+      min-width: 50px;
+      max-width: 50px;
+      height: 30px;
+      line-height: 30px;
+      background-color: #e22f2f;
+      border-radius: 2px;
+      margin-left: 10px;
+      font-size: 14px;
+      color: #fff;
+      text-align: center;
+    }
+    .search {
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      margin: 0;
+      border: none;
+      font-size: 12px;
+      -webkit-appearance: none;
+      outline: none;
+    } 
+    .history-bar {
+      margin: 10px;
+      position: relative;
+    }
+    .history-title {
+      font-size: 14px;
+    }
+    .history-clear {
+      position: absolute;
+      right: 0;
+      top: 0;
+      color: #e22f2f;
+      font-size: 12px;
+    }
+    .history-list {
+      margin-top: 5px;
+    }
+    .history-item {
+      padding: 5px 10px;
+      margin-right: 8px;
+      margin-top: 10px;
+      font-size: 12px;
+      background-color: #e6e6e6;
+      float: left;
+    }
+    .list-bar {
+      padding-left: 10px;
+    }
+    .list-item {
+      height: 45px;
+      border-bottom: 1px solid #eee;
+      line-height: 45px;
+      color: #8c8c8c;
+      font-family:PingFangSC-Regular;
+      font-size:14px;
+    }
+    .search::-moz-placeholder {
+      color: #6d7a80;
+      opacity: 0.5;
+    }
+    .search::-ms-input-placeholder {
+      color: #6d7a80;
+      opacity: 0.5;
+    }
+    .search::-webkit-input-placeholder {
+      color: #6d7a80;
+      opacity: 0.5;
+    }
+    .search::input-placeholder {
+      color: #6d7a80;
+      opacity: 0.5;
+    }
+    .highlightedText {
+      color: red;
+    }
+    </style>
+    <script type="text/javascript" src="js/stopIOS.js"></script>
+  </head>
+  
+  <body ng-app="app" ng-controller="manager">
+  <div class="container">
+    <!-- <div class="top-bar">
+      <div class="img-wrapper-1" onClick="javascript:window.history.go(-1);return false;"><img src="images/fanhui.png" /></div>
+      <span>搜索</span>
+      <div class="img-wrapper-2" onClick="javascript:window.location.href='./closeInAppBrowser.html'"><img src="images/y-guanbi.png" /></div>
+    </div> -->
+    <div class="search-bar">
+      <div class="search-input">
+        <img src="images/ssTb.png" /><input id="search" ng-cloak  class="search" type="text" ng-model="searchText" ng-keypress="myfun($event)" ng-blur="testFn()" placeholder="搜索产品/关键字" /><img ng-if="searchText" style="top:0;left: 89%;padding: 0.5rem;"  class="clearValBtn" src="images/goover.png" ng-click="clearVal()">
+      </div>
+      <div class="search-cancel" ng-if="!searchText"><a href="index.html" style="text-decoration: none;color: #000;outline: none;">取消</a></div>
+      <div class="search-go" ng-if="searchText" ng-click="goSearch()">搜索</div>
+    </div>
+    <div class="history-bar" ng-if="!searchText">
+      <div class="history-title" ng-if="searchHistory.length>0">搜索历史</div>
+      <div style="line-height:50px;" class="history-title" ng-if="searchHistory.length<=0">没有历史纪录</div>
+      <div class="history-clear" ng-if="searchHistory.length>0" ng-click="cancelSearch()">清除</div>
+      <div class="history-list"  ng-if="searchHistory.length>0">
+        <div class="history-item" ng-repeat="item in searchHistory" ng-cloak ><span ng-click="goSearch(item.name)" ng-bind="item.name" ng-cloak ></span></div>
+      </div>
+    </div>
+    <div class="list-bar" ng-if="searchText">
+      <div class="list-item" ng-click="getText(item.name)" ng-repeat="item in searchList"  ng-cloak>
+	  <span style="width:100%;" ng-bind='item.name' ng-cloak></span>
+      </div>
+    </div>
+  </div>
+  </body>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/jd.js"></script>
+    <script src="angular/angular.min.js"></script>
+<script>
+  
+  var app = angular.module('app', []);
+  //var token = "5e256615-3bff-40c9-bab4-7be5876949f0";
+ // var token = localStorage.getItem("lastname"); || "5e256615-3bff-40c9-bab4-7be5876949f0";
+  var token = api();
+  app.controller('manager', ["$scope", "$http",function($scope,$http) {
+      $(".search").focus();
+    $scope.searchText = "";
+    $scope.searchHistory = [];
+    $scope.searchList = [];
+    //console.log(localStorage.getItem("lastname"));
+	
+	var url = "/jd/api/sku/search/history/get?searchKey=";
+      $.ajax({
+        url: url,
+        headers: {
+          "Authorization": "Bearer" + token,
+          "content-type": "application/x-www-form-urlencoded",
+          "cache-control": "no-cache",
+          "postman-token": "8f20525e-3fc4-14e1-9039-943c4175470e"
+        },
+        crossDomain: true,
+        type: "GET",
+        success: function(data) {
+		//alert(data);
+            $scope.searchHistory = [];
+            for (var i = 0; i < data.length; i++) {
+              $scope.searchHistory.push({
+                name: data[i]
+              });
+            }
+          
+          $scope.$apply();
+        },
+        error: function(xhr) {
+          console.log(xhr);
+        }
+      });
+	  
+    $scope.$watch("searchText", function(searchValue) {
+	if(typeof(searchValue)=="undefined"){
+		searchValue='';
+	}
+     // var url = "";
+//      if (searchValue) {
+//        url = "/api/categories/searchKey?key="+searchValue;
+//      }else{
+//        
+////        url = "http://139.196.104.148:11010/jd/sku/search/history/get?searchKey="+searchValue;
+//      }
+	  var url = "/jd/api/categories/searchKey?key="+searchValue;
+      $.ajax({
+        url: url,
+        headers: {
+          "Authorization": "Bearer" + token,
+          "content-type": "application/x-www-form-urlencoded",
+          "cache-control": "no-cache",
+          "postman-token": "8f20525e-3fc4-14e1-9039-943c4175470e"
+        },
+        crossDomain: true,
+        type: "GET",
+        success: function(data) {
+          if (searchValue) {
+            $scope.searchList = [];
+            for (var i = 0; i < data.length; i++) {
+              if (i > 9) break;
+              $scope.searchList.push({
+                name: data[i].name
+              });
+            }
+          } else {
+           // $scope.searchHistory = [];
+//            for (var i = 0; i < data.length; i++) {
+//              $scope.searchHistory.push({
+//                name: data[i]
+//              });
+//            }
+          }
+          $scope.$apply();
+          //补全字体颜色处理
+            var listItemSpan = $('.list-item span');
+            listItemSpan.each(function(index, el) {
+                var spanHtml = listItemSpan.eq(index).html();
+               var spanHtml2 = spanHtml.split(searchValue).join('<strong style="color:#4a4a4a;">'+ searchValue +'</strong>');
+                 listItemSpan.eq(index).html(spanHtml2);
+            });
+        },
+        error: function(xhr) {
+          console.log(xhr);
+        }
+      });
+    });
+    //智能补全部分
+    $scope.cancelSearch = function() {
+      //var url = "/history/delete";
+      $scope.searchHistory = [];
+      $http({
+        async:false,
+        crossDomain:true,
+        method:'GET',
+        url:"/jd/api/sku/search/history/delete",
+       // url:"http://139.196.104.148:11010/jd/sku/search/history/delete",
+        headers:{
+            'Authorization':"Bearer" + token,
+            'content-type':"application/x-www-form-urlencoded",
+            'cache-control':"no-cache",
+            'postman-token':'8f20525e-3fc4-14e1-9039-943c4175470e'
+        }
+      }).success(function(data,status,headers,config){
+      }).error(function(data,status,headers,config) {
+          /* Act on the event */
+      });
+    }
+	
+	$scope.getText = function(content) {
+	   $(".search").val(content);
+	     if(typeof(content)!="undefined"){
+		$scope.searchText=content;
+           }
+		 if(typeof(content)=="undefined"){
+		$scope.searchText='';
+		}
+		 window.location.href = "./goodslist.html?names=" + $scope.searchText + ""; 
+      };
+      //清除搜索框内容
+	$scope.clearVal = function(){
+    $scope.searchText = '';
+  }
+	 $scope.goSearch = function(content) {
+	   if(!content){
+	   // if(content)
+		 var content=$("#search").val();
+		}
+		// alert(content);
+		if(typeof(content)=="undefined"){
+		content='';
+		}
+		
+		
+         window.location.href = "./goodslist.html?names=" + content + "";           
+      };
+
+  }]);
+  // app.filter("highlight", function($sce, $log){
+  //     var fn = function(text, search){
+  //         $log.info("text: " + text);
+  //         $log.info("search: " + search);
+
+  //         if (!search) {
+  //             return $sce.trustAsHtml(text);
+  //         }
+  //         text = encodeURI(text);
+  //         search = encodeURI(search);
+
+  //         var regex = new RegExp(search, 'gi')
+  //         var result = text.replace(regex, '<span class="highlightedText">$&</span>');
+  //         result = decodeURI(result);
+  //         $log.info("result: " + result );
+  //         return $sce.trustAsHtml(result);
+  //     };
+
+  //     return fn;
+  // });
+
+</script>
+   
+</html>

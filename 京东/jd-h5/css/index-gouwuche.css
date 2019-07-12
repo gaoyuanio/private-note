@@ -1,0 +1,385 @@
+*{
+	margin: 0.0rem;
+	padding: 0.0rem;
+	border: 0.0rem;
+	
+}
+html{
+	font-size: calc(100vw/3.75);
+	height: 100%;
+}
+body{
+	height: 100%;
+}
+.containe{
+	overflow: hidden;
+	height: 100%;
+	/*background: #fff;*/
+}
+.head{
+	height: 0.47rem;
+	background: #FFFFFF;
+	overflow: hidden;
+	position: relative;
+	
+}
+.head-wrap{
+
+}
+.head-round-box{
+	float: left;
+	width: 0.19rem;
+	height: 0.19rem;
+	background-color:#FFFFFF;
+	border: 0.01rem solid #a49f9e;
+	border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0.14rem;
+	margin: auto;
+}
+
+.head1-font{
+	float: left;
+	display: inline-block;
+	width: 0.3rem;
+	height: 100%;
+	border-radius: 100%;
+	font-size: 0.14rem;
+	color: #000000;
+	line-height: 0.47rem;
+}
+.head1-font > input[type=checkbox]{
+	position: absolute;
+	left: 0.01rem;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: none;
+	background:none;
+}
+.head1-font > label{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 0.3rem;
+	height: 100%;
+	background: url(../images/nochecked.png) no-repeat center center;
+	background-size: 0.16rem 0.16rem;
+	z-index: 333;
+}
+.head1-font > input[type=checkbox]:checked + label{
+	background: url(../images/checked.png) no-repeat center center;
+	background-size: 0.14rem 0.14rem;
+}
+.head-button2{
+	display: block;
+	font-size: 0.12rem;
+	height: 0.23rem;
+	width:0.88rem;
+	color: #9cccf2;
+	border: 0.01rem solid #9cccf2;
+	text-align: center;
+	line-height:0.23rem;
+	float: right;
+	border-radius: 0.03rem;
+	text-decoration: none;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 2.45rem;
+	right: 0;
+	margin: auto;
+}
+.head-button2{
+	text-decoration: none;
+}
+.head-button1{
+	display: block;
+	font-size: 0.12rem;
+	height: 0.23rem;
+	width:0.68rem;
+	color: #443839;
+	border: 0.01rem solid #979797;
+	text-align: center;
+	line-height:0.23rem;
+	float: right;
+	border-radius: 0.03rem;
+	text-decoration: none;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0.55rem;
+	right: 0;
+	margin: auto;
+}
+.head-button1{
+	text-decoration: none;
+}
+.center{
+	background: #fff;
+}
+.option-ico{
+	height: 0.23rem;
+	width: 0.23rem;
+	float: left;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	border: 0;
+	left: 0.13rem;
+	margin: auto;
+	background-image:url(../images/yuan2.png);
+	background-size:0.23rem 0.23rem;
+	-moz-background-size:0.23rem 0.23rem;
+	-moz-background-size:0.23rem 0.23rem;
+
+}
+.col-xs-12{ 
+	margin-top: 0.06rem;
+	margin-bottom: 0.1rem;
+	width: 100%;
+	height: 1.0rem;
+	overflow: hidden;
+	position: relative;
+	background: #FFFFFF;
+}
+.order1 {
+	height: 100%;
+	-webkit-box-shadow:inset 0 -1px 0 0 #e9e9e9;
+	   -moz-box-shadow:inset 0 -1px 0 0 #e9e9e9;
+			box-shadow:inset 0 -1px 0 0 #e9e9e9;
+}
+.order1-photo-wrap {
+	text-align: center;
+	height:0.92rem;
+	width: 0.92rem;
+	background: #FFFFFF;
+	border-radius: 0.04rem;
+	float: left;
+	line-height: 0.82rem;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0.1rem;
+	margin: 0.18rem 0 0.25rem 0.24rem;
+}
+.order1-photo-wrap img{
+	height:0.8rem;
+	width: 0.75rem;
+}
+.order-font {
+	height: 0.54rem;
+	width:2.4rem;
+	font-size: 0.13rem;
+	overflow: hidden;
+	position: absolute;
+	top: 0.14rem;
+	left: 1.15rem;
+	margin: auto;
+}
+
+.order1-spec-wrap{
+	float: left;
+	font-size:0.18rem;
+	color: #b8b3b2;
+	margin-left: 0.10rem;
+}
+.order1-spec{
+	position: absolute;
+	left: 1.52rem;
+	bottom:0.5rem;
+	font-size:0.12rem;
+}
+.order1-spec-money{
+	position: absolute;
+	bottom: 0.20rem;
+	left: 1.15rem;
+	top:0.84rem;
+	color: #c31219;
+	font-size: 0.16rem;
+	font-weight: 600;
+	font-family: PingFangSC-Regular;
+	line-height: 0.16rem;
+	padding-left: 0.16rem;
+}
+.numbers{
+	display: block;
+	position: absolute;
+	left: 2.5rem;
+	top: 0.79rem;
+	width: 1.03rem;
+	height: 0.28rem;
+	border: 1px solid #c5c5c5;
+	border-radius: 0.04rem;
+	background: #fff;
+}
+.numbers span{
+	position: absolute;
+	top: -0.15rem;
+	width: 0.29rem;
+	height: 0.56rem;
+}
+.number-jian{
+	background: url(../images/jiannum.png) no-repeat center center;
+	background-size: 0.15rem 0.02rem;
+}
+.number-jian2{
+	background: url(../images/jiannum2.png) no-repeat center center;
+	background-size: 0.15rem 0.02rem;
+}
+.number-jia{
+	right: 0;
+	background: url(../images/addnum.png) no-repeat center center;
+	background-size: 0.16rem 0.16rem;	
+}
+.number{
+	display: block;
+	margin: 0 auto;
+	font-size: 0.14rem;
+	color: #1c1c1c;
+	width: 0.43rem;
+	text-align: center;
+	height: 100%;
+	border-left: 1px solid #c5c5c5;
+	border-right: 1px solid #c5c5c5;
+	border-radius: 0;
+	outline: none;
+}
+.number-jian{
+	left: 0;		
+}
+@media (max-width:330px) {
+	.order-font {
+		height: 0.54rem;
+		width:2.4rem;
+		font-size: 0.10rem;
+		overflow: hidden;
+		position: absolute;
+		top: 0.20rem;
+		left: 1.2rem;
+		margin: auto;			
+	}
+	.order1-spec{
+		position: absolute;
+		left: 1.52rem;
+		bottom:0.45rem;
+		font-size:0.10rem;
+	}
+}
+.footer1 {
+	width: 100%;
+	position:absolute;
+	bottom: 0.49rem;
+	font-size: 14px;
+	box-shadow: 3px 0.0rem  3px rgba(8, 8, 8, 0.08);
+	z-index: 9999;
+}
+.footer1-left{
+	height: 50px;
+	width: 2.75rem;
+	float: left;
+	background:#FFFFFF;
+	text-align: right;
+	padding-right: 0.1rem;
+}
+.footer1-left-top{
+	line-height: 0.26rem;
+	font-size: 0.16rem;
+	font-family:PingFangSC-Regular;
+	color: #1a1a1a;
+	letter-spacing: 0;
+	width: 50%;
+	margin-left: 2%;
+}
+.footer1-left-top span:nth-of-type(1){
+	margin-left: 0.08rem;
+}
+.footer1-left-top-money{
+	font-size: 0.16rem;
+	font-family:PingFangSC-Regular;
+	letter-spacing: 0;
+	color:#e22f2f;
+	line-height: 0.16rem;
+	text-align: left;
+}
+.footer1-left-bottom{
+	font-family:PingFangSC-Regular;
+	font-size:0.12rem;
+	color:#8c8c8c;
+	letter-spacing:0;
+	line-height:0.12rem;
+	text-align:center;
+	width: 50%;
+	/*position: relative;
+	left: 38px;
+	top: -3px;*/
+}
+.ok-button{
+	width:1rem;
+	height:50px;
+	font-size:0.16rem;
+	font-family:PingFangSC-Regular;
+	color: #8c8c8c;
+	text-align: center;
+	line-height:50px;
+	background: #E53F40;
+	display: block;
+	float: right;
+	text-decoration: none;
+}
+.ok-button span{
+	font-size: 0.12rem;
+}
+.ok-button:hover{
+	text-decoration: none;
+}
+.all_button{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 0.5rem;
+	height: 0.5rem;
+	box-sizing: border-box;
+	text-align: center;
+	font-size: 0.1rem;
+	letter-spacing:0;
+	line-height:10px;
+	font-family:PingFangSC-Regular;
+}
+.all_button .check_all{
+	position: relative;
+	display: block;
+	width: 0.5rem;
+	height: 0.5rem;
+	background: url(../images/checkall.png) no-repeat center 0.1rem;
+	background-size: 0.16rem 0.16rem
+}
+.all_button .check_all > input{
+	width: 0;
+	height: 0;
+}
+.all_button .check_all > label{
+	position: absolute;
+	left:0px;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: url(../images/nochecked.png) no-repeat center 0.1rem;
+	background-size: 0.16rem 0.16rem;
+	z-index: 333;
+}
+.all_button .check_all > input[type=checkbox]:checked + label{
+	background: url(../images/checked.png) no-repeat center center;
+	background-size: 0.14rem 0.14rem;
+	margin-top:-5px;
+}
+a{
+	text-decoration: none;
+}
+a:hover{
+	text-decoration: none;
+}

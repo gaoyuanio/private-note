@@ -1,0 +1,162 @@
+/*.headImg a{
+	display:inline-block;
+	margin-top: 10px;
+}*/
+/*.headImg{
+	text-align: right;
+}
+.head{
+	padding:10px 0;
+}
+.headH2{
+	display: inline-block;
+	text-align:center;
+	font-size:25px;
+	padding:5px 0;
+	font-weight: 700;
+}*/
+.dt img{
+	width:100%;
+}
+.dt{
+	position: relative;
+	padding:0;
+	margin:0;
+}
+.dt-main{
+	padding-top:5%;
+	margin:0;
+	width: 100%;
+	height:100%;
+	position: absolute;
+	top:0;
+	left:0;
+	color: #fff;
+	overflow: hidden;
+}
+.dt-main-left{
+	height:100%;
+	/*margin-top:10%;*/
+}
+.dt-main-left p{
+	/*height:20%;*/
+	margin-top:3%;
+	font-size:12px;
+}
+.soujianren span{
+	padding:10px 0;
+	font-size: 17px;
+	color: #443837;
+	font-weight: 700;
+}
+.soujianren{
+	border-bottom: 1px solid #e5e5e5;
+}
+.dizhi{
+	color:#a29c9b;
+	font-size:12px;
+	margin-top:10px;
+}
+.top{
+	margin:20px 0;
+}
+.dianpu{
+	font-size: 20px;
+	font-weight:800;
+	color:#150608;
+	line-height: 20px;
+	padding:0 10px; 
+}
+.dianpu img{
+	margin-right:5px;
+	display:inline-block;
+	height:29px;
+	width:28px;
+	margin-top:-5px;
+}
+.dnTu img{
+	display:inline-block;
+	width: 100%;
+	margin-top:10px;
+}
+.pColor{
+	color: #a29c9b;
+	margin-top:5px;
+}
+.hong{
+	color: #e53f40;
+}
+.fukuan{
+	border-bottom: 1px solid #e5e5e5;
+	padding-bottom: 10px; 
+	width:96%;
+	margin:0 auto;
+	margin-top:10px;
+}
+.huise{
+	color: #a9a3a2;
+	padding:0 10px; 
+}
+.lanse{
+	color: #3a99e6;
+}
+.xiangqing{
+	margin-top:1px;
+}
+#dz{
+	width:28px;
+	height:33px;
+	margin-top:8px;
+}
+.col-xs-12{
+	margin:0;
+	padding:0;
+}
+.row1{
+	padding:0 10px;
+}
+.row2{
+	padding:0;
+	padding-right:5px; 
+	font-size:10px;
+}
+.p{
+	overflow:hidden;
+	color:#6F6464;
+}
+.zz{
+	color: #665B5B;
+}
+.foot{
+	padding-top:10px;
+	text-align: right;
+	border-top:2px solid #E7E5E6;
+}
+.foot button:first-child{
+	display:inline-block;
+	padding:5px 10px;
+	border-radius:5px;
+	background:#fff;
+	border:1px solid #CBCBCB;
+}
+.foot button:last-child{
+	display:inline-block;
+	padding:5px 20px;
+	border-radius:5px;
+	background:#E63D40;
+	color:#fff;
+	border:1px solid #CBCBCB;
+	margin-right: 10px;
+}
+.btn-tk{
+	border:1px solid #CBCBCB;
+	display:inline-block;
+	padding:3px 20px;
+	border-radius:3px;
+	color: #887F7F;
+	background:#fff;
+}
+.tk{
+	text-align: right;
+	padding-right:5px;
+}

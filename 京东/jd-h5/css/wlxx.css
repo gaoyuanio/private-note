@@ -1,0 +1,137 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+html{
+  	font-size: calc(100vw/3.75);
+  	}
+body{
+	font-family: "Microsoft Yahei";
+	font-size:0.18rem;
+	background:#f8f8f8;
+	}
+.head{
+	padding:4% 5%;
+	}
+.head .leftimg{
+	width:22%;
+	border: 0.01rem solid #E5E5E5;
+	border-radius: 4px;
+	padding:3% 0;
+	}
+.head .leftimg img{
+	width:0.72rem;
+	height:0.46rem;
+	}
+.head .rightinfo{
+	width:68%;
+	padding-left:5%;
+	margin-top:-0.02rem;
+	}
+.head .rightinfo .wlzt{
+	font-size:0.16rem;
+	
+}
+.head .rightinfo .wlzt .blue{
+	color:#a4d7fd;
+}
+.head .rightinfo .kdcompany{
+	font-size:0.12rem;
+	margin-top:1.4%;
+	color:#bfbfbf;
+	}
+.head .rightinfo .dh{
+	font-size:0.12rem;
+	margin-top:1.4%;
+	color:#bfbfbf;
+	}
+.head .rightinfo .tel{
+	font-size:0.12rem;
+	margin-top:1.4%;
+	color:#acacac;
+	}
+.content {
+	margin-top:0.22rem;
+	}
+.content .title{
+	padding:0.14rem 5%;
+	border-bottom:2px solid #E5E5E5;
+	font-size:0.14rem;
+	line-height:0.2rem;
+	}
+.content .xinxi{
+	/*	padding-left:16.1%;*/
+	/*background:url(../images/produce.png) no-repeat 5% 49%;*/
+	padding-top:6.3%;
+	background-size:0.25rem 3.95rem;
+	}
+.content .xinxi .detail{
+	width:100%;
+	margin-left:7.8%;
+	padding-left:8%;
+    border-left: 1px solid #e5e5e5;
+    position:relative;
+	}
+.content .xinxi .detail .mdd {
+    font-size: 0.14rem;
+    color: #33a6f9;
+    padding-right:20%;
+    line-height:0.2rem;
+	}
+.content .xinxi	.detail .time {
+    font-size: 0.12rem;
+    color: #736a68;
+    padding:2% 0;
+    line-height:0.16rem;
+    border-bottom: 1px solid #e5e5e5;
+	}
+.content .xinxi	.detail .circle{
+	width:0.1rem;
+	height:0.1rem;
+	border-radius:50%;
+	background:#33a5f9;
+	top:5.3%;
+	left:-1.2%;
+	position:absolute;
+	font-size:0;
+	-webkit-box-shadow: 0 0 0.04rem 0.04rem #9ed5fd;
+	   -moz-box-shadow: 0 0 0.04rem 0.04rem #9ed5fd;
+        -ms-box-shadow: 0 0 0.04rem 0.04rem #9ed5fd;
+         -o-box-shadow: 0 0 0.04rem 0.04rem #9ed5fd;
+   	}
+.content .xinxi .detail2{
+	/*padding-left:16.1%;
+	padding-top:3.3%;
+	padding-bottom:2%;
+	background:url(../images/images/mdd_05.png) no-repeat 5% top;
+    background-size:0.25rem 0.7rem;*/
+    width:100%;
+	margin-left:7.8%;
+	padding-left:8%;
+	padding-top:3.3%;
+    border-left: 1px solid #e5e5e5;
+    position:relative;
+	}
+.content .xinxi .detail2 .mdd {
+    font-size: 0.14rem;
+    color: #736a68;
+    padding-right:20%;
+    line-height:0.2rem;
+	}
+.content .xinxi	.detail2 .time {
+    font-size: 0.12rem;
+    color: #736a68;
+    padding:1.6% 0;
+    line-height:0.16rem;
+    border-bottom: 1px solid #e5e5e5;
+    }
+.content .xinxi	.detail2 .circle{
+	width:0.1rem;
+	height:0.1rem;
+	border-radius:50%;
+	background:#e5e5e5;
+	top:22%;
+	left:-1.2%;
+	position:absolute;
+	font-size:0;
+	}

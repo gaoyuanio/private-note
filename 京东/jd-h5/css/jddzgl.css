@@ -1,0 +1,132 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+
+.main{
+	width:100%;
+	padding-top: 1%;
+	-webkit-box-shadow:inset 0 0.03rem 0.03rem #e5e3e3;
+	   -moz-box-shadow:inset 0 0.03rem 0.03rem #e5e3e3;
+			box-shadow:inset 0 0.03rem 0.03rem #e5e3e3;
+}
+.group{
+	padding:5%;
+	padding-top: 2.5%;
+	padding-bottom:1.6%;
+	position:relative;
+	margin-bottom:1.9%;
+	}
+.group .info{
+	font-size:0.16rem;
+	color:#443837;
+	}
+.group .info .tel{
+	color:#150606;
+	right:5%;
+	position:absolute;
+	font-size:0.13rem;
+	}
+.address{
+	font-size:0.14rem;
+	color:#736a68;
+	padding-top:1.5%;
+	padding-bottom:2.2%;
+	border-bottom:1px solid #e5e5e5;
+	}
+.mbadd{
+	padding-top:1.6%;
+	}
+.mbadd .bjleft,.mbadd .bjright{
+	width:50%;
+	}
+.mbadd img{
+	width:0.16rem;
+	height:0.20rem;
+	margin-top:-3%;
+	}
+.mbadd .bjleft{
+	text-align:left;
+	}
+.mbadd .bjright{
+	text-align:right;
+	/* background:url(../images/bjtb.png) no-repeat 81% center; */
+	background-size:0.16rem 0.20rem;
+	padding-left:0.20rem;/*图片与文字距离*/
+	padding-top:1.4%;
+	padding-bottom:1.4%;
+	}
+.mbadd .bjright img{
+	display:inline-block;
+	}
+.mbadd .right{
+	text-align:right;
+/* 	background:url(../images/bjtb.png) no-repeat 91.2% center; */
+	background-size:0.16rem 0.20rem;
+	padding-left:0.20rem;/*图片与文字距离*/
+	padding-top:1.4%;
+	padding-bottom:1.4%;
+	}
+.mbdz{
+	font-size:0.14rem;
+	}
+.bj{
+	font-size:0.12rem;
+	display:inline-block;
+	width:0.25rem;
+	height:0.20rem;
+	border:0.01rem solid #ccc;
+	border-radius:0.04rem;
+	width: 0.5rem;
+    height: 0.25rem;
+    border: 1px solid #ccc;
+    line-height: 0.25rem;
+    text-align: center;
+	}
+.delete{
+	display:inline-block;
+	margin-right:.2rem;
+	font-size:0.14rem;
+	width:0.25rem;
+	height:0.20rem;
+	border:0.01rem solid #ccc;
+	border-radius:0.04rem;
+	width: 0.5rem;
+    height: 0.25rem;
+    border: 1px solid #ccc;
+    line-height: 0.25rem;
+    text-align: center;
+	}
+.rhr{
+	height:1px;
+	width:100%;
+	background-color:red;
+	margin-top: -1.9%;
+    margin-bottom: 2%;
+	}
+.sure{
+	width:90%;
+	height:50px;
+	padding-top:14px;
+	font-size:18px;
+	text-align:center;
+	background:#e53f40;
+	position:absolute;
+	bottom:10px;
+	left: 5%;
+	z-index:999;
+	}
+.sure a{
+	color:#ffffff;
+	background:url("../images/tjtb.png")no-repeat left center;
+	background-size:21px;
+	padding-left:30px;
+	}
+.sure a img{
+	width:21px;
+	height:21px;
+	text-align:center;
+	}
+a,a:active,a:hover,a:link,a:visited{
+	text-decoration:none;
+	}

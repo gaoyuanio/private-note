@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html ng-app="demoApp">
+<head>
+<meta charset="utf-8" />
+<title>支付订单</title>
+<link rel="stylesheet" type="text/css" href="css/index-zhifu.css"/>
+<!--
+        	时间：2016-09-19
+        	描述：
+      
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+		  -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<script type="text/javascript" src="js/stopIOS.js"></script>
+</head>
+<body ng-controller="DemoCtrl">
+<div style="background:#e5e4e4;width: 100%;height: 0.005rem;box-shadow:0.04rem 0.0rem 0.04rem rgba(22,5,6,.15);"></div>
+<div class="conter">
+  <ul class="conter-list">
+    <li class="conter-list1"> <span class="conter-list1-left">订单编号</span><span class="conter-list1-right">SH201608042330316966</span> </li>
+    <li class="conter-list2"> <span class="conter-list2-left">支付金额</span><span class="conter-list2-right">￥{{item}}</span> </li>
+  </ul>
+  <div style="height:0.12rem;background: #F8F8F8;"></div>
+  <ul class="conter-list">
+    <li class="conter-list3" style="text-align:center">下单成功，请等待财务人员审核</li>
+  </ul>
+  <!--<div class="footer1-wrap">
+				<div class="footer1-button">
+							
+					<a  class="yue">
+						<p onClick="zhifu()">余额支付</p>
+					</a>
+				</div>
+			</div>-->
+</div>
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="angular/angular.min.js"></script>
+<script src="js/jd.js"></script>
+<script type="text/javascript">
+		var str=location.href; //获取本页url地址
+		var arr=str.split("?");
+		var str1 = arr[1];
+		var str2 = arr[2];
+		var str3 = arr[3];
+		var str4 = arr[4];
+		if(str1){var sku=str1.split("=")[1];}
+		if(str2){var num=str2.split("=")[1];}
+		if(str3){var itemsku=str3.split("=")[1];}
+		if(str4){var orderId=str4.split("=")[1];}
+		console.log(orderId);
+		var json_params = {};
+		json_params.sku = sku;
+
+		//alert(jsondata);
+		var app = angular.module('demoApp', []);
+		app.controller('DemoCtrl', ["$scope","$rootScope","$sce","$http", function ($scope, $rootScope, $sce,$http) {
+		var vvv = do_api("biz.product.detail.query",json_params);
+		var vvvs = do_api("biz.price.sellPrice.get",json_params);
+		$scope.cp_class =  JSON.parse(vvv);
+		$scope.cp_classs =  JSON.parse(vvvs);
+		$scope.item = $scope.cp_classs.biz_price_sellPrice_get_response.result[0].jdPrice * num;
+		
+
+		}]);
+		</script>
+</html>

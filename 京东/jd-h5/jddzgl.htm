@@ -1,0 +1,81 @@
+<html lang="zh-cn"  ng-app="demoApp">
+<head>
+<meta charset="UTF-8">
+<title>地址管理</title>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/jddzgl.css">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<script type="text/javascript" src="js/stopIOS.js"></script>
+</head>
+<style type="text/css">
+	.ng-cloak{display: none;}
+	</style>
+<body ng-controller="DemoCtrl">
+<div class="main ng-cloak" ng-cloak>
+  <!--group1 start-->
+  <div class="group white-bg" id="list" ng-repeat="item in listss">
+    <p class="info">收件人: <span>{{item.vatInvoiceName}}</span> <span class="tel">{{item.vatInvoicePhone}}</span> </p>
+    <p class="address"> 地址：{{item.invoiceTitle}}{{item.vatInvoiceAddress}} </p>
+  </div>
+  <!--group4 end-->
+</div>
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="angular/angular.min.js"></script>
+<script src="js/jd.js"></script>
+<script type="text/javascript">
+ var str=location.href; //获取本页url地址
+		var arr=str.split("?");
+		var str1 = arr[1];
+		var str2 = arr[2];
+		if(str1){var sku=str1.split("=")[1];}
+		if(str2){var q=str2.split("=")[1];}
+		var token=api();
+		
+		 var app = angular.module('demoApp', []);
+   		 app.controller('DemoCtrl', ["$scope","$rootScope","$sce","$http", function ($scope, $rootScope, $sce,$http) {
+		 $http({
+		 	async: true,
+			crossDomain: true,
+            method:'GET',
+            url:"/jd/api/config/invoices",
+            headers: {'Authorization':"Bearer"+token+"",'cache-control': "no-cache",'postman-token': '00a70b0c-0756-adfe-3928-af0e1bbdc95f'}  //请求头里会添加Authorization属性为'code_bunny'
+        }).success(function(data,status,headers,config){
+        	//console.log(data.configInvoices);
+			 var arr = [];
+			 var objs =data.configInvoices;
+			angular.forEach(objs, function(datas,index,array){
+				console.log(datas.vatInvoiceCounty);
+				var list = datas;
+				arr.push(list)
+				
+			});
+			$scope.listss = arr;
+			//console.log($scope.listss);
+        	
+        }).error(function(data,status,headers,config){
+  				alert('用户信息错误');
+			 window.location.href="./closeInAppBrowser.html";
+        });
+
+    }]);
+		var settings = {
+		  "async": true,
+		  "crossDomain": true,
+		  "url": "/jd/api/config/invoices",
+		  "method": "GET",
+		  "headers": {
+		    "authorization": "Bearer 218997e0-6fe9-4f74-9911-96be38c97b54",
+		    "cache-control": "no-cache",
+		    "postman-token": "3a1a16c5-b6a2-cbdf-c610-b2f66031ec4a"
+		  }
+		};
+
+		$.ajax(settings).done(function (response) {
+		  //console.log(response);
+		});
+</script>
+</html>

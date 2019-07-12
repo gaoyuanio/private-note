@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-cn" ng-app="demoApp">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <title>物流信息</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/ddxqddfk.css">
+    <script type="text/javascript" src="js/stopIOS.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]-->
+</head>
+<body ng-controller="DemoCtrl">
+<!--顶部返回 开始-->
+<style>
+    .ng-cloak {
+        display: none;
+    }
+    .back_fixed .s-img {
+        display: inline-block;
+    }
+    .logistics-head{
+        padding: 4%;
+        margin-bottom: 15px;
+        background-color: white;
+    }
+    .content{
+        background-color: white;
+        padding-left: 15px;
+        padding-top: 15px;
+        padding-bottom: 15px
+    }
+    .list-wrap{
+        position: relative;
+        border-left: 1px solid grey;
+        color: grey;
+        padding: 5%;
+    }
+    .circle{
+        border-radius: 50%;
+        height: 15px;
+        width: 15px;
+        display: block;
+    }
+    .red-circle{
+        padding: 3px;
+        border: 2px solid red;
+        position: absolute;
+        border-radius: 50%;
+        top: -10px;
+        left: -13px;
+    }
+    .red{
+        background-color: red;
+    }
+    .grey{
+        background-color: grey;
+        position: absolute;
+        top: -5px;
+        left: -8px;
+    }
+    .logistics-date{
+        width: 100%;
+        font-size: 0.13rem;
+        color: #acaaaa;
+        padding-top: 1.5%;
+        line-height: 0.19rem;
+    }
+    .logistics-info{
+        white-space: normal;
+        word-break: break-all;
+    }
+    .text-grey{
+        color: #acaaaa;
+    }
+</style>
+<div class="logistics-head ng-cloak" ng-cloak>
+    <div><span>订单信息</span>&nbsp;&nbsp;<span class="text-grey">{{orderId}}</span></div>
+    <div><span>配送方式</span>&nbsp;&nbsp;<span class="text-grey">京东速递&nbsp;{{orderId}}</span></div>
+</div>
+<div class="content">
+    <div class="list-wrap ng-cloak" ng-repeat="item in trackInfo" ng-cloak>
+        <span class="circle grey" ng-if="$index"></span>
+        <div class="red-circle" ng-if="!$index">
+            <span class="circle red"></span>
+        </div>
+
+        <div class="left-side">
+            <div class="logistics-info text-grey">{{item.content}}</div>
+            <div class="logistics-date">{{item.msgTime}}</div>
+        </div>
+    </div>
+</div>
+<!--底部 结束-->
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/main.js"></script>
+<script src="angular/angular.min.js"></script>
+<script src="modules/api-service.module.js"></script>
+<script src="js/jd.js"></script>
+<script src="layer/layer_mobile/layer.js"></script>
+<script type="text/javascript">
+    var str = location.href; //获取本页url地址
+    var arr = str.split("?");
+//    var str1 = arr[1];
+//    var str2 = arr[2];
+//    var str3 = arr[3];
+    var str4 = arr[1];
+//    var str5 = arr[5];
+//    var str6 = arr[6];
+//    if (str1) {
+//        var sku = str1.split("=")[1];
+//    }
+//    if (str2) {
+//        var num = str2.split("=")[1];
+//    }
+//    if (str3) {
+//        var number = str3.split("=")[1];
+//    }
+    if (str4) {
+        var jdOrderId = str4.split("=")[1];
+    }
+//    if (str5) {
+//        var orders = str5.split("=")[1];
+//    }
+//    if (str5) {
+//        var apporder = str6.split("=")[1];
+//    }
+
+    var token = api();
+
+    var app = angular.module('demoApp', ['JDApiService']);
+    app.controller('DemoCtrl', ["$scope", "$rootScope", "$sce", "$http", 'address', function ($scope, $rootScope, $sce, $http, addressService) {
+
+        $http({
+            async: true,
+            crossDomain: true,
+            method: "GET",
+            url: "/jd/api/orders/track/" + jdOrderId + "",
+            headers: {
+                'Authorization': "Bearer" + token + "",
+                'content-type': "application/x-www-form-urlencoded",
+                'cache-control': "no-cache",
+                'postman-token': 'ed86b9aa-8464-6e0c-b594-9bdedf5832b1'
+            }
+        }).success(function (res) {
+            console.log(res)
+            if(res.orderTrackItemList){
+                $scope.trackInfo = res.orderTrackItemList
+                $scope.orderId = res.jdOrderId
+            }
+        }).error(function (error) {
+
+        })
+    }]);
+
+</script>
+</body>
+</html>

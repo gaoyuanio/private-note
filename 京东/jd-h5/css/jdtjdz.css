@@ -1,0 +1,56 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+
+.container{
+	width:89.7%;
+	margin:0 auto;
+	}
+.container .group{
+	padding:3.7% 1.5%;
+	border-bottom:1px solid #f3f3f3;
+	
+	position:relative;
+	}
+.container .group a{
+	/*right:0;
+	position:absolute;*/
+	float:right;
+	color:#a69fa1;
+	background:url(../images/more.png)no-repeat right bottom;
+	background-size:0.10rem 0.20rem;
+	text-align:left;
+    display: inline-block;
+    padding-right: 0.2rem;
+	}
+.textarea{
+	height:1.13rem;
+	background:#f7f7f7;
+	font-size:0.16rem;
+	border-radius:5px;
+	color:#9d9796;
+	margin-top:11.7%;
+	padding:2%;
+	}
+.sure{
+	width:100%;
+	height:50px;
+	/*padding:2.4% 0;*/
+	line-height:50px;
+	font-size:18px;
+	text-align:center;
+	background:#e53f40;
+	position:fixed;
+	bottom:0;
+	z-index:999;
+	color:#fff;
+	}
+.sure a{
+	color:#ffffff;
+	z-index:999;
+	}
+a,a:active,a:hover,a:link,a:visited{
+
+	text-decoration:none;
+	}

@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html  ng-app="demoApp">
+<head>
+    <meta charset="utf-8" />
+  
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>商品列表</title>
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/goodslist.css" />
+
+    <link rel="stylesheet" href="css/css.css">
+    <link rel="stylesheet" type="text/css" href="css/fenleis.css">
+    <link rel="stylesheet" href="css/fenlei2.css">
+    <link rel="stylesheet" href="css/ionic.min.css">
+    <script type="text/javascript" src="js/stopIOS.js"></script>
+</head> 
+<style>
+	 .header .head-input{ 
+        width: 3.43rem;
+        height: 0.34rem;
+        margin: 0 auto;
+        outline: none;
+        border-radius: 0;
+        padding-left: 0.34rem !important;
+        font-size: 0.12rem !important;
+        line-height: 0.34rem;
+        color: #4a4a4a;
+        font-family:PingFangSC-Regular; 
+        background-size: 0.14rem 0.14rem !important;
+    }
+    .ng-cloak{display: none;}
+    .clear{zoom:1;}
+    .clear:after{display:block;content:'.';clear:both;overflow:hidden;height:0;visibility:hidden;}
+    .y-gengduo{display: block;width: 100%;height: 0.2rem;line-height: 0.2rem;font-size: 0.14rem;text-align: center;background: #f6f6f6;padding-bottom: 0.3rem;}
+    .write0{display:none;}
+    .write1{display:black;}
+.form-control{ 
+    width: 100%;
+    height: auto;
+    box-shadow: none;
+    border-radius: 0;
+    
+  } 
+  .scroll-content{
+    bottom: 10px;
+  }  
+  .header{
+    margin-top:13%;
+  }
+  .tishi_wrap{
+    position: relative;
+    height: 6rem; 
+    z-index: 999;
+    background: #edecf0;
+  }
+
+  .spinner svg{
+    stroke: #e85a5d;
+    width: 50px;
+    height: 50px;
+  }
+@media only screen and (max-width: 340px){
+  .header{
+    margin-top: 16%;
+  }
+}
+   .container {
+      width: 100%;
+      position: relative;
+	  padding:0px;
+    }
+   .top-bar {
+      width: 100%;
+      height: 45px;
+      background-color: #fff;
+      box-shadow: 0 1px 0 rgba(215,215,215,0.5);
+      text-align: center;
+      font-size: 16px;
+      font-weight: bold;
+      line-height: 45px;
+      position: relative;
+    }
+    .img-wrapper-1 {
+      width: 10px;
+      height: 18px;
+      line-height: 18px;
+      position: absolute;
+      left: 16px;
+      top: 13px;
+    }
+    .img-wrapper-2 {
+      width: 18px;
+      height: 18px;
+      line-height: 18px;
+      position: absolute;
+      right: 16px;
+      top: 13px;
+    }
+    .img-wrapper-1 img, .img-wrapper-2 img {
+      width: 100%;
+      height: 100%;
+    }
+    .search-bar {
+      position: relative;
+      z-index: 999;
+      padding: 8px 15px;
+      height: 54px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      background-color: #f6f6f6;
+      border-bottom: 1px solid #eee;
+    }
+    .search-input {
+      border: 1px solid #eee;
+      height: 100%;
+      background-color: #fff;
+      flex-grow: 1;
+      position: relative;
+      padding-left: 33px;
+    }
+    .search-input img {
+      width: 14px;
+      height: 14px;
+      position: absolute;
+      left: 10px;
+      top: 10px;
+    }
+    .search-cancel {
+      min-width: 50px;
+      max-width: 50px;
+      height: 30px;
+      line-height: 30px;
+      background-color: #fafafa;
+      border: 1px solid #dadada;
+      border-radius: 2px;
+      margin-left: 10px;
+      font-size: 14px;
+      text-align: center; 
+    }
+    .search-go {
+      min-width: 50px;
+      max-width: 50px;
+      height: 30px;
+      line-height: 30px;
+      background-color: #e22f2f;
+      border-radius: 2px;
+      margin-left: 10px;
+      font-size: 14px;
+      color: #fff;
+      text-align: center;
+    }
+    .search {
+      width: 100%;
+      height: 90%;
+      padding: 0;
+      margin: 0;
+      border: none;
+      font-size: 12px;
+      -webkit-appearance: none;
+      outline: none;
+    } 
+    .history-bar {
+      margin: 10px;
+      position: relative;
+    }
+    .history-title {
+      font-size: 14px;
+    }
+    .history-clear {
+      position: absolute;
+      right: 0;
+      top: 0;
+      color: #e22f2f;
+      font-size: 12px;
+    }
+    .history-list {
+      margin-top: 5px;
+    }
+    .history-item {
+      padding: 5px 10px;
+      margin-right: 8px;
+      margin-top: 10px;
+      font-size: 12px;
+      background-color: #e6e6e6;
+      float: left;
+    }
+    .list-bar {
+      padding-left: 10px;
+    }
+    .list-item {
+      height: 45px;
+      border-bottom: 1px solid #eee;
+      line-height: 45px;
+      color: #8c8c8c;
+      font-family:PingFangSC-Regular;
+      font-size:14px;
+    }
+    .search::-moz-placeholder {
+      color: #6d7a80;
+      opacity: 0.5;
+    }
+    .search::-ms-input-placeholder {
+      color: #6d7a80;
+      opacity: 0.5;
+    }
+    .search::-webkit-input-placeholder {
+      color: #6d7a80;
+      opacity: 0.5;
+    }
+    .search::input-placeholder {
+      color: #6d7a80;
+      opacity: 0.5;
+    }
+    .highlightedText {
+      color: red;
+    }
+    .spinner svg{
+    stroke: #e85a5d;
+    width: 40px;
+    height: 40px;
+  } 
+  .loading-container{
+/*    background: #edecf0;*/
+    top: 52px;
+  } 
+  .loading-container .loading{
+
+    padding: 0;
+    width: 0.4rem;
+    height: 0.4rem;
+  }
+   @media (max-width: 340px) {
+     .loading-container .loading{
+        width: 0.5rem;
+        height: 0.5rem;
+     }
+  } 
+</style>
+
+<body ng-controller="DemoCtrl" >
+
+    <div class="container-fluid" >
+
+        <!-- <div class="container " >
+           <div class="top-bar">
+			  <div class="img-wrapper-1" onClick="javascript:window.history.go(-1);return false;"><img src="images/fanhui.png" /></div>
+			  <span>搜索</span>
+			  <div class="img-wrapper-2"  onClick="javascript:window.location.href='./closeInAppBrowser.html'"><img src="images/y-guanbi.png" /></div>
+			</div>
+ -->			<div class="search-bar">
+			   <div class="search-input" ng-cloak>
+				<img src="images/ssTb.png" /><input class="search" type="text" ng-focus="searchhtml()" placeholder="搜索产品/关键字" value="{{namesss}}" ng-cloak/>
+			  </div>
+			</div>
+  
+        </div>
+
+		
+		
+        <div class="write{{write}} tishi_wrap" ng-cloak>
+         <div style="position:absolute;top: 40%;left: 40%;z-index:999;"><img src="./images/goods.png" style="width:50%;height:50%;">
+            <div style="margin-left:-24%;margin-top:3%;"><h5 style="font-size:0.16rem;">抱歉！暂无相关商品</h5></div>
+         </div>
+        </div>
+     <ion-content style="background: #f6f6f6; top: 55px;" >
+     <!-- <div style="visibility:hidden;margin-top:12%;"></div> -->
+	 <ion-refresher pulling-text="下拉刷新..." on-refresh="do_refresher()"></ion-refresher> 
+        <div  class="conent-wrap clear ng-cloak" ng-cloak >
+            <div class="col-xs-12 clear ng-cloak"  id="scrollWrap2" ng-cloak  >
+			
+                <!-- 循环产品 开始 -->
+                <div class="col-xs-6 ng-cloak" ng-style="{opacity:item.jdSkuDetailsView.price!=null?1:0.5}"  ng-repeat="item in listss" ng-cloak ng-click="item.jdSkuDetailsView.price!=null && info(item.id,number,item.jdSkuDetailsView.stockStateDesc)"  name="xzy{{$index}}" style="-webkit-overflow-scrolling:touch;">
+                    
+                        <img src="{{item.jdSkuDetailsView.imgPath}}" ng-cloak/>
+                   
+                    <p class="info ng-cloak" style="position:absolute;top:1rem;width:1.18rem;background:#666666;opacity:0.7;text-align:center;color: #fff;" >
+                            <span style="color:#FFF;" ng-if="item.jdSkuDetailsView.stockStateDesc=='无货'">{{item.jdSkuDetailsView.stockStateDesc}}</span>
+                    </p>
+                    <div class="info_wrapper" style="position: relative;height: 100%;width: 2.47rem;float: right;background: #fff;box-shadow:inset 0 -1px 0 0 #eeeeee">
+                      <p class="info ng-cloak" ng-cloak style="overflow:hidden;">
+                          <!--href="./actions.html?sku={{item.id}}?number={{number}}?stockStateDesc={{item.jdSkuDetailsView.stockStateDesc}}"-->
+                          <a  ng-bind-html="item.wareName"></a>
+                      </p>
+                        <!--<a ng-click="gotoAction()" href="./actions.html?sku={{item.id}}?number={{number}}" class="ng-cloak" ng-cloak></a>-->
+                      <div class="money-box ng-cloak" ng-cloak>
+                          <span class="money ng-cloak"  ng-cloak>  <b ng-bind="item.jdSkuDetailsView.price |  currency:'￥'"></b></span><span class="none-money" ng-bind="item.jdSkuDetailsView.jdPrice  | currency:'￥'"></span>
+                      </div>
+                      <p class="pinglun ng-cloak" style="margin-bottom: 0;">商品评分 {{item.jdSkuDetailsView.averageScore}}颗星  {{item.jdSkuDetailsView.goodRate*100 | number:0}}%好评</p>
+                    </div>
+					
+
+                </div>
+                <!-- 循环产品 结束 -->
+                <!-- <div style="margin-bottom:1%;visibility:hidden;">121</div> -->
+                
+            </div>
+		 <div id="footer" ng-if="actiontxt==false" style=" width:100%;height:150px;">
+                   <a  class="y-gengduo ng-cloak" style="color:#000;" ng-cloak  >已经到底啦～</a>
+                </div>
+        </div>
+
+              <div class="clear:after"></div>
+
+        </div>
+			 <ion-list>
+			 </ion-list>
+            <ion-infinite-scroll ng-if="hasMore" on-infinite="do_infinite()" immediate-check="false"></ion-infinite-scroll>
+    </ion-content>
+        <div class="clear:after"></div>
+    </body>
+    <script src="js/jquery.min.js"></script>
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    
+    <script src="layer/layer_mobile/layer.js"></script>
+    <script src="js/jd.js"></script>
+    <script src="angular/angular.min.js"></script>
+        <script src="js/ionic.bundle.min.js"></script>
+
+    <script type="text/javascript">
+    //显示顶部的列表
+    $('#show').click(function(){
+    $('.search-sort-list').toggle();
+    });
+
+
+          var winHeight = $(window).height();   //获取当前页面高度
+          $(window).resize(function(){
+          var thisHeight=$(this).height();
+          if(winHeight - thisHeight >50){
+          $('#footer').hide();
+
+
+          }else{
+          //当软键盘收起，在此处操作
+          $('#footer').show();
+          }
+          });
+          var str=location.href; //获取本页url地址
+          var arr=str.split("?");
+          var str1 = arr[1];
+          var str2 = arr[2];
+          if(str1){var names=str1.split("=")[1];}
+          if(str2){var sku=str2.split("=")[1];}
+           
+		  
+          var token=api();
+          //var token='26c7f7c1-369f-4a8d-b3dd-5d07ebc93df1';
+
+         var app = angular.module('demoApp', ["ionic"]);
+        app.controller('DemoCtrl', ["$scope","$rootScope","$sce","$http","$timeout","$ionicLoading", function ($scope, $rootScope, $sce,$http,$timeout,$ionicLoading) {
+             $ionicLoading.show({
+              template:'<ion-spinner icon="android"></ion-spinner>',
+            //content: '正在加载...',
+            animation: 'fade-in',
+            showBackdrop: false,
+            maxWidth: 200,
+            showDelay: 0
+            });
+		
+		 if(names==null||names==undefined){
+		   $scope.namesss = "";
+		   }
+		   else{
+           $scope.namesss = decodeURI(names);
+		   }
+		
+		var rowsOfPage=8;
+		$scope.onepage = 0;
+		$scope.quantity = 200;
+		$scope.hasMore = false;
+        //      $scope.dataNull=false;     // 无数据提示
+        $scope.SName = "当前没有";
+        $scope.do_refresher = function() {
+			$scope.actiontxt=true;
+            $scope.hasMore = false;
+            $scope.bItems = [];
+           $http({
+            async: true,
+            crossDomain: true,
+            method:'POST',
+            // url:"/api/skus?q="+names+"&pageNum=1&pageSize="+newnum+"",
+//            url:"/jd/api/skus?q="+names+"&pageNum=1&pageSize=8",
+               url:"/jd/api/search/skus",
+             data:{
+               keyword:decodeURI(names),
+                 catId:"",
+                 pageIndex:1,
+                 pageSize:8
+             },
+            //url:"http://apistage.huilianyi.com/jd/api/skus?q=%E5%86%85%E5%AD%98&category=680&pageNum=2&pageSize=5",
+            headers: {'Authorization':"Bearer"+token+"",'cache-control': "no-cache",'postman-token': '00a70b0c-0756-adfe-3928-af0e1bbdc95f'}  //请求头里会添加Authorization属性为'code_bunny'
+        }).success(function(listdata,status,headers,config){
+				
+                if (listdata) {
+                    $scope.listss = listdata.jdSkus || [];
+					$ionicLoading.hide();
+					$scope.names =$scope.listss;
+                    $scope.hasMore = ($scope.bItems.length < listdata.total);
+					if(listdata.jdSkus.length<8){
+					 $scope.onepage = 1;
+					 $scope.quantity =listdata.jdSkus.length;
+					}
+                    if ($scope.listss.length == 0) {
+                        $scope.dataNull = true;
+                    } else {					    
+                        $scope.dataNull = false;						
+                    }
+                } else {
+                    $scope.hasMore = false;
+                }
+                $scope.$broadcast("scroll.refreshComplete");
+				$scope.pageNum=1;
+            });
+		}
+		$scope.pageNum=1;
+		$scope.pageSize=8;
+		 $scope.do_infinite = function() {
+		    console.log($scope.quantity);
+
+			if($scope.quantity<8){
+			
+			   $scope.$broadcast("scroll.infiniteScrollComplete");
+			   $scope.actiontxt=false;
+                return;
+			}
+			
+			//if($scope.onepage ==1){
+//			console.log($scope.hasMore);
+//			   $scope.$broadcast("scroll.infiniteScrollComplete");
+//                return;
+//			}
+			
+            if (!$scope.hasMore) {
+                $scope.$broadcast("scroll.infiniteScrollComplete");
+                return;
+            }
+            //  如果当前页数大于等于总页数，说明已经没数据可再加载了。
+			console.log($scope.pageNum);
+            $scope.pageNum += 1;
+           $http({
+            async: true,
+            crossDomain: true,
+            method:'POST',
+            // url:"/api/skus?q="+names+"&pageNum=1&pageSize="+newnum+"",
+//            url:"/jd/api/skus?q="+names+"&pageNum="+ $scope.pageNum+"&pageSize="+$scope.pageSize,
+               url:"/jd/api/search/skus",
+               data:{
+                   keyword:decodeURI(names),
+                   catId:"",
+                   pageIndex:$scope.pageNum,
+                   pageSize:$scope.pageSize
+            },
+            //url:"http://apistage.huilianyi.com/jd/api/skus?q=%E5%86%85%E5%AD%98&category=680&pageNum=2&pageSize=5",
+            headers: {'Authorization':"Bearer"+token+"",'cache-control': "no-cache",'postman-token': '00a70b0c-0756-adfe-3928-af0e1bbdc95f'}  //请求头里会添加Authorization属性为'code_bunny'
+        }).success(function(listdata,status,headers,config){
+		
+                if (listdata) {
+                    //window.debug && alert("length " + listdata.datas.length + " yeshu " + $scope.currentPage);
+                    //$scope.currentPage = listdata.currentPage;
+                    for (var i = 0; i < listdata.jdSkus.length; i++) {
+                        $scope.listss.push(listdata.jdSkus[i]);
+                    }
+                    $scope.hasMore = ($scope.listss.length < listdata.total);
+					 $scope.actiontxt=$scope.hasMore;
+					 //$scope.pageNum=1;
+					//$scope.pageSize=8;
+					console.log($scope.hasMore );
+                } else {
+                    $scope.hasMore = false;
+					 $scope.actiontxt=false;
+                }
+                $scope.$broadcast("scroll.infiniteScrollComplete");
+            });
+		}
+           $scope.write = 0;
+           $scope.number =0;
+           $http({
+            async: true,
+            crossDomain: true,
+            method:'POST',
+            // url:"/api/skus?q="+names+"&pageNum=1&pageSize="+newnum+"",
+//            url:"/jd/api/skus?q="+names+"&pageNum=1&pageSize=8",
+               url:"/jd/api/search/skus",
+               data:{
+                   keyword:decodeURI(names),
+                   catId:"",
+                   pageIndex:1,
+                   pageSize:8
+               },
+            //url:"http://apistage.huilianyi.com/jd/api/skus?q=%E5%86%85%E5%AD%98&category=680&pageNum=2&pageSize=5",
+            headers: {'Authorization':"Bearer"+token+"",'cache-control': "no-cache",'postman-token': '00a70b0c-0756-adfe-3928-af0e1bbdc95f'}  //请求头里会添加Authorization属性为'code_bunny'
+        }).success(function(data,status,headers,config){
+//		console.log(data.jdSkus);
+
+            var objlist =data.jdSkus;
+            $scope.names =objlist;
+          var allTotal = data.total;
+                
+            $scope.listss = data.jdSkus;
+             $ionicLoading.hide();
+            if ($scope.listss=='') {
+              $scope.write = 1;
+            }
+            if (data.jdSkus === null) {
+              $scope.write = 1;
+            }
+			 if( allTotal < 8 ){
+			  $scope.quantity = allTotal;
+              $scope.hasMore = true;
+            }else {
+              $scope.hasMore = true;
+            }
+			
+        }).error(function(data,status,headers,config){
+              layer.open({
+                content: '用户信息错误'
+                ,skin: 'msg'
+                ,time: 3 //2秒后自动关闭
+                });
+        });
+        //上拉刷新
+        $scope.testFn=function(){
+
+            var names = $scope.text;
+            window.location.href="./goodslist.html?names="+names+"";
+
+        };
+        $scope.off=function(){
+
+        
+            window.location.href="./closeInAppBrowser.html";
+
+        };
+        $scope.cart=function(){
+
+        
+            window.location.href="./cart.html";
+
+        };
+        $scope.cartme=function(){
+
+        
+            window.location.href="./mycart.html";
+
+        };
+		
+		 $scope.searchhtml = function() {
+             window.location.href = "./search.html";               
+            };
+         $scope.info = function(id,number,stockStateDesc) {
+             window.location.href ='./actions.html?sku='+id+'?number='+number+'?stockStateDesc='+stockStateDesc;
+            };
+        $scope.myfun = function(KeyEvent) {
+            var names =$scope.text;
+
+            //console.log(names);
+			if(typeof(content)=="undefined"){
+			names='';
+			}
+            if(KeyEvent.keyCode===13){
+             if(names==undefined) {
+                layer.open({
+                content: '搜索内容为空'
+                ,skin: 'msg'
+                ,time: 3 //2秒后自动关闭
+                }); 
+              return false;
+            };
+            window.location.href = "./goodslist.html?names=" + names + "";    
+            }
+
+
+            };
+
+              $scope.cop=function(){
+
+               $("input[name='text']").val("").focus(); // 清空并获得焦点
+            }
+          
+
+    }]);
+	
+	function GetQueryString(name)
+{
+     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+     var r = window.location.search.substr(1).match(reg);
+     if(r!=null)return  unescape(r[2]); return null;
+}
+</script>
+</html>
