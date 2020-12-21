@@ -5,10 +5,10 @@
 `docker images`
 
 #### 打包
-`sudo docker build -t="hmap-wechat:2019072601" .`
+`sudo docker build -t="hmap-wechat:gy2019090301" .`
 
 #### 打tag
-`sudo docker tag 500caddfcaad registry.cloud.saas.hand-china.com/hcf/wechat-work-dev:1.4.0-2019072601`
+`sudo docker tag b23952065c74 registry.cloud.saas.hand-china.com/hcf/wechat-work-dev:1.4.0-gy2019090301`
 
 ####push
-`sudo docker push registry.cloud.saas.hand-china.com/hcf/wechat-work-dev:1.4.0-2019072601`
+`sudo docker push registry.cloud.saas.hand-china.com/hcf/wechat-work-dev:1.4.0-gy2019090301`
