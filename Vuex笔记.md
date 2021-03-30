@@ -12,7 +12,7 @@
 
 ​	vuex是实现组件全局状态（数据）管理的一种机制，可以方便实现组件之间数据的共享
 
-<img src="/Users/gaoyuan/Library/Application Support/typora-user-images/image-20201221091304337.png" alt="image-20201221091304337" style="zoom:50%;" />
+![](https://cdn.jsdelivr.net/gh/gaoyuanio/imgs/img/image-20201221091304337.png)
 
 #### 1.2 使用Vuex统一管理状态的好处
 
